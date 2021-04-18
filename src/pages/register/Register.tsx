@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   IonContent,
   IonHeader,
@@ -12,24 +12,26 @@ import {
   IonItem,
   IonLabel,
   IonRow,
-  IonCol
+  IonCol,
+  IonSelect,
+  IonSelectOption
 } from '@ionic/react';
 import {
   Link,
   RouteComponentProps
 } from 'react-router-dom';
 import { toast } from '../../components/toast/Toast';
-import { logoutUser, registerUser } from '../../data/api/Firebase';
+import { registerUser } from '../../data/api/Firebase';
 import { StatusColor } from '../../enum/StatusColor';
 import {
   setIsLoggedIn,
   setPhotoURL,
-  // setUserProfileServer
 } from '../../data/user/user.actions';
 import { connect } from '../../data/connect';
 import { getAvatar } from '../../util/getAvatar';
 import * as ROUTES from '../../constants/Routes';
 import { AppColor } from '../../enum/AppColor';
+import { companyTypeOptions } from './CompanyTypeOptions';
 
 interface OwnProps extends RouteComponentProps {}
 
@@ -45,13 +47,31 @@ const RegisterPage: React.FC<RegisterProps> = ({
     history,
     setPhotoURL: setPhotoURLAction,
   }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [companyTypeOptionsList, setCompanyTypeOptionsList] = useState<any[]>([]);
+  const [companyTypeOption, setCompanyTypeOption] = useState<number>(1);
+  const [abnAcn, setAbnAcn] = useState<string>('');
+
+  const companyActionsOptions = async () => {
+    const actions = companyTypeOptions();
+    setCompanyTypeOptionsList(await actions);
+  }
+
   const [busy , setBusy] = useState(false);
+
+  useEffect(() => {
+    companyActionsOptions();
+  }, [
+    companyTypeOption,
+  ])
 
   const register = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const isNumber = /^\d+$/.test(abnAcn);
 
     if (password !== confirmPassword) {
       return toast('Passwords should match!', StatusColor.WARNING);
@@ -59,6 +79,26 @@ const RegisterPage: React.FC<RegisterProps> = ({
 
     if (email.trim() === '' || password.trim() === '') {
       return toast('Email and password are required!', StatusColor.WARNING);
+    }
+
+    if (!isNumber) {
+      return toast('Only digits for ABN or ACN!', StatusColor.WARNING);
+    }
+
+    if (companyTypeOption === 1) { // ABN verification
+      if (abnAcn.trim() === '') {
+        return toast('ABN is required!', StatusColor.WARNING);
+      }
+      if (abnAcn.length !== 11) {
+        return toast('ABN is 11 digits long', StatusColor.WARNING);
+      }
+    } else if (companyTypeOption === 2) { // ACN verification
+      if (abnAcn.trim() === '') {
+        return toast('ACN is required!', StatusColor.WARNING);
+      }
+      if (abnAcn.length !== 9) {
+        return toast('ACN is 9 digits long', StatusColor.WARNING);
+      }
     }
 
     setBusy(true);
@@ -117,6 +157,29 @@ const RegisterPage: React.FC<RegisterProps> = ({
               <IonInput name="password" type="password"
                         value={confirmPassword}
                         onIonChange={(e: any) => setConfirmPassword(e.detail.value!)} required>
+              </IonInput>
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company Type</IonLabel>
+              <IonSelect
+                onIonChange={e => setCompanyTypeOption(e.detail.value)}
+                value={companyTypeOption}
+              >
+                {companyTypeOptionsList.map((option: any, index: number) => (
+                  <IonSelectOption 
+                    key={index}
+                    value={option.value}
+                  >
+                    {option.description}
+                  </IonSelectOption>
+                ))}
+              </IonSelect>
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>{companyTypeOptionsList[companyTypeOption-1]?.description} number</IonLabel>
+              <IonInput name="abnAcn" type="text"
+                        value={abnAcn}
+                        onIonChange={(e: any) => setAbnAcn(e.detail.value!)} required>
               </IonInput>
             </IonItem>
           </IonList>
