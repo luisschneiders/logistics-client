@@ -40,3 +40,4 @@ yarn-error.log*
 
 # Firebase
 .firebaserc
+logistics-app-firebase-adminsdk.json
