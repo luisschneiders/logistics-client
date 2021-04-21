@@ -38,6 +38,8 @@ import * as ROUTES from '../../constants/Routes';
 import { AppColor } from '../../enum/AppColor';
 import { companyTypeOptions } from './CompanyTypeOptions';
 import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
+import { CompanyType } from '../../enum/CompanyType';
+import { RoleType } from '../../enum/RoleType';
 
 interface OwnProps extends RouteComponentProps {}
 
@@ -59,7 +61,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [companyTypeOptionsList, setCompanyTypeOptionsList] = useState<any[]>([]);
-  const [companyTypeOption, setCompanyTypeOption] = useState<any>('ABN');
+  const [companyTypeOption, setCompanyTypeOption] = useState<any>(CompanyType.ABN);
   const [companyAbnAcn, setCompanyAbnAcn] = useState<string>('');
   const [companyName, setCompanyName] = useState<string>('');
 
@@ -123,7 +125,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
       email: email,
       password: password,
       userName: name,
-      userRole: 'admin',
+      userRole: RoleType.ADMIN,
       companyName: companyName,
       companyAbnAcn: companyAbnAcn,
       companySignup: true,

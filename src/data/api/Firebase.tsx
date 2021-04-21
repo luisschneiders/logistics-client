@@ -8,6 +8,7 @@ import { UserProfileFirebase } from '../../models/UserProfileFirebase';
 import { CollectionUser } from '../../models/CollectionUser';
 import { CollectionCompany } from '../../models/CollectionCompany';
 import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
+import { RoleType } from '../../enum/RoleType';
 
 firebase.initializeApp(Firebase);
 const db = firebase.firestore();
@@ -42,7 +43,7 @@ export async function registerUser(form: RegisterCompanyForm) {
       userId: resultRegisterUser.user.uid,
       userEmail: form.email,
       userName: form.userName,
-      userRole: 'admin',
+      userRole: RoleType.ADMIN,
     }
 
     const resultCollectionCompany: any = await db.collection('Company').add(addCollectionCompany);
