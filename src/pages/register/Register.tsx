@@ -8,13 +8,18 @@ import {
   IonInput,
   IonButton,
   IonLoading,
-  IonList,
   IonItem,
   IonLabel,
   IonRow,
   IonCol,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonList,
+  IonText
 } from '@ionic/react';
 import {
   Link,
@@ -32,6 +37,7 @@ import { getAvatar } from '../../util/getAvatar';
 import * as ROUTES from '../../constants/Routes';
 import { AppColor } from '../../enum/AppColor';
 import { companyTypeOptions } from './CompanyTypeOptions';
+import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 
 interface OwnProps extends RouteComponentProps {}
 
@@ -48,12 +54,14 @@ const RegisterPage: React.FC<RegisterProps> = ({
     setPhotoURL: setPhotoURLAction,
   }) => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [companyTypeOptionsList, setCompanyTypeOptionsList] = useState<any[]>([]);
-  const [companyTypeOption, setCompanyTypeOption] = useState<number>(1);
-  const [abnAcn, setAbnAcn] = useState<string>('');
+  const [companyTypeOption, setCompanyTypeOption] = useState<any>('ABN');
+  const [companyAbnAcn, setCompanyAbnAcn] = useState<string>('');
+  const [companyName, setCompanyName] = useState<string>('');
 
   const companyActionsOptions = async () => {
     const actions = companyTypeOptions();
@@ -71,7 +79,11 @@ const RegisterPage: React.FC<RegisterProps> = ({
   const register = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const isNumber = /^\d+$/.test(abnAcn);
+    const isNumber = /^\d+$/.test(companyAbnAcn);
+
+    if (name.trim() === '') {
+      return toast('User Name are required!', StatusColor.WARNING);
+    }
 
     if (password !== confirmPassword) {
       return toast('Passwords should match!', StatusColor.WARNING);
@@ -81,46 +93,54 @@ const RegisterPage: React.FC<RegisterProps> = ({
       return toast('Email and password are required!', StatusColor.WARNING);
     }
 
+    if (companyName.trim() === '') {
+      return toast('Company Name are required!', StatusColor.WARNING);
+    }
+
     if (!isNumber) {
       return toast('Only digits for ABN or ACN!', StatusColor.WARNING);
     }
 
     if (companyTypeOption === 1) { // ABN verification
-      if (abnAcn.trim() === '') {
+      if (companyAbnAcn.trim() === '') {
         return toast('ABN is required!', StatusColor.WARNING);
       }
-      if (abnAcn.length !== 11) {
+      if (companyAbnAcn.length !== 11) {
         return toast('ABN is 11 digits long', StatusColor.WARNING);
       }
     } else if (companyTypeOption === 2) { // ACN verification
-      if (abnAcn.trim() === '') {
+      if (companyAbnAcn.trim() === '') {
         return toast('ACN is required!', StatusColor.WARNING);
       }
-      if (abnAcn.length !== 9) {
+      if (companyAbnAcn.length !== 9) {
         return toast('ACN is 9 digits long', StatusColor.WARNING);
       }
     }
 
     setBusy(true);
-    const response: any = await registerUser(email, password);
-    setBusy(false);
+
+    const registerForm: RegisterCompanyForm = {
+      email: email,
+      password: password,
+      userName: name,
+      userRole: 'admin',
+      companyName: companyName,
+      companyAbnAcn: companyAbnAcn,
+      companySignup: true,
+      companyType: companyTypeOption,
+    }
+
+    const response: any = await registerUser(registerForm);
 
     if (response) {
-      // Go to dashboard...
-      // const userProfile: any = await setUserCredentialsServer({email, password});
-
-      // if (userProfile) {
-        // await setUserProfileServer(userProfile);
+        toast('Successfully registered!', StatusColor.DEFAULT);
+        setBusy(false);
         await setIsLoggedIn(true);
-        await setPhotoURLAction(getAvatar(response?.user?.email));
+        await setPhotoURLAction(getAvatar(response?.resultRegisterUser?.user?.email));
+        // await setCompanyProfile();
         history.push(ROUTES.TABS_HOME, {direction: 'none'});
-      // } else {
-      //   logoutUser().then(() => {
-      //     setIsLoggedIn(false);
-      //   }, (error) => {
-      //     toast(error.message, StatusColor.ERROR, 4000);
-      //   });
-      // }
+    } else {
+      setBusy(false);
     }
   }
 
@@ -137,26 +157,51 @@ const RegisterPage: React.FC<RegisterProps> = ({
           <img src="assets/img/slide2.svg" alt="Logo"/>
         </div>
         <form noValidate onSubmit={register}>
+          <IonText><h3>User</h3></IonText>
           <IonList lines="full">
+            <IonItem>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>User Name</IonLabel>
+              <IonInput name="name" type="text"
+                        value={name}
+                        spellCheck={false}
+                        autocapitalize="off"
+                        onIonChange={(e: any) => setName(e.detail.value!)} required>
+              </IonInput>
+            </IonItem>
             <IonItem>
               <IonLabel position="stacked" color={AppColor.PRIMARY}>Email</IonLabel>
               <IonInput name="email" type="email"
-                        value={email} spellCheck={false} autocapitalize="off"
+                        value={email}
+                        spellCheck={false}
+                        autocapitalize="off"
                         onIonChange={(e: any) => setEmail(e.detail.value!)} required>
               </IonInput>
             </IonItem>
             <IonItem>
               <IonLabel position="stacked" color={AppColor.PRIMARY}>Password</IonLabel>
               <IonInput name="password" type="password"
+                        autocomplete="off"
                         value={password}
                         onIonChange={(e: any) => setPassword(e.detail.value!)} required>
               </IonInput>
             </IonItem>
-            <IonItem>
+            <IonItem className="ion-margin-bottom">
               <IonLabel position="stacked" color={AppColor.PRIMARY}>Confirm Password</IonLabel>
               <IonInput name="password" type="password"
                         value={confirmPassword}
                         onIonChange={(e: any) => setConfirmPassword(e.detail.value!)} required>
+              </IonInput>
+            </IonItem>
+          </IonList>
+          <IonText><h3>Company</h3></IonText>
+          <IonList lines="full">
+            <IonItem>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company Name</IonLabel>
+              <IonInput name="companyName" type="text"
+                        value={companyName}
+                        spellCheck={false}
+                        autocapitalize="off"
+                        onIonChange={(e: any) => setCompanyName(e.detail.value!)} required>
               </IonInput>
             </IonItem>
             <IonItem>
@@ -168,23 +213,22 @@ const RegisterPage: React.FC<RegisterProps> = ({
                 {companyTypeOptionsList.map((option: any, index: number) => (
                   <IonSelectOption 
                     key={index}
-                    value={option.value}
+                    value={option.description}
                   >
                     {option.description}
                   </IonSelectOption>
                 ))}
               </IonSelect>
             </IonItem>
-            <IonItem>
-              <IonLabel position="stacked" color={AppColor.PRIMARY}>{companyTypeOptionsList[companyTypeOption-1]?.description} number</IonLabel>
+            <IonItem className="ion-margin-bottom">
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>{companyTypeOption} number</IonLabel>
               <IonInput name="abnAcn" type="text"
-                        value={abnAcn}
-                        onIonChange={(e: any) => setAbnAcn(e.detail.value!)} required>
+                        value={companyAbnAcn}
+                        onIonChange={(e: any) => setCompanyAbnAcn(e.detail.value!)} required>
               </IonInput>
             </IonItem>
           </IonList>
-
-          <IonRow className="ion-padding-top">
+          <IonRow className="ion-margin-top">
             <IonCol>
               <IonButton type="submit" fill="outline" expand="block">Register</IonButton>
             </IonCol>
