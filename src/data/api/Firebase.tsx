@@ -11,7 +11,9 @@ import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 import { RoleType } from '../../enum/RoleType';
 
 firebase.initializeApp(Firebase);
-const db = firebase.firestore();
+
+export const dbFirestore = firebase.firestore();
+export const timestampFirebase = firebase.firestore.Timestamp;
 
 export async function loginUser(email: string, password: string) {
   try {
@@ -36,6 +38,8 @@ export async function registerUser(form: RegisterCompanyForm) {
       companyType: form.companyType,
       companyCreatedBy: resultRegisterUser.user.uid,
       companyEmail: form.email,
+      createdAt: timestampFirebase.now(),
+      updatedAt: timestampFirebase.now(),
     }
 
     const addCollectionUser: CollectionUser = {
@@ -44,12 +48,18 @@ export async function registerUser(form: RegisterCompanyForm) {
       userEmail: form.email,
       userName: form.userName,
       userRole: RoleType.ADMIN,
+      createdAt: timestampFirebase.now(),
+      updatedAt: timestampFirebase.now(),
     }
 
-    const resultCollectionCompany: any = await db.collection('Company').add(addCollectionCompany);
-    const resultCollectionUser: any = await db.collection('User').add(addCollectionUser);
+    const resultCollectionCompany: any = await dbFirestore.collection('Company').add(addCollectionCompany);
+    const resultCollectionUser: any = await dbFirestore.collection('User').add(addCollectionUser);
 
-    return {resultRegisterUser, resultCollectionCompany, resultCollectionUser};
+    return {
+      resultRegisterUser,
+      resultCollectionCompany,
+      resultCollectionUser
+    };
 
   } catch(error) {
     toast(error.message, StatusColor.ERROR, 4000);
@@ -84,14 +94,4 @@ export async function updateProfile(profile: UserProfileFirebase) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
-}
-
-export async function addFirestoreCollectionUser(collectionUser: CollectionUser) {
-  const response: any = await db.collection('User').add(collectionUser);
-  return response;
-}
-
-export async function addFirestoreCollectionCompany(collectionCompany: CollectionCompany) {
-  const response: any = await db.collection('Company').add(collectionCompany);
-  return response;
 }
