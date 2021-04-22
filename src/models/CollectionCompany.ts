@@ -8,4 +8,6 @@ export interface CollectionCompany {
   companyType: CompanyType;
   companyCreatedBy: string;
   companyEmail: string;
+  createdAt: any;
+  updatedAt: any;
 }

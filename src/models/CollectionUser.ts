@@ -6,4 +6,6 @@ export interface CollectionUser {
   userEmail: string;
   userName: string;
   userRole: RoleType;
+  createdAt: any;
+  updatedAt: any;
 }
