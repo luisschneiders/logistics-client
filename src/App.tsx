@@ -58,6 +58,9 @@ import * as ROUTES  from './constants/Routes';
 import { setResetAppStore } from './data/app/app.actions';
 import { initialState } from './data/app/app.state';
 import * as selectorsUser from './data/user/user.selectors';
+import { setCompanyProfile } from './data/sessions/sessions.actions';
+import { CompanyProfile } from './models/CompanyProfile';
+import { CompanyType } from './enum/CompanyType';
 
 const App: React.FC = () => {
   return (
@@ -79,6 +82,7 @@ interface DispatchProps {
   setPhotoURL: typeof setPhotoURL;
   setResetAppStore: typeof setResetAppStore;
   setHasSeenWelcome: typeof setHasSeenWelcome;
+  setCompanyProfile: typeof setCompanyProfile;
 }
 
 interface IonicAppProps extends StateProps, DispatchProps {}
@@ -92,10 +96,20 @@ const IonicApp: React.FC<IonicAppProps> = ({
     setDisplayName,
     setPhotoURL,
     setResetAppStore,
+    setCompanyProfile,
   }) => {
 
   const [busy, setBusy] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  const companyProfile: CompanyProfile = {
+    companyId: '',
+    companyName: '',
+    companyAbnAcn: '',
+    companyType: CompanyType.ABN,
+    companyCreatedBy: '',
+    companyEmail: '',
+  }
 
   useEffect(() => {
     getDarkMode();
@@ -119,6 +133,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
       setDisplayName,
       setPhotoURL,
       setResetAppStore,
+      setCompanyProfile,
     ]);
 
   return (
@@ -150,6 +165,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                         toast('Successfully logged out!', StatusColor.DEFAULT);
                         setIsLoggedIn(false);
                         setResetAppStore(initialState);
+                        setCompanyProfile(companyProfile);
                       }, (error) => {
                         toast(error.message, StatusColor.ERROR, 4000);
                       });
@@ -177,6 +193,7 @@ const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
     setDisplayName,
     setPhotoURL,
     setResetAppStore,
+    setCompanyProfile,
   },
   component: IonicApp
 });

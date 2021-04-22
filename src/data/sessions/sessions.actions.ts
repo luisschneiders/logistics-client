@@ -1,6 +1,8 @@
+import { CompanyProfile } from '../../models/CompanyProfile';
 import { Period } from '../../models/Period';
 import { ActionType } from '../../util/types';
 import {
+  SESSION_COMPANY_PROFILE_SET,
   SESSION_EXPENSES_TIME_TRANSITON_SET,
   SESSION_HOME_TIME_TRANSITON_SET,
   SESSION_MENU_ENABLED_SET,
@@ -8,10 +10,18 @@ import {
 } from '../actionTypes';
 import {
   getStorageHomeTimeTransition,
+  setStorageCompanyProfile,
   setStorageExpensesTimeTransition,
   setStorageHomeTimeTransition,
   setStorageTransactionsTimeTransition,
 } from '../sessions/data';
+
+const companyProfileAction = (data: CompanyProfile) => {
+  return ({
+    type: SESSION_COMPANY_PROFILE_SET,
+    payload: data
+  } as const);
+}
 
 const homeTimeTransitionAction = (homeTimeTransition: string) => {
   return ({
@@ -32,6 +42,11 @@ const transactionsTimeTransitionAction = (transactionsTimeTransition: Period) =>
     type: SESSION_TRANSACTIONS_TIME_TRANSITON_SET,
     transactionsTimeTransition
   } as const);
+}
+
+export const setCompanyProfile = (companyProfile: CompanyProfile) => async () => {
+  await setStorageCompanyProfile(companyProfile);
+  return companyProfileAction(companyProfile);
 }
 
 export const setMenuEnabled = (menuEnabled: boolean) => ({
@@ -61,6 +76,7 @@ export const setTransactionsTimeTransition = (transactionsTimeTransition: Period
 
 
 export type SessionsActions =
+  | ActionType<typeof setCompanyProfile>
   | ActionType<typeof setMenuEnabled>
   // TODO: review the need of this actions
   | ActionType<typeof setHomeTimeTransition>

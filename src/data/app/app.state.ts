@@ -12,11 +12,19 @@ import { userTypeReducer } from '../userType/userType.reducer';
 import { vehicleReducer } from '../vehicle/vehicle.reducer';
 import { APP_STORE_RESET } from '../actionTypes';
 import { PageListItem } from '../../enum/PageListItem';
+import { CompanyType } from '../../enum/CompanyType';
 
 export const initialState: AppState = {
   sessionsReducer: {
     menuEnabled: true,
-    userProfile: null,
+    companyProfile: {
+      companyId: '',
+      companyName: '',
+      companyAbnAcn: '',
+      companyType: CompanyType.ABN,
+      companyCreatedBy: '',
+      companyEmail: '',
+    },
     homeTimeTransition: '0',
     expensesTimeTransition: { startDate: '', endDate: '' },
     transactionsTimeTransition: { startDate: '', endDate: '' },

@@ -40,18 +40,23 @@ import { companyTypeOptions } from './CompanyTypeOptions';
 import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 import { CompanyType } from '../../enum/CompanyType';
 import { RoleType } from '../../enum/RoleType';
+import { CollectionCompany } from '../../models/CollectionCompany';
+import { CompanyProfile } from '../../models/CompanyProfile';
+import { setCompanyProfile } from '../../data/sessions/sessions.actions';
 
 interface OwnProps extends RouteComponentProps {}
 
 interface DispatchProps {
   setIsLoggedIn: typeof setIsLoggedIn;
   setPhotoURL: typeof setPhotoURL;
+  setCompanyProfile: typeof setCompanyProfile;
 }
 
 interface RegisterProps extends OwnProps, DispatchProps { }
 
 const RegisterPage: React.FC<RegisterProps> = ({
     setIsLoggedIn,
+    setCompanyProfile,
     history,
     setPhotoURL: setPhotoURLAction,
   }) => {
@@ -134,13 +139,29 @@ const RegisterPage: React.FC<RegisterProps> = ({
 
     const response: any = await registerUser(registerForm);
 
-    if (response) {
-        toast('Successfully registered!', StatusColor.DEFAULT);
-        setBusy(false);
-        await setIsLoggedIn(true);
-        await setPhotoURLAction(getAvatar(response?.resultRegisterUser?.user?.email));
-        // await setCompanyProfile();
-        history.push(ROUTES.TABS_HOME, {direction: 'none'});
+    if (response &&
+        response.resultRegisterUser.user.uid &&
+        response.resultCollectionCompany.id &&
+        response.resultCollectionUser.id
+    ) {
+      const companyProfile: CompanyProfile = {
+        companyId: response.resultRegisterUser.user.uid,
+        companyName: companyName,
+        companyAbnAcn: companyAbnAcn,
+        companyType: companyTypeOption,
+        companyEmail: email,
+      }
+
+      toast('Successfully registered!', StatusColor.DEFAULT);
+
+      await setIsLoggedIn(true);
+      await setPhotoURLAction(getAvatar(response.resultRegisterUser.user?.email));
+      await setCompanyProfile(companyProfile);
+
+      history.push(ROUTES.TABS_HOME, {direction: 'none'});
+
+      setBusy(false);
+
     } else {
       setBusy(false);
     }
@@ -248,6 +269,7 @@ export default connect<OwnProps, {}, DispatchProps>({
   mapDispatchToProps: {
     setIsLoggedIn,
     setPhotoURL,
+    setCompanyProfile,
   },
   component: RegisterPage
 });
