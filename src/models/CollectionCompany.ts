@@ -1,4 +1,4 @@
-import { CompanyType } from "../enum/CompanyType";
+import { CompanyType } from '../enum/CompanyType';
 
 export interface CollectionCompany {
   companyId: string;
