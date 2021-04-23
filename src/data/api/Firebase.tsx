@@ -9,11 +9,12 @@ import { CollectionUser } from '../../models/CollectionUser';
 import { CollectionCompany } from '../../models/CollectionCompany';
 import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 import { RoleType } from '../../enum/RoleType';
+import { Collection } from '../../enum/Collection';
 
 firebase.initializeApp(Firebase);
 
 export const dbFirestore = firebase.firestore();
-export const timestampFirebase = firebase.firestore.Timestamp;
+export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 export async function loginUser(email: string, password: string) {
   try {
@@ -38,8 +39,8 @@ export async function registerUser(form: RegisterCompanyForm) {
       companyType: form.companyType,
       companyCreatedBy: resultRegisterUser.user.uid,
       companyEmail: form.email,
-      createdAt: timestampFirebase.now(),
-      updatedAt: timestampFirebase.now(),
+      createdAt: timestamp,
+      updatedAt: timestamp,
     }
 
     const addCollectionUser: CollectionUser = {
@@ -48,18 +49,14 @@ export async function registerUser(form: RegisterCompanyForm) {
       userEmail: form.email,
       userName: form.userName,
       userRole: RoleType.ADMIN,
-      createdAt: timestampFirebase.now(),
-      updatedAt: timestampFirebase.now(),
+      createdAt: timestamp,
+      updatedAt: timestamp,
     }
 
-    const resultCollectionCompany: any = await dbFirestore.collection('Company').add(addCollectionCompany);
-    const resultCollectionUser: any = await dbFirestore.collection('User').add(addCollectionUser);
+    await dbFirestore.collection(Collection.COMPANY).doc(resultRegisterUser.user.uid).set(addCollectionCompany);
+    await dbFirestore.collection(Collection.USER).doc(resultRegisterUser.user.uid).set(addCollectionUser);
 
-    return {
-      resultRegisterUser,
-      resultCollectionCompany,
-      resultCollectionUser
-    };
+    return resultRegisterUser;
 
   } catch(error) {
     toast(error.message, StatusColor.ERROR, 4000);
