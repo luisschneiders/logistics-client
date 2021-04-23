@@ -6,5 +6,5 @@ export interface CompanyProfile {
   companyAbnAcn: string;
   companyType: CompanyType;
   companyCreatedBy?: string;
-  companyEmail: string;
+  companyEmail?: string;
 }

@@ -107,8 +107,6 @@ const IonicApp: React.FC<IonicAppProps> = ({
     companyName: '',
     companyAbnAcn: '',
     companyType: CompanyType.ABN,
-    companyCreatedBy: '',
-    companyEmail: '',
   }
 
   useEffect(() => {
