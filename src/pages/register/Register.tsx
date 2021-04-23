@@ -139,23 +139,18 @@ const RegisterPage: React.FC<RegisterProps> = ({
 
     const response: any = await registerUser(registerForm);
 
-    if (response &&
-        response.resultRegisterUser.user.uid &&
-        response.resultCollectionCompany.id &&
-        response.resultCollectionUser.id
-    ) {
+    if (response && response.user.uid) {
       const companyProfile: CompanyProfile = {
-        companyId: response.resultRegisterUser.user.uid,
+        companyId: response.user.uid,
         companyName: companyName,
         companyAbnAcn: companyAbnAcn,
         companyType: companyTypeOption,
-        companyEmail: email,
       }
 
       toast('Successfully registered!', StatusColor.DEFAULT);
 
       await setIsLoggedIn(true);
-      await setPhotoURLAction(getAvatar(response.resultRegisterUser.user?.email));
+      await setPhotoURLAction(getAvatar(response.user?.email));
       await setCompanyProfile(companyProfile);
 
       history.push(ROUTES.TABS_HOME, {direction: 'none'});

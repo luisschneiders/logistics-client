@@ -18,7 +18,7 @@ import {
 import './Login.scss';
 import { RouteComponentProps } from 'react-router-dom';
 import { toast } from '../../components/toast/Toast';
-import { loginUser } from '../../data/api/Firebase';
+import { loginUser, logoutUser } from '../../data/api/Firebase';
 import { StatusColor } from '../../enum/StatusColor';
 import {
   setIsLoggedIn,
@@ -29,6 +29,7 @@ import { connect } from '../../data/connect';
 import { getAvatar } from '../../util/getAvatar';
 import * as ROUTES from '../../constants/Routes';
 import {
+  getCompanyProfile,
   setMenuEnabled,
 } from '../../data/sessions/sessions.actions';
 import { AppColor } from '../../enum/AppColor';
@@ -36,6 +37,7 @@ import { AppColor } from '../../enum/AppColor';
 interface OwnProps extends RouteComponentProps {}
 
 interface DispatchProps {
+  getCompanyProfile: typeof getCompanyProfile;
   setIsLoggedIn: typeof setIsLoggedIn;
   setDisplayName: typeof setDisplayName;
   setPhotoURL: typeof setPhotoURL;
@@ -45,6 +47,7 @@ interface DispatchProps {
 interface LoginProps extends OwnProps, DispatchProps {}
 
 const LoginPage: React.FC<LoginProps> = ({
+    getCompanyProfile,
     setIsLoggedIn,
     history,
     setDisplayName: setDisplayNameAction,
@@ -73,25 +76,12 @@ const LoginPage: React.FC<LoginProps> = ({
 
     if (response) {
       // Go to dashboard...
-      // const userProfile: any = await getUserCredentialsServer({email, password});
+      await getCompanyProfile(response.user.uid);
+      await setIsLoggedIn(true);
+      await setDisplayNameAction(response.user.displayName ? response.user.displayName : null);
+      await setPhotoURLAction(response.user.photoURL ? response.user.photoURL : getAvatar(response.user.email));
 
-      // Check if credentials in the server match. If not, logout from Firebase
-      // if (userProfile) {
-
-        // await setUserProfileServer(userProfile);
-        await setIsLoggedIn(true);
-        await setDisplayNameAction(response.user.displayName ? response.user.displayName : null);
-        await setPhotoURLAction(response.user.photoURL ? response.user.photoURL : getAvatar(response.user.email));
-
-        history.push(ROUTES.TABS_HOME, {direction: 'none'});
-
-      // } else {
-      //   logoutUser().then(() => {
-      //     setIsLoggedIn(false);
-      //   }, (error) => {
-      //     toast(error.message, StatusColor.ERROR, 4000);
-      //   });
-      // }
+      history.push(ROUTES.TABS_HOME, {direction: 'none'});
     }
   }
 
@@ -140,6 +130,7 @@ const LoginPage: React.FC<LoginProps> = ({
 
 export default connect<OwnProps, {}, DispatchProps>({
   mapDispatchToProps: {
+    getCompanyProfile,
     setIsLoggedIn,
     setDisplayName,
     setPhotoURL,
