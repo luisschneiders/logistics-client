@@ -7,6 +7,7 @@ import {
 } from '../../constants/Storage';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { Period } from '../../models/Period';
+import { fetchCompanyProfile } from '../api/CollectionCompany';
 
 const { Storage } = Plugins;
 
@@ -35,4 +36,9 @@ export const setStorageExpensesTimeTransition = async (expensesTimeTransition: P
 
 export const setStorageTransactionsTimeTransition = async (transactionsTimeTransition: Period) => {
   await Storage.set({ key: TRANSACTIONS_TIME_TRANSITION, value: JSON.stringify(transactionsTimeTransition)});
+}
+
+export const fetchCompanyProfileData = async (userId: string) => {
+  const response: any = await fetchCompanyProfile(userId);
+  return response as CompanyProfile;
 }

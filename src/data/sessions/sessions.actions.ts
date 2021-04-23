@@ -1,3 +1,4 @@
+import { CompanyType } from '../../enum/CompanyType';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { Period } from '../../models/Period';
 import { ActionType } from '../../util/types';
@@ -9,6 +10,8 @@ import {
   SESSION_TRANSACTIONS_TIME_TRANSITON_SET,
 } from '../actionTypes';
 import {
+  fetchCompanyProfileData,
+  getStorageCompanyProfile,
   getStorageHomeTimeTransition,
   setStorageCompanyProfile,
   setStorageExpensesTimeTransition,
@@ -42,6 +45,36 @@ const transactionsTimeTransitionAction = (transactionsTimeTransition: Period) =>
     type: SESSION_TRANSACTIONS_TIME_TRANSITON_SET,
     transactionsTimeTransition
   } as const);
+}
+
+export const getCompanyProfile = (userId: string) => async () => {
+  const response: CompanyProfile = await getStorageCompanyProfile();
+  let companyProfile: CompanyProfile = {
+    companyId: '',
+    companyName: '',
+    companyAbnAcn: '',
+    companyType: CompanyType.ABN,
+
+  }
+  if (response && response.companyId && response.companyId.length !== 0) {
+    companyProfile = {
+      companyId: response.companyId,
+      companyName: response.companyName,
+      companyAbnAcn: response.companyAbnAcn,
+      companyType: response.companyType,
+    };
+  } else {
+    const responseFetch = await fetchCompanyProfileData(userId);
+    companyProfile = {
+      companyId: responseFetch.companyId,
+      companyName: responseFetch.companyName,
+      companyAbnAcn: responseFetch.companyAbnAcn,
+      companyType: responseFetch.companyType,
+    }
+  }
+
+  await setStorageCompanyProfile(companyProfile);
+  return companyProfileAction(companyProfile);
 }
 
 export const setCompanyProfile = (companyProfile: CompanyProfile) => async () => {
