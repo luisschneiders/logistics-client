@@ -5,16 +5,41 @@ import {
   HOME_TIME_TRANSITION,
   TRANSACTIONS_TIME_TRANSITION,
 } from '../../constants/Storage';
+import { CompanyType } from '../../enum/CompanyType';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { Period } from '../../models/Period';
 import { fetchCompanyProfile } from '../api/CollectionCompany';
 
 const { Storage } = Plugins;
 
-export const getStorageCompanyProfile = async () => {
+export const getStorageCompanyProfile = async (userId: string) => {
   const response: any  = await Storage.get({ key: COMPANY_PROFILE });
-  const responseObj: any = JSON.parse(response.value);
-  return responseObj;
+  const responseObj: CompanyProfile = JSON.parse(response.value);
+
+  if (responseObj && responseObj.companyId && responseObj.companyId.length !== 0) {
+    return responseObj;
+  } else {
+    const fetchCompany = await fetchCompanyProfileData(userId);
+
+    if (fetchCompany && fetchCompany.companyId && fetchCompany.companyId.length !== 0) {
+      const companyProfile: CompanyProfile = {
+        companyId: fetchCompany.companyId,
+        companyName: fetchCompany.companyName,
+        companyAbnAcn: fetchCompany.companyAbnAcn,
+        companyType: fetchCompany.companyType,
+      }
+      return companyProfile;
+    } else {
+      // TODO: Create a reminder in the app that there is no company associated to the user.
+      const companyProfile: CompanyProfile = {
+        companyId: '',
+        companyName: '',
+        companyAbnAcn: '',
+        companyType: CompanyType.ABN,
+      }
+      return companyProfile;
+    }
+  }
 }
 
 export const setStorageCompanyProfile = async (data: CompanyProfile) => {
