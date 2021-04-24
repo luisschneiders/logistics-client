@@ -108,14 +108,14 @@ const RegisterPage: React.FC<RegisterProps> = ({
       return toast('Only digits for ABN or ACN!', StatusColor.WARNING);
     }
 
-    if (companyTypeOption === 1) { // ABN verification
+    if (companyTypeOption === CompanyType.ABN) { // ABN verification
       if (companyAbnAcn.trim() === '') {
         return toast('ABN is required!', StatusColor.WARNING);
       }
       if (companyAbnAcn.length !== 11) {
         return toast('ABN is 11 digits long', StatusColor.WARNING);
       }
-    } else if (companyTypeOption === 2) { // ACN verification
+    } else if (companyTypeOption === CompanyType.ACN) { // ACN verification
       if (companyAbnAcn.trim() === '') {
         return toast('ACN is required!', StatusColor.WARNING);
       }
