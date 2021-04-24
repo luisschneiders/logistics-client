@@ -20,7 +20,7 @@ import LsAppSummary from '../../components/summary/AppSummary';
 import LsTransition from '../../components/time/Transition';
 import * as MOMENT  from '../../util/moment';
 import { Period } from '../../models/Period';
-import { endPeriod, startPeriod } from '../../util/moment';
+import { endPeriod, now, startPeriod } from '../../util/moment';
 import { setAppSummary } from '../../data/summary/summary.actions';
 import LsMainChip from '../../components/chip/MainChip';
 import { StatusColor } from '../../enum/StatusColor';
@@ -41,8 +41,8 @@ const HomePage: React.FC<HomeProps> = ({
 }) => {
   const [height, width] = useWindowSize();
   const [period, setPeriod] = useState<Period>({
-    startDate: startPeriod(MOMENT.currentYearYYYY, 'year'),
-    endDate: endPeriod(MOMENT.currentYearYYYY, 'year'),
+    startDate: startPeriod(MOMENT.currentDayDD, 'day'),
+    endDate: endPeriod(MOMENT.currentDayDD, 'day'),
   });
   const [isError, setError] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -79,7 +79,7 @@ const HomePage: React.FC<HomeProps> = ({
             <IonRow className="ion-no-padding">
               <IonCol size="8" push="2" className="ion-no-padding">
               <LsTransition
-                monthOrYear="year"
+                dayOrMonthOrYear="day"
                 period={period}
                 setPeriod={setPeriod}
               />
@@ -90,7 +90,7 @@ const HomePage: React.FC<HomeProps> = ({
         </IonToolbar>
         {width <= MOBILE_VIEW && <IonToolbar>
           <LsTransition
-            monthOrYear="year"
+            dayOrMonthOrYear="day"
             period={period}
             setPeriod={setPeriod}
           />

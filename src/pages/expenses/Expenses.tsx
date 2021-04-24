@@ -149,7 +149,7 @@ const ExpensesPage: React.FC<ExpensesProps> = ({
               </IonCol>
               <IonCol size="8" className="ion-no-padding">
                 <LsTransition
-                  monthOrYear='month'
+                  dayOrMonthOrYear='month'
                   period={period}
                   setPeriod={setPeriod}
                 />
@@ -190,7 +190,7 @@ const ExpensesPage: React.FC<ExpensesProps> = ({
         {width <= MOBILE_VIEW &&
         <IonToolbar>
           <LsTransition
-            monthOrYear="month"
+            dayOrMonthOrYear="month"
             period={period}
             setPeriod={setPeriod}
           />
