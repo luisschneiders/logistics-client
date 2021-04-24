@@ -26,6 +26,7 @@ export async function fetchCompanyProfile(userId: string) {
     })
 
   }).catch((error) => {
-    return toast(`Error: ${error}`, StatusColor.ERROR, 4000);
+    toast(`No company associated to this user: ${error}`, StatusColor.ERROR, 4000);
+    return null;
   });
 }
