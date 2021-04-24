@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { setDarkMode } from '../../data/user/user.actions'
 import {
   RouteComponentProps,
@@ -14,21 +14,29 @@ import {
   IonContent,
   IonList,
   IonListHeader,
-  IonToggle } from '@ionic/react';
+  IonToggle,
+  IonPopover,
+  IonBadge,
+  IonButton
+} from '@ionic/react';
 import './Menu.scss'
 import {
   businessOutline,
-  moonOutline, sunnyOutline,
+  moonOutline, sunnyOutline, warning,
 } from 'ionicons/icons';
 import { connect } from '../../data/connect';
 import { appPages } from '../../app/AppPages';
 import { AppColor } from '../../enum/AppColor';
 import LsMainChip from '../chip/MainChip';
+import { CompanyProfile } from '../../models/CompanyProfile';
+import * as selectorsSessions from '../../data/sessions/sessions.selectors';
+import { StatusColor } from '../../enum/StatusColor';
 
 interface StateProps {
   darkMode: boolean;
   isAuthenticated: boolean;
   menuEnabled: boolean;
+  companyProfile: CompanyProfile;
 }
 
 interface DispatchProps {
@@ -37,8 +45,16 @@ interface DispatchProps {
 
 interface MenuProps extends RouteComponentProps, StateProps, DispatchProps {}
 
-const LsMenu: React.FC<MenuProps> = ({darkMode, history, isAuthenticated, setDarkMode, menuEnabled}) => {
+const LsMenu: React.FC<MenuProps> = ({
+    history,
+    darkMode,
+    isAuthenticated,
+    menuEnabled,
+    companyProfile,
+    setDarkMode,
+  }) => {
   const location = useLocation();
+  const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
 
   const renderMenuItems = (pages: any[], menu: string) => {
     return pages
@@ -68,7 +84,32 @@ const LsMenu: React.FC<MenuProps> = ({darkMode, history, isAuthenticated, setDar
   return (
     <IonMenu type="overlay" disabled={!menuEnabled} contentId="main">
       <IonContent forceOverscroll={false}>
+        {(!companyProfile || !companyProfile.companyId) &&
+          <IonPopover
+            cssClass='my-custom-class'
+            event={popoverState.event}
+            isOpen={popoverState.showPopover}
+            onDidDismiss={() => setShowPopover({ showPopover: false, event: undefined })}
+          >
+            <IonList lines="full" className="ion-no-padding">
+              <IonItem>
+                <IonIcon slot="start" icon={warning} />
+                <div>
+                  No company associated to this user
+                </div>
+              </IonItem>
+            </IonList>
+          </IonPopover>
+        }
         <IonList lines="none">
+          {(!companyProfile || !companyProfile.companyId) &&
+          <IonItem>
+            {/* TODO: create a proper notification centre */}
+            <IonLabel>Notifications</IonLabel>
+            <IonButton fill="clear">
+              <IonBadge color={StatusColor.ERROR} slot="end" onClick={(e: any) => { e.persist(); setShowPopover({showPopover: true, event: e}) }}>1</IonBadge>
+            </IonButton>
+          </IonItem>}
           {isAuthenticated ? renderMenuItems(appPages().authenticated, 'Menu') : renderMenuItems(appPages().unauthenticated, 'Menu')}
         </IonList>
         <IonList lines="none">
@@ -102,7 +143,8 @@ export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     darkMode: state.userReducer.darkMode,
     isAuthenticated: state.userReducer.isLoggedIn,
-    menuEnabled: state.sessionsReducer.menuEnabled
+    menuEnabled: state.sessionsReducer.menuEnabled,
+    companyProfile: selectorsSessions.getCompanyProfile(state),
   }),
   mapDispatchToProps: ({
     setDarkMode
