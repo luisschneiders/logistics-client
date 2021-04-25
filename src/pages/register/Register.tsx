@@ -178,7 +178,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
           <IonText><h3>User</h3></IonText>
           <IonList lines="full">
             <IonItem>
-              <IonLabel position="stacked" color={AppColor.PRIMARY}>User Name</IonLabel>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>User name</IonLabel>
               <IonInput name="name" type="text"
                         value={name}
                         spellCheck={false}
@@ -204,7 +204,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
               </IonInput>
             </IonItem>
             <IonItem className="ion-margin-bottom">
-              <IonLabel position="stacked" color={AppColor.PRIMARY}>Confirm Password</IonLabel>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>Confirm password</IonLabel>
               <IonInput name="password" type="password"
                         value={confirmPassword}
                         onIonChange={(e: any) => setConfirmPassword(e.detail.value!)} required>
@@ -214,7 +214,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
           <IonText><h3>Company</h3></IonText>
           <IonList lines="full">
             <IonItem>
-              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company Name</IonLabel>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company name</IonLabel>
               <IonInput name="companyName" type="text"
                         value={companyName}
                         spellCheck={false}
@@ -223,7 +223,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
               </IonInput>
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company Type</IonLabel>
+              <IonLabel position="stacked" color={AppColor.PRIMARY}>Company type</IonLabel>
               <IonSelect
                 onIonChange={e => setCompanyTypeOption(e.detail.value)}
                 value={companyTypeOption}

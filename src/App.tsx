@@ -58,7 +58,10 @@ import * as ROUTES  from './constants/Routes';
 import { setResetAppStore } from './data/app/app.actions';
 import { initialState } from './data/app/app.state';
 import * as selectorsUser from './data/user/user.selectors';
-import { setCompanyProfile } from './data/sessions/sessions.actions';
+import {
+  getCompanyProfile,
+  setCompanyProfile
+} from './data/sessions/sessions.actions';
 import { CompanyProfile } from './models/CompanyProfile';
 import { CompanyType } from './enum/CompanyType';
 
@@ -77,6 +80,7 @@ interface StateProps {
 
 interface DispatchProps {
   getDarkMode: typeof getDarkMode;
+  getCompanyProfile: typeof getCompanyProfile;
   setIsLoggedIn: typeof setIsLoggedIn;
   setDisplayName: typeof setDisplayName;
   setPhotoURL: typeof setPhotoURL;
@@ -90,6 +94,7 @@ interface IonicAppProps extends StateProps, DispatchProps {}
 const IonicApp: React.FC<IonicAppProps> = ({
     darkMode,
     isLoggedIn,
+    getCompanyProfile,
     getDarkMode,
     setIsLoggedIn,
     setHasSeenWelcome,
@@ -113,6 +118,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     getDarkMode();
     getCurrentUser().then((user: any) => {
       if (user) {
+        getCompanyProfile(user.uid);
         setIsAuthenticated(true);
         setIsLoggedIn(true);
         setDisplayName(user.displayName);
@@ -126,6 +132,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     });
   }, [
       getDarkMode,
+      getCompanyProfile,
       setIsLoggedIn,
       setHasSeenWelcome,
       setDisplayName,
@@ -186,6 +193,7 @@ const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: {
     getDarkMode,
+    getCompanyProfile,
     setIsLoggedIn,
     setHasSeenWelcome,
     setDisplayName,
