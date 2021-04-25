@@ -50,8 +50,8 @@ const TodoPage: React.FC<TodoProps> = ({}) => {
           <IonTitle>TODO</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonList>
+      <IonContent className="ion-no-padding">
+        <IonList lines="full">
           <IonItem>
             <IonIcon slot="start" icon={notificationsOutline} />
             <IonLabel>Create Notification Center</IonLabel>
