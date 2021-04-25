@@ -1,5 +1,6 @@
 import {
   MODAL_BANK_SHOW_SET,
+  MODAL_COMPANY_USER_SHOW_SET,
   MODAL_EXPENSES_ADD_SHOW_SET,
   MODAL_EXPENSES_SEARCH_SHOW_SET,
   MODAL_EXPENSE_TYPE_SHOW_SET,
@@ -17,6 +18,11 @@ export const modalReducer = (state: ModalState, action: ModalAction) : ModalStat
       return {
         ...state,
         isShowModalBank: action.payload
+      }
+    case MODAL_COMPANY_USER_SHOW_SET:
+      return {
+        ...state,
+        isShowModalCompanyUser: action.payload
       }
     case MODAL_EXPENSE_TYPE_SHOW_SET:
       return {

@@ -87,6 +87,7 @@ export const initialState: AppState = {
   },
   modalReducer: {
     isShowModalBank: false,
+    isShowModalCompanyUser: false,
     isShowModalExpensesAdd: false,
     isShowModalExpensesSearch: false,
     isShowModalExpenseType: false,
