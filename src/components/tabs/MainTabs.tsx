@@ -27,8 +27,10 @@ import ExpenseTypeDetailsPage from '../../pages/expense-type/ExpenseTypeDetails'
 import TransactionTypePage from '../../pages/transaction-type/TransactionType';
 import TransactionTypeDetailsPage from '../../pages/transaction-type/TransactionTypeDetails';
 
-import UserTypePage from '../../pages/user/UserType';
-import UserTypeDetailsPage from '../../pages/user/UserTypeDetails';
+import CompanyUserPage from '../../pages/user/CompanyUser';
+import CompanyUserDetailsPage from '../../pages/user/CompanyUserDetails';
+
+import TodoPage from '../../pages/todo/Todo';
 
 import VehiclePage from '../../pages/vehicle/Vehicle';
 import VehicleDetailsPage from '../../pages/vehicle/VehicleDetails';
@@ -56,25 +58,30 @@ const LsMainTabs: React.FC<StateProps> = ({isAuthenticated}) => {
       <IonRouterOutlet>
         <Redirect path={ROUTES.TABS} to={ROUTES.TABS_HOME} exact={true} />
         <Route path={ROUTES.TABS_HOME} render={() => <HomePage />} exact={true} />
-        <Route path={ROUTES.TABS_EXPENSES} render={() => <ExpensesPage />} exact={true} />
-        <Route path={ROUTES.TABS_TRANSACTIONS} render={() => <TransactionsPage />} exact={true} />
+        {/* <Route path={ROUTES.TABS_EXPENSES} render={() => <ExpensesPage />} exact={true} />
+        <Route path={ROUTES.TABS_TRANSACTIONS} render={() => <TransactionsPage />} exact={true} /> */}
 
         <Route path={ROUTES.TABS_SETUP} render={() => <SetupPage />} exact={true} />
 
-        <Route path={ROUTES.TABS_BANK} render={() => <BankPage />} exact={true} />
+        {/* <Route path={ROUTES.TABS_BANK} render={() => <BankPage />} exact={true} />
         <Route path={`${ROUTES.TABS_BANK}/:id`} component={BankDetailsPage} exact={true} />
 
         <Route path={ROUTES.TABS_EXPENSE_TYPE} render={() => <ExpenseTypePage />} exact={true} />
         <Route path={`${ROUTES.TABS_EXPENSE_TYPE}/:id`} component={ExpenseTypeDetailsPage} exact={true} />
 
         <Route path={ROUTES.TABS_TRANSACTION_TYPE} render={() => <TransactionTypePage />} exact={true} />
-        <Route path={`${ROUTES.TABS_TRANSACTION_TYPE}/:id`} component={TransactionTypeDetailsPage} exact={true} />
+        <Route path={`${ROUTES.TABS_TRANSACTION_TYPE}/:id`} component={TransactionTypeDetailsPage} exact={true} /> */}
 
-        <Route path={ROUTES.TABS_USER_TYPE} render={() => <UserTypePage />} exact={true} />
-        <Route path={`${ROUTES.TABS_USER_TYPE}/:id`} component={UserTypeDetailsPage} exact={true} />
+        {/* <Route path={ROUTES.TABS_USER_TYPE} render={() => <UserTypePage />} exact={true} />
+        <Route path={`${ROUTES.TABS_USER_TYPE}/:id`} component={UserTypeDetailsPage} exact={true} /> */}
 
-        <Route path={ROUTES.TABS_VEHICLE} render={() => <VehiclePage />} exact={true} />
-        <Route path={`${ROUTES.TABS_VEHICLE}/:id`} component={VehicleDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COMPANY_USER} render={() => <CompanyUserPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COMPANY_USER}/:id`} component={CompanyUserDetailsPage} exact={true} />
+
+        {/* <Route path={ROUTES.TABS_VEHICLE} render={() => <VehiclePage />} exact={true} />
+        <Route path={`${ROUTES.TABS_VEHICLE}/:id`} component={VehicleDetailsPage} exact={true} /> */}
+
+        <Route path={ROUTES.TABS_TODO} render={() => <TodoPage />} exact={true} />
 
         <Route path='/' render={() => <Redirect to={ROUTES.TABS_HOME} />} exact={true} />
       </IonRouterOutlet>

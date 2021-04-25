@@ -19,6 +19,8 @@ export const TABS = '/tabs';
 
 export const TABS_BANK = `${TABS}/bank`;
 
+export const TABS_COMPANY_USER = `${TABS}/company-user`;
+
 export const TABS_EXPENSES = `${TABS}/expenses`;
 
 export const TABS_EXPENSE_TYPE = `${TABS}/expense-type`;
@@ -34,6 +36,8 @@ export const TABS_TRANSACTIONS = `${TABS}/transactions`;
 export const TABS_TRANSACTION_TYPE = `${TABS}/transaction-type`;
 
 export const TABS_TRIPS = `${TABS}/trips`;
+
+export const TABS_TODO = `${TABS}/todo`;
 
 export const TABS_USER_TYPE = `${TABS}/user-type`;
 
