@@ -66,13 +66,17 @@ const CompanyUserPage: React.FC<CompanyUserProps> = ({
           <IonButtons slot="start">
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>Company users</IonTitle>
+          <IonTitle>Users</IonTitle>
           <IonFab vertical="center" horizontal="end">
             {(companyProfile?.companyId.length !== 0) && 
-              <IonFabButton color={AppColor.TERTIARY} size="small" title="Add new record">
+              <IonFabButton
+                onClick={() => setModalCompanyUserShow(true)}
+                color={AppColor.TERTIARY}
+                size="small"
+                title="Add new record"
+              >
                 <IonIcon
                   icon={add}
-                  onClick={() => setModalCompanyUserShow(true)}
                   size="small"
                 />
               </IonFabButton>
