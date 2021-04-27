@@ -47,10 +47,12 @@ import {
 import LsMainTabs from './components/tabs/MainTabs';
 import LsMenu from './components/menu/Menu';
 import { toast } from './components/toast/Toast';
+import HomeOrWelcome from './components/HomeOrWelcome';
 
 import LoginPage from './pages/login/Login';
 import RegisterPage from './pages/register/Register';
 import AccountPage from './pages/account/Account';
+import WelcomePage from './pages/welcome/Welcome';
 
 import { StatusColor } from './enum/StatusColor';
 import { getAvatar } from './util/getAvatar';
@@ -148,7 +150,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                 <IonSplitPane contentId="main" className="app-split-pane">
                   <LsMenu />
                   <IonRouterOutlet id="main">
-                    <Route path='/' component={LoginPage} exact={true} />
+                    <Route path='/' component={HomeOrWelcome} exact={true} />
 
                     <Route path={ROUTES.LOGIN} component={LoginPage} exact={true} />
                     <Route path={ROUTES.REGISTER} component={RegisterPage} exact={true} />
@@ -164,7 +166,8 @@ const IonicApp: React.FC<IonicAppProps> = ({
                         return <Redirect to={ROUTES.LOGIN} />
                       }
                     }} />
-
+                    
+                    <Route path={ROUTES.WELCOME} component={WelcomePage} exact={true} />
                     <Route path={ROUTES.LOGOUT} render={() => {
                       logoutUser().then(() => {
                         toast('Successfully logged out!', StatusColor.DEFAULT);

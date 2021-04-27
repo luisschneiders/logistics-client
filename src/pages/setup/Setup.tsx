@@ -12,6 +12,7 @@ import {
   IonToolbar
 } from '@ionic/react';
 import {
+  businessOutline,
   hammerOutline,
   peopleOutline,
 } from 'ionicons/icons';
@@ -51,7 +52,11 @@ const SetupPage: React.FC<SetupProps> = ({
         <IonList lines="full">
           <IonItem detail={true} routerLink={ROUTES.TABS_COMPANY_USER} routerDirection="none">
             <IonIcon slot="start" icon={peopleOutline} />
-            <IonLabel>Company users</IonLabel>
+            <IonLabel>Users</IonLabel>
+          </IonItem>
+          <IonItem detail={true} routerLink={ROUTES.TABS_COMPANY_USER} routerDirection="none">
+            <IonIcon slot="start" icon={businessOutline} />
+            <IonLabel>Clients</IonLabel>
           </IonItem>
           <IonItem detail={true} routerLink={ROUTES.TABS_TODO} routerDirection="none">
             <IonIcon slot="start" icon={hammerOutline} />
