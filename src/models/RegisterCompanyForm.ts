@@ -6,8 +6,10 @@ export interface RegisterCompanyForm {
   password: string,
   userName: string,
   userRole: RoleType,
+  userIsActive: boolean;
   companyName: string,
   companyAbnAcn: string,
   companySignup: boolean,
   companyType: CompanyType,
+  companyIsActive: boolean
 }

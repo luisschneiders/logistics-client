@@ -35,10 +35,11 @@ export async function registerUser(form: RegisterCompanyForm) {
       companyId: resultRegisterUser.user.uid,
       companyName: form.companyName,
       companyAbnAcn: form.companyAbnAcn,
-      companySignup: true,
+      companySignup: form.companySignup,
       companyType: form.companyType,
       companyCreatedBy: resultRegisterUser.user.uid,
       companyEmail: form.email,
+      companyIsActive: form.companyIsActive,
       createdAt: timestamp,
       updatedAt: timestamp,
     }
@@ -49,6 +50,7 @@ export async function registerUser(form: RegisterCompanyForm) {
       userEmail: form.email,
       userName: form.userName,
       userRole: RoleType.ADMIN,
+      userIsActive: form.userIsActive,
       createdAt: timestamp,
       updatedAt: timestamp,
     }

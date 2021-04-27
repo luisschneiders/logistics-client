@@ -131,9 +131,11 @@ const RegisterPage: React.FC<RegisterProps> = ({
       password: password,
       userName: name,
       userRole: RoleType.ADMIN,
+      userIsActive: true,
       companyName: companyName,
       companyAbnAcn: companyAbnAcn,
       companySignup: true,
+      companyIsActive: true,
       companyType: companyTypeOption,
     }
 
