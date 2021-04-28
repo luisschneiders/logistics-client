@@ -11,14 +11,13 @@ import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 import { RoleType } from '../../enum/RoleType';
 import { Collection } from '../../enum/Collection';
 
-firebase.initializeApp(Firebase);
-
+export const fb = firebase.initializeApp(Firebase);
 export const dbFirestore = firebase.firestore();
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 
 export async function loginUser(email: string, password: string) {
   try {
-    const response: any = await firebase.auth().signInWithEmailAndPassword(email, password);
+    const response: any = await fb.auth().signInWithEmailAndPassword(email, password);
     toast(`Welcome back ${response?.user?.displayName || ''}!`, StatusColor.DEFAULT);
     return response;
   } catch(error) {
@@ -29,7 +28,7 @@ export async function loginUser(email: string, password: string) {
 
 export async function registerUser(form: RegisterCompanyForm) {
   try {
-    const resultRegisterUser: any = await firebase.auth().createUserWithEmailAndPassword(form.email, form.password);
+    const resultRegisterUser: any = await fb.auth().createUserWithEmailAndPassword(form.email, form.password);
 
     const addCollectionCompany: CollectionCompany = {
       companyId: resultRegisterUser.user.uid,
@@ -68,7 +67,7 @@ export async function registerUser(form: RegisterCompanyForm) {
 
 export function getCurrentUser() {
   return new Promise((resolve, reject) => {
-    const unsubscribe: any = firebase.auth().onAuthStateChanged((user: any) => {
+    const unsubscribe: any = fb.auth().onAuthStateChanged((user: any) => {
       if (user) {
         resolve(user);
       } else {
@@ -80,13 +79,13 @@ export function getCurrentUser() {
 }
 
 export async function logoutUser() {
-  const response: any = firebase.auth().signOut();
+  const response: any = fb.auth().signOut();
   return response;
 }
 
 export async function updateProfile(profile: UserProfileFirebase) {
   try {
-    firebase.auth().currentUser?.updateProfile(profile);
+    fb.auth().currentUser?.updateProfile(profile);
     return true;
 
   } catch(error) {
