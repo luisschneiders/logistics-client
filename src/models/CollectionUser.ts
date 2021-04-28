@@ -5,7 +5,7 @@ export interface CollectionUser {
   userId: string;
   userEmail: string;
   userName: string;
-  userRole: RoleType;
+  userRole: string
   userIsActive: boolean;
   createdAt: any;
   updatedAt: any;
