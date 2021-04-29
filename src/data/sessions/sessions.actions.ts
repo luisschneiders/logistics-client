@@ -1,9 +1,11 @@
 import { CompanyType } from '../../enum/CompanyType';
 import { CompanyProfile } from '../../models/CompanyProfile';
+import { CompanyUser } from '../../models/CompanyUser';
 import { Period } from '../../models/Period';
 import { ActionType } from '../../util/types';
 import {
   SESSION_COMPANY_PROFILE_SET,
+  SESSION_COMPANY_USER_SET,
   SESSION_EXPENSES_TIME_TRANSITON_SET,
   SESSION_HOME_TIME_TRANSITON_SET,
   SESSION_MENU_ENABLED_SET,
@@ -12,8 +14,10 @@ import {
 import {
   fetchCompanyProfileData,
   getStorageCompanyProfile,
+  getStorageCompanyUser,
   getStorageHomeTimeTransition,
   setStorageCompanyProfile,
+  setStorageCompanyUser,
   setStorageExpensesTimeTransition,
   setStorageHomeTimeTransition,
   setStorageTransactionsTimeTransition,
@@ -22,6 +26,13 @@ import {
 const companyProfileAction = (data: CompanyProfile) => {
   return ({
     type: SESSION_COMPANY_PROFILE_SET,
+    payload: data
+  } as const);
+}
+
+const companyUserAction = (data: CompanyUser) => {
+  return ({
+    type: SESSION_COMPANY_USER_SET,
     payload: data
   } as const);
 }
@@ -58,6 +69,17 @@ export const setCompanyProfile = (companyProfile: CompanyProfile) => async () =>
   return companyProfileAction(companyProfile);
 }
 
+export const getCompanyUser = (userId: string) => async () => {
+  const response: CompanyUser = await getStorageCompanyUser(userId);
+  await setStorageCompanyUser(response);
+  return companyUserAction(response);
+}
+
+export const setCompanyUser = (companyUser: CompanyUser) => async () => {
+  await setStorageCompanyUser(companyUser);
+  return companyUserAction(companyUser);
+}
+
 export const setMenuEnabled = (menuEnabled: boolean) => ({
   type: SESSION_MENU_ENABLED_SET,
   menuEnabled
@@ -86,6 +108,7 @@ export const setTransactionsTimeTransition = (transactionsTimeTransition: Period
 
 export type SessionsActions =
   | ActionType<typeof setCompanyProfile>
+  | ActionType<typeof setCompanyUser>
   | ActionType<typeof setMenuEnabled>
   // TODO: review the need of this actions
   | ActionType<typeof setHomeTimeTransition>

@@ -30,6 +30,7 @@ import { getAvatar } from '../../util/getAvatar';
 import * as ROUTES from '../../constants/Routes';
 import {
   getCompanyProfile,
+  getCompanyUser,
   setMenuEnabled,
 } from '../../data/sessions/sessions.actions';
 import { AppColor } from '../../enum/AppColor';
@@ -38,6 +39,7 @@ interface OwnProps extends RouteComponentProps {}
 
 interface DispatchProps {
   getCompanyProfile: typeof getCompanyProfile;
+  getCompanyUser: typeof getCompanyUser;
   setIsLoggedIn: typeof setIsLoggedIn;
   setDisplayName: typeof setDisplayName;
   setPhotoURL: typeof setPhotoURL;
@@ -48,6 +50,7 @@ interface LoginProps extends OwnProps, DispatchProps {}
 
 const LoginPage: React.FC<LoginProps> = ({
     getCompanyProfile,
+    getCompanyUser,
     setIsLoggedIn,
     history,
     setDisplayName: setDisplayNameAction,
@@ -77,6 +80,7 @@ const LoginPage: React.FC<LoginProps> = ({
     if (response) {
       // Go to dashboard...
       await getCompanyProfile(response.user.uid);
+      await getCompanyUser(response.user.uid);
       await setIsLoggedIn(true);
       await setDisplayNameAction(response.user.displayName ? response.user.displayName : null);
       await setPhotoURLAction(response.user.photoURL ? response.user.photoURL : getAvatar(response.user.email));
@@ -131,6 +135,7 @@ const LoginPage: React.FC<LoginProps> = ({
 export default connect<OwnProps, {}, DispatchProps>({
   mapDispatchToProps: {
     getCompanyProfile,
+    getCompanyUser,
     setIsLoggedIn,
     setDisplayName,
     setPhotoURL,

@@ -42,7 +42,8 @@ import { CompanyType } from '../../enum/CompanyType';
 import { RoleType } from '../../enum/RoleType';
 import { CollectionCompany } from '../../models/CollectionCompany';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { setCompanyProfile } from '../../data/sessions/sessions.actions';
+import { setCompanyProfile, setCompanyUser } from '../../data/sessions/sessions.actions';
+import { CompanyUser } from '../../models/CompanyUser';
 
 interface OwnProps extends RouteComponentProps {}
 
@@ -50,6 +51,7 @@ interface DispatchProps {
   setIsLoggedIn: typeof setIsLoggedIn;
   setPhotoURL: typeof setPhotoURL;
   setCompanyProfile: typeof setCompanyProfile;
+  setCompanyUser: typeof setCompanyUser;
 }
 
 interface RegisterProps extends OwnProps, DispatchProps { }
@@ -57,6 +59,7 @@ interface RegisterProps extends OwnProps, DispatchProps { }
 const RegisterPage: React.FC<RegisterProps> = ({
     setIsLoggedIn,
     setCompanyProfile,
+    setCompanyUser,
     history,
     setPhotoURL: setPhotoURLAction,
   }) => {
@@ -149,11 +152,19 @@ const RegisterPage: React.FC<RegisterProps> = ({
         companyType: companyTypeOption,
       }
 
+      const companyUser: CompanyUser = {
+        userId: response.user.uid,
+        userEmail: email,
+        userName: name,
+        userRole: RoleType.ADMIN,
+      }
+
       toast('Successfully registered!', StatusColor.DEFAULT);
 
       await setIsLoggedIn(true);
       await setPhotoURLAction(getAvatar(response.user?.email));
       await setCompanyProfile(companyProfile);
+      await setCompanyUser(companyUser);
 
       history.push(ROUTES.TABS_HOME, {direction: 'none'});
 
@@ -267,6 +278,7 @@ export default connect<OwnProps, {}, DispatchProps>({
     setIsLoggedIn,
     setPhotoURL,
     setCompanyProfile,
+    setCompanyUser,
   },
   component: RegisterPage
 });

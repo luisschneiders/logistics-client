@@ -62,10 +62,14 @@ import { initialState } from './data/app/app.state';
 import * as selectorsUser from './data/user/user.selectors';
 import {
   getCompanyProfile,
-  setCompanyProfile
+  getCompanyUser,
+  setCompanyProfile,
+  setCompanyUser
 } from './data/sessions/sessions.actions';
 import { CompanyProfile } from './models/CompanyProfile';
 import { CompanyType } from './enum/CompanyType';
+import { CompanyUser } from './models/CompanyUser';
+import { RoleType } from './enum/RoleType';
 
 const App: React.FC = () => {
   return (
@@ -83,12 +87,14 @@ interface StateProps {
 interface DispatchProps {
   getDarkMode: typeof getDarkMode;
   getCompanyProfile: typeof getCompanyProfile;
+  getCompanyUser: typeof getCompanyUser;
   setIsLoggedIn: typeof setIsLoggedIn;
   setDisplayName: typeof setDisplayName;
   setPhotoURL: typeof setPhotoURL;
   setResetAppStore: typeof setResetAppStore;
   setHasSeenWelcome: typeof setHasSeenWelcome;
   setCompanyProfile: typeof setCompanyProfile;
+  setCompanyUser: typeof setCompanyUser;
 }
 
 interface IonicAppProps extends StateProps, DispatchProps {}
@@ -97,6 +103,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     darkMode,
     isLoggedIn,
     getCompanyProfile,
+    getCompanyUser,
     getDarkMode,
     setIsLoggedIn,
     setHasSeenWelcome,
@@ -104,6 +111,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     setPhotoURL,
     setResetAppStore,
     setCompanyProfile,
+    setCompanyUser,
   }) => {
 
   const [busy, setBusy] = useState<boolean>(true);
@@ -116,11 +124,19 @@ const IonicApp: React.FC<IonicAppProps> = ({
     companyType: CompanyType.ABN,
   }
 
+  const companyUser: CompanyUser = {
+    userId: '',
+    userEmail: '',
+    userName: '',
+    userRole: '',
+  }
+
   useEffect(() => {
     getDarkMode();
     getCurrentUser().then((user: any) => {
       if (user) {
         getCompanyProfile(user.uid);
+        getCompanyUser(user.uid);
         setIsAuthenticated(true);
         setIsLoggedIn(true);
         setDisplayName(user.displayName);
@@ -135,12 +151,14 @@ const IonicApp: React.FC<IonicAppProps> = ({
   }, [
       getDarkMode,
       getCompanyProfile,
+      getCompanyUser,
       setIsLoggedIn,
       setHasSeenWelcome,
       setDisplayName,
       setPhotoURL,
       setResetAppStore,
       setCompanyProfile,
+      setCompanyUser,
     ]);
 
   return (
@@ -174,6 +192,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                         setIsLoggedIn(false);
                         setResetAppStore(initialState);
                         setCompanyProfile(companyProfile);
+                        setCompanyUser(companyUser);
                       }, (error) => {
                         toast(error.message, StatusColor.ERROR, 4000);
                       });
@@ -197,12 +216,14 @@ const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
   mapDispatchToProps: {
     getDarkMode,
     getCompanyProfile,
+    getCompanyUser,
     setIsLoggedIn,
     setHasSeenWelcome,
     setDisplayName,
     setPhotoURL,
     setResetAppStore,
     setCompanyProfile,
+    setCompanyUser,
   },
   component: IonicApp
 });
