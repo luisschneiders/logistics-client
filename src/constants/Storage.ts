@@ -3,6 +3,7 @@
  */
 
 export const COMPANY_PROFILE = 'companyProfile';
+export const COMPANY_USER = 'companyUser';
 export const DARK_MODE = 'darkMode';
 export const EXPENSES_TIME_TRANSITION = 'expensesTimeTransition';
 export const HAS_SEEN_WELCOME = 'hasSeenWelcome';
