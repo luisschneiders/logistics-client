@@ -10,22 +10,17 @@ import { connect } from '../../data/connect';
 import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionUser from '../../data/collectionUser/collectionUser.selectors';
-import * as selectorsUserType from '../../data/userType/userType.selectors';
-import { UserType, UserTypeList } from '../../models/UserType';
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
 import {
-  setUserTypeList,
   updateUserType
 } from '../../data/userType/userType.actions';
 import { PageListItem } from '../../enum/PageListItem';
 import LsMainCard from '../card/MainCard';
 import * as ROUTES from '../../constants/Routes';
-import { userTypeOptions } from '../../pages/user/UserTypeOptions';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { CompanyUser } from '../../models/CompanyUser';
 import { companyUserOptions } from '../../pages/user/CompanyUserOptions';
-import { setCollectionUserList, setCollectionUserListLoadMore } from '../../data/collectionUser/collectionUser.actions';
+import { setCollectionUserListLoadMore } from '../../data/collectionUser/collectionUser.actions';
 import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
 
 interface StateProps {
@@ -48,11 +43,9 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
     isFetching,
     collectionUserList,
     setCollectionUserListLoadMore,
-    updateUserType,
   }) => {
   const [collectionUser, setCollectionUser] = useState<CollectionUser[]>([]);
   const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
-
   const userActionsOptions = async () => {
     const actions = companyUserOptions();
     setCollectionUserOptionsList(await actions);
@@ -91,19 +84,21 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
             <IonItem key={index}>
               <IonLabel>
                 <IonItem
-                  className="ion-text-uppercase"
                   lines="none"
                   routerLink={`${ROUTES.TABS_COMPANY_USER}/${item.userId}`}
                 >
                   <IonLabel>
-                    <div className="ion-text-capitalize">Name: </div>
-                    <div className={item.userIsActive ? StatusColor.IS_ACTIVE : StatusColor.IS_INACTIVE}>
-                      {item.userName}
+                    <strong className="ion-text-capitalize">Details: </strong>
+                    <div>
+                      Name: {item.userName}
+                    </div>
+                    <div>
+                      Email: {item.userEmail}
                     </div>
                   </IonLabel>
                   <IonLabel>
-                    <div className="ion-text-capitalize">Role: </div>
-                    <div className={item.userIsActive ? StatusColor.IS_ACTIVE : StatusColor.IS_INACTIVE}>
+                    <strong className="ion-text-capitalize">Role: </strong>
+                    <div>
                       {collectionUserOptionsList.map((type: any, key: number) => {
                         return type.value === item.userRole ? <span key={key}>{type.description}</span> : '';
                       })}
