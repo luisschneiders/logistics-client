@@ -76,30 +76,19 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
   return (
     <>
       {collectionUser && collectionUser.length > 0 &&
-        <IonList lines="full">
+        <IonList lines="full" className="ion-no-padding">
           {collectionUser.map((item: CollectionUser, index: number) => (
             <IonItem key={index}>
               <IonLabel>
                 <IonItem
                   lines="none"
+                  className="ion-no-padding"
                   routerLink={`${ROUTES.TABS_COMPANY_USER}/${item.userId}`}
                 >
                   <IonLabel>
                     <strong className="ion-text-capitalize">Details: </strong>
-                    <div>
-                      Name: {item.userName}
-                    </div>
-                    <div>
-                      Email: {item.userEmail}
-                    </div>
-                  </IonLabel>
-                  <IonLabel>
-                    <strong className="ion-text-capitalize">Role: </strong>
-                    <div>
-                      {collectionUserOptionsList.map((type: any, key: number) => {
-                        return type.value === item.userRole ? <span key={key}>{type.description}</span> : '';
-                      })}
-                    </div>
+                    <div>{item.userName}</div>
+                    <div>{item.userEmail}</div>
                   </IonLabel>
                 </IonItem>
               </IonLabel>

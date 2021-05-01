@@ -48,7 +48,7 @@ const TodoPage: React.FC<TodoProps> = ({}) => {
           </IonItem>
           <IonItem>
             <IonIcon slot="start" icon={peopleOutline} />
-            <IonLabel>Implement users role</IonLabel>
+            <IonLabel>Implement user access (roles)</IonLabel>
           </IonItem>
           <IonItem>
             <IonIcon slot="start" icon={keyOutline} />
@@ -56,7 +56,7 @@ const TodoPage: React.FC<TodoProps> = ({}) => {
           </IonItem>
           <IonItem>
             <IonIcon slot="start" icon={documentsOutline} />
-            <IonLabel>Improve Firestore Pagination</IonLabel>
+            <IonLabel>Improve Firestore pagination</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
