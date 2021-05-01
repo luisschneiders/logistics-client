@@ -129,6 +129,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     userEmail: '',
     userName: '',
     userRole: '',
+    userIsActive: false,
   }
 
   useEffect(() => {
