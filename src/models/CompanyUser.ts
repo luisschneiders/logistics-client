@@ -3,4 +3,5 @@ export interface CompanyUser {
   userEmail?: string;
   userName: string;
   userRole: string;
+  userIsActive: boolean;
 }

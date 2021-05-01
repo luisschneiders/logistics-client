@@ -3,4 +3,5 @@ export interface Pagination {
   pageSize:number;
   rowCount: number;
   pageCount: number;
+  lastVisible?: any;
 }

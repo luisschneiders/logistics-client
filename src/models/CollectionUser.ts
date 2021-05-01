@@ -1,4 +1,4 @@
-import { RoleType } from '../enum/RoleType';
+import { Pagination } from './Pagination';
 
 export interface CollectionUser {
   companyId: string;
@@ -9,4 +9,9 @@ export interface CollectionUser {
   userIsActive: boolean;
   createdAt: any;
   updatedAt: any;
+}
+
+export interface CollectionUserList {
+  collectionUsers: CollectionUser[];
+  pagination: Pagination;
 }
