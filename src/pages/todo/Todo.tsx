@@ -25,7 +25,7 @@ import LsListItemUserType from '../../components/list/ListItemUserType';
 import {
   setUserTypeList
 } from '../../data/userType/userType.actions';
-import { add, albumsOutline, keyOutline, mailOutline, notificationsOutline, peopleOutline } from 'ionicons/icons';
+import { add, albumsOutline, documentsOutline, keyOutline, mailOutline, notificationsOutline, peopleOutline } from 'ionicons/icons';
 import { setModalCompanyUserShow } from '../../data/modal/modal.actions';
 import LsModalCompanyUser from '../../components/modal/ModalCompanyUser';
 import { CompanyProfile } from '../../models/CompanyProfile';
@@ -63,6 +63,10 @@ const TodoPage: React.FC<TodoProps> = ({}) => {
           <IonItem>
             <IonIcon slot="start" icon={keyOutline} />
             <IonLabel>Create page reset password</IonLabel>
+          </IonItem>
+          <IonItem>
+            <IonIcon slot="start" icon={documentsOutline} />
+            <IonLabel>Improve Firestore Pagination</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
