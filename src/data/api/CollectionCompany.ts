@@ -30,3 +30,19 @@ export async function fetchCompanyProfile(userId: string) {
     return null;
   });
 }
+
+export async function fetchCompanyUser(userId: string) {
+  // Check if user exist in the collection
+  const userRef = dbFirestore.collection(Collection.USER).doc(userId);
+
+  return userRef.get().then((doc) => {
+    if (doc.exists) {
+      return doc.data();
+    } else {
+      return null;
+    }
+  }).catch((error) => {
+    toast(`No user was found: ${error}`, StatusColor.ERROR, 4000);
+    return null;
+  });
+}

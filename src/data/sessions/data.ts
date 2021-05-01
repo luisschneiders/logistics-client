@@ -60,6 +60,7 @@ export const getStorageCompanyUser = async (userId: string) => {
         userEmail: fetchCompanyUser.userEmail,
         userName: fetchCompanyUser.userName,
         userRole: fetchCompanyUser.userRole,
+        userIsActive: fetchCompanyUser.userIsActive
       }
       return companyUser;
     } else {
@@ -68,6 +69,7 @@ export const getStorageCompanyUser = async (userId: string) => {
         userEmail: '',
         userName: '',
         userRole: RoleType.USER,
+        userIsActive: false,
       }
       return companyUser;
     }

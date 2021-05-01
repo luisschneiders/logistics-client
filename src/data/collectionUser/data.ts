@@ -17,7 +17,6 @@ export const fetchCollectionUserData = async (id: string, pageSize: number) => {
 
 export const fetchCollectionUserLoadMoreData = async (id: string, lastVisible: any, pageSize: number) => {
   const response: any = await fetchCollectionUserListLoadMore(id, lastVisible, pageSize);
-  console.log('LFS - fetchCollectionUserLoadMoreData: ', response);
   return response as CollectionUserList;
 }
 
