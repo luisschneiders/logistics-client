@@ -12,9 +12,6 @@ import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionUser from '../../data/collectionUser/collectionUser.selectors';
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
-import {
-  updateUserType
-} from '../../data/userType/userType.actions';
 import { PageListItem } from '../../enum/PageListItem';
 import LsMainCard from '../card/MainCard';
 import * as ROUTES from '../../constants/Routes';
@@ -32,7 +29,7 @@ interface StateProps {
 
 interface DispatchProps {
   setCollectionUserListLoadMore: typeof setCollectionUserListLoadMore;
-  updateUserType: typeof updateUserType;
+  // updateUserType: typeof updateUserType;
 }
 
 interface ListUserTypeProps extends StateProps, DispatchProps {}
@@ -134,7 +131,7 @@ export default connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: ({
     setCollectionUserListLoadMore,
-    updateUserType,
+    // updateUserType,
   }),
   component: LsListItemCollectionUser
 });

@@ -21,15 +21,14 @@ import {
 } from 'react-router';
 import { connect } from '../../data/connect';
 import * as ROUTES from '../../constants/Routes';
-import { UserType } from '../../models/UserType';
+// import { UserType } from '../../models/UserType';
 import * as selectorsUser from '../../data/user/user.selectors';
-import * as selectorsSessions from '../../data/sessions/sessions.selectors';
-import * as selectorsUserType from '../../data/userType/userType.selectors';
+// import * as selectorsUserType from '../../data/userType/userType.selectors';
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
 import { toast } from '../../components/toast/Toast';
-import { setUserTypeById, updateUserType } from '../../data/userType/userType.actions';
-import { userTypeOptions } from './UserTypeOptions';
+// import { setUserTypeById, updateUserType } from '../../data/userType/userType.actions';
+// import { userTypeOptions } from './UserTypeOptions';
 
 
 interface OwnProps extends RouteComponentProps<{
@@ -38,13 +37,13 @@ interface OwnProps extends RouteComponentProps<{
 
 interface StateProps {
   isLoggedIn: boolean;
-  userType: UserType | undefined;
-  userTypeById: UserType;
+  // userType: UserType | undefined;
+  // userTypeById: UserType;
 };
 
 interface DispatchProps {
-  setUserTypeById: typeof setUserTypeById;
-  updateUserType: typeof updateUserType;
+  // setUserTypeById: typeof setUserTypeById;
+  // updateUserType: typeof updateUserType;
 };
 
 interface CompanyUserDetailsProps extends OwnProps, StateProps, DispatchProps {};
@@ -52,10 +51,10 @@ interface CompanyUserDetailsProps extends OwnProps, StateProps, DispatchProps {}
 const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
     isLoggedIn,
     match,
-    userType,
-    userTypeById,
-    setUserTypeById,
-    updateUserType,
+    // userType,
+    // userTypeById,
+    // setUserTypeById,
+    // updateUserType,
   }) => {
 
     const [userTypeDescription, setUserTypeDescription] = useState<string>('');
@@ -65,37 +64,37 @@ const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
 
     const [isById, setIsById] = useState<boolean>(false);
 
-    const userActionsOptions = async () => {
-      const actions = userTypeOptions();
-      setUserTypeOptionsList(await actions);
-    }
+    // const userActionsOptions = async () => {
+    //   const actions = userTypeOptions();
+    //   setUserTypeOptionsList(await actions);
+    // }
 
     useEffect(() => {
-      userActionsOptions();
+      // userActionsOptions();
       if (isLoggedIn) {
         // If user refresh the page, fetch the User by id only once
-        if (!userType && !isById) {
-          // setUserTypeById(userProfileServer.userId, parseInt(match.params.id));
-          setIsById(true);
-        }
+        // if (!userType && !isById) {
+        //   setUserTypeById(userProfileServer.userId, parseInt(match.params.id));
+        //   setIsById(true);
+        // }
       }
 
-      if (userType) {
-        setUserTypeDescription(userType.userTypeDescription);
-        setUserTypeRates(userType.userTypeRates);
-        setUserTypeOption(userType.userTypeOptions);
-      } else if (userTypeById) {
-        setUserTypeDescription(userTypeById.userTypeDescription);
-        setUserTypeRates(userTypeById.userTypeRates);
-        setUserTypeOption(userTypeById.userTypeOptions);
-      }
+      // if (userType) {
+      //   setUserTypeDescription(userType.userTypeDescription);
+      //   setUserTypeRates(userType.userTypeRates);
+      //   setUserTypeOption(userType.userTypeOptions);
+      // } else if (userTypeById) {
+      //   setUserTypeDescription(userTypeById.userTypeDescription);
+      //   setUserTypeRates(userTypeById.userTypeRates);
+      //   setUserTypeOption(userTypeById.userTypeOptions);
+      // }
 
     }, [
       isLoggedIn,
-      userType,
+      // userType,
       match,
-      userTypeById,
-      setUserTypeById,
+      // userTypeById,
+      // setUserTypeById,
       isById,
     ]);
 
@@ -109,12 +108,12 @@ const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
         return toast('Type is required!', StatusColor.WARNING);
       }
 
-      const newUserType: UserType = userType || userTypeById;
-      newUserType.userTypeDescription = userTypeDescription;
-      newUserType.userTypeOptions = userTypeOption;
-      newUserType.userTypeRates = userTypeRates;
+      // const newUserType: UserType = userType || userTypeById;
+      // newUserType.userTypeDescription = userTypeDescription;
+      // newUserType.userTypeOptions = userTypeOption;
+      // newUserType.userTypeRates = userTypeRates;
 
-      updateUserType(newUserType);
+      // updateUserType(newUserType);
     }
 
   return (
@@ -132,13 +131,13 @@ const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
       <IonContent>
         <form noValidate onSubmit={formUserType}>
           <IonList>
-            <IonItem lines="full" disabled={!userType && !userTypeById}>
+            {/* <IonItem lines="full" disabled={!userType && !userTypeById}>
               <IonLabel position="stacked" color={AppColor.PRIMARY}>Description</IonLabel>
               <IonInput name="userTypeDescription" type="text"
                         value={userTypeDescription} spellCheck={false} autocapitalize="off"
                         onIonChange={(e: any) => setUserTypeDescription(e.detail.value!)} required>
               </IonInput>
-            </IonItem>
+            </IonItem> */}
             <IonItem>
               <IonLabel position="stacked">Type</IonLabel>
               <IonSelect
@@ -166,11 +165,11 @@ const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
                 min="0"
               />
             </IonItem>
-            <IonItem lines="none" disabled={!userType && !userTypeById}>
+            {/* <IonItem lines="none" disabled={!userType && !userTypeById}>
               <div slot="end">
                 <IonButton type="submit" fill="outline" >Update</IonButton>
               </div>
-            </IonItem>
+            </IonItem> */}
           </IonList>
         </form>
       </IonContent>
@@ -181,12 +180,12 @@ const CompanyUserDetailsPage: React.FC<CompanyUserDetailsProps> = ({
 export default connect<OwnProps, StateProps, DispatchProps>({
   mapStateToProps: (state, OwnProps) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
-    userType: selectorsUserType.getUserTypeFromList(state, OwnProps),
-    userTypeById: selectorsUserType.getUserType(state),
+    // userType: selectorsUserType.getUserTypeFromList(state, OwnProps),
+    // userTypeById: selectorsUserType.getUserType(state),
   }),
   mapDispatchToProps: ({
-    setUserTypeById,
-    updateUserType,
+    // setUserTypeById,
+    // updateUserType,
   }),
   component: withRouter(CompanyUserDetailsPage)
 });

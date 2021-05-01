@@ -1,34 +1,24 @@
 import {
   IonButtons,
   IonContent,
-  IonFab,
-  IonFabButton,
   IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
   IonList,
-  IonLoading,
   IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar
 } from '@ionic/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from '../../data/connect';
-import { AppColor } from '../../enum/AppColor';
-import * as selectorsUser from '../../data/user/user.selectors';
-import * as selectorsUserType from '../../data/userType/userType.selectors';
-import * as selectorsSessions from '../../data/sessions/sessions.selectors';
-import { PageListItem } from '../../enum/PageListItem';
-import LsListItemUserType from '../../components/list/ListItemUserType';
 import {
-  setUserTypeList
-} from '../../data/userType/userType.actions';
-import { add, albumsOutline, documentsOutline, keyOutline, mailOutline, notificationsOutline, peopleOutline } from 'ionicons/icons';
-import { setModalCompanyUserShow } from '../../data/modal/modal.actions';
-import LsModalCompanyUser from '../../components/modal/ModalCompanyUser';
-import { CompanyProfile } from '../../models/CompanyProfile';
+  documentsOutline,
+  keyOutline,
+  notificationsOutline,
+  peopleOutline
+} from 'ionicons/icons';
 
 interface StateProps {
 }

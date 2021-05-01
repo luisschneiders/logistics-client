@@ -1,14 +1,14 @@
 import { CollectionUser } from '../../models/CollectionUser';
 import { CollectionUserList } from '../../models/CollectionUser';
 import { RegisterUserForm } from '../../models/RegisterUserForm';
-import { UserType, UserTypeList } from '../../models/UserType';
+// import { UserType, UserTypeList } from '../../models/UserType';
 import { ActionType } from '../../util/types';
 import {
-  USER_TYPE_LIST_SET,
-  USER_TYPE_LIST_IS_FETCHING,
-  USER_TYPE_IS_SAVING,
-  USER_TYPE_UPDATE,
-  USER_TYPE_BY_ID_SET,
+  // USER_TYPE_LIST_SET,
+  // USER_TYPE_LIST_IS_FETCHING,
+  // USER_TYPE_IS_SAVING,
+  // USER_TYPE_UPDATE,
+  // USER_TYPE_BY_ID_SET,
   COLLECTION_USER_ADD,
   COLLECTION_USER_LIST_SET,
   COLLECTION_USER_LIST_IS_FETCHING,
@@ -16,8 +16,8 @@ import {
   COLLECTION_USER_LIST_LOAD_MORE_SET,
 } from '../actionTypes';
 import {
-  updateUserTypeData,
-  fetchUserTypeByIdData,
+  // updateUserTypeData,
+  // fetchUserTypeByIdData,
   addCollectionUserData,
   fetchCollectionUserData,
   fetchCollectionUserLoadMoreData
@@ -30,12 +30,12 @@ const saveCollectionUserAction = (data: Partial<CollectionUser>) => {
   } as const);
 }
 
-const updateUserTypeAction = (data: UserType) => {
-  return ({
-    type: USER_TYPE_UPDATE,
-    payload: data
-  } as const);
-}
+// const updateUserTypeAction = (data: UserType) => {
+//   return ({
+//     type: USER_TYPE_UPDATE,
+//     payload: data
+//   } as const);
+// }
 
 const setCollectionUserListAction = (data: CollectionUserList) => {
   return ({
@@ -51,12 +51,12 @@ const setCollectionUserListLoadMoreAction = (data: CollectionUserList) => {
   } as const);
 }
 
-const setUserTypeByIdAction = (data: UserType) => {
-  return ({
-    type: USER_TYPE_BY_ID_SET,
-    payload: data
-  } as const);
-}
+// const setUserTypeByIdAction = (data: UserType) => {
+//   return ({
+//     type: USER_TYPE_BY_ID_SET,
+//     payload: data
+//   } as const);
+// }
 
 const isFetchingCollectionUserListAction = (isFetching: boolean) => {
   return ({
@@ -76,7 +76,7 @@ export const isFetchingCollectionUserList = (isFetching: boolean) => async () =>
   return isFetchingCollectionUserListAction(isFetching);
 }
 
-export const isSavingCompanuUser = (isSaving: boolean) => async () => {
+export const isSavingCollectionUser = (isSaving: boolean) => async () => {
   return isSavingCollectionUserAction(isSaving);
 }
 
@@ -94,12 +94,12 @@ export const setCollectionUserListLoadMore = (id: string, lastVisible: any, page
   return setCollectionUserListLoadMoreAction(data);
 }
 
-export const setUserTypeById = (userId: number, userTypeId: number) => async (dispatch: React.Dispatch<any>) => {
+// export const setUserTypeById = (userId: number, userTypeId: number) => async (dispatch: React.Dispatch<any>) => {
 
-  const data = await fetchUserTypeByIdData(userId, userTypeId);
+//   const data = await fetchUserTypeByIdData(userId, userTypeId);
 
-  return setUserTypeByIdAction(data);
-}
+//   return setUserTypeByIdAction(data);
+// }
 
 export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: React.Dispatch<any>) => {
   dispatch(isSavingCollectionUserAction(true));
@@ -108,16 +108,16 @@ export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: Re
   return saveCollectionUserAction(collectionUser);
 }
 
-export const updateUserType = (data: Partial<UserType>) => async (dispatch: React.Dispatch<any>) => {
-  const userType = await updateUserTypeData(data);
-  return updateUserTypeAction(userType);
-}
+// export const updateUserType = (data: Partial<UserType>) => async (dispatch: React.Dispatch<any>) => {
+//   const userType = await updateUserTypeData(data);
+//   return updateUserTypeAction(userType);
+// }
 
 export type CollectionUserAction = 
   | ActionType<typeof addCollectionUser>
   | ActionType<typeof setCollectionUserList>
   | ActionType<typeof setCollectionUserListLoadMore>
   | ActionType<typeof isFetchingCollectionUserList>
-  | ActionType<typeof isSavingCompanuUser>
+  | ActionType<typeof isSavingCollectionUser>
   // | ActionType<typeof updateUserType>
   // | ActionType<typeof setUserTypeById>
