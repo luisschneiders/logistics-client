@@ -157,6 +157,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
         userEmail: email,
         userName: name,
         userRole: RoleType.ADMIN,
+        userIsActive: true,
       }
 
       toast('Successfully registered!', StatusColor.DEFAULT);

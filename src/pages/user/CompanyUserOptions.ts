@@ -1,4 +1,4 @@
-import { RoleType } from "../../enum/RoleType"
+import { RoleType } from '../../enum/RoleType';
 
 export const companyUserOptions = async () => {
   return [
