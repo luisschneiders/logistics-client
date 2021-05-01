@@ -1,12 +1,13 @@
+import React, { useEffect, useState } from 'react';
 import {
   IonButton,
   IonInput,
   IonItem,
   IonLabel,
+  IonLoading,
   IonSelect,
   IonSelectOption,
 } from '@ionic/react';
-import React, { useEffect, useState } from 'react';
 import { AppColor } from '../../enum/AppColor';
 import { ModalProvider } from './ModalProvider';
 import LsMainModal from './MainModal';
@@ -16,28 +17,36 @@ import { useModal } from '../../hooks/useModal';
 import { connect } from '../../data/connect';
 import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsModal from '../../data/modal/modal.selectors';
+import * as selectorsSessions from '../../data/sessions/sessions.selectors';
+import * as selectorsCollectionUser from '../../data/collectionUser/collectionUser.selectors';
 import { setModalCompanyUserShow } from '../../data/modal/modal.actions';
-import { addUserType } from '../../data/userType/userType.actions';
 import { companyUserOptions } from '../../pages/user/CompanyUserOptions';
 import { RoleType } from '../../enum/RoleType';
+import { addCollectionUser } from '../../data/collectionUser/collectionUser.actions';
+import { App } from '../../credentials/App';
+import { CompanyProfile } from '../../models/CompanyProfile';
 
 interface StateProps {
   isLoggedIn: boolean;
+  companyProfile: CompanyProfile;
   isShowModalCompanyUser: boolean;
+  isSavingCompanyUser: boolean;
 }
 
 interface DispatchProps {
   setModalCompanyUserShow: typeof setModalCompanyUserShow;
-  addUserType: typeof addUserType;
+  addCollectionUser: typeof addCollectionUser;
 }
 
 interface ModalUserTypeProps extends StateProps, DispatchProps {}
 
 const LsModalCompanyUser: React.FC<ModalUserTypeProps> = ({
     isLoggedIn,
+    companyProfile,
     isShowModalCompanyUser,
+    isSavingCompanyUser,
     setModalCompanyUserShow,
-    addUserType,
+    addCollectionUser,
   }) => {
 
   const { showModal, isSubmitting, handleShow, handleClose } = useModal();
@@ -61,13 +70,19 @@ const LsModalCompanyUser: React.FC<ModalUserTypeProps> = ({
     }
   }, [
     isLoggedIn,
+    companyProfile,
     isShowModalCompanyUser,
+    isSavingCompanyUser,
     setModalCompanyUserShow,
     handleShow
   ])
 
   const companyUserForm = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isLoggedIn || !companyProfile) {
+      return toast('Could not find associated company!', StatusColor.WARNING);
+    }
     
     if (companyUserName.trim() === '') {
       return toast('User name is required!', StatusColor.WARNING);
@@ -80,24 +95,24 @@ const LsModalCompanyUser: React.FC<ModalUserTypeProps> = ({
     if (!companyUserOption) {
       return toast('Role is required!', StatusColor.WARNING);
     }
-    // addUserType({
-    //   userTypeDescription,
-    //   userTypeRates,
-    //   companyUserOptions: companyUserOption,
-    //   // userTypeInsertedBy: userProfileServer.userId,
-    //   userTypeIsActive: true,
-    // });
-    setCompanyUserName('');
-    setCompanyUserEmail('');
-    handleClose();
+
+    addCollectionUser({
+      companyId: companyProfile.companyId,
+      userEmail: companyUserEmail,
+      userName: companyUserName,
+      userRole: companyUserOption,
+      userIsActive: true,
+      userPassword: App.defaultPassword,
+    });
   }
 
   return (
     <ModalProvider>
+      <IonLoading message="Please wait..." duration={0} isOpen={isSavingCompanyUser}></IonLoading>
       <LsMainModal
         id="modal-company-user"
         show={showModal}
-        title="New company user"
+        title="Add new user"
         isSubmitting={isSubmitting}
         closeModal={handleClose}
       >
@@ -148,8 +163,9 @@ const LsModalCompanyUser: React.FC<ModalUserTypeProps> = ({
                 type="submit"
                 shape="round"
                 color={AppColor.PRIMARY}
+                disabled={isSavingCompanyUser ? true : false}
               >
-                Save
+                {isSavingCompanyUser ? 'Saving...' : 'Save'}
               </IonButton>
             </div>
           </IonItem>
@@ -162,11 +178,13 @@ const LsModalCompanyUser: React.FC<ModalUserTypeProps> = ({
 export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
+    companyProfile: selectorsSessions.getCompanyProfile(state),
     isShowModalCompanyUser: selectorsModal.showModalCompanyUser(state),
+    isSavingCompanyUser: selectorsCollectionUser.isSavingCollectionUser(state),
   }),
   mapDispatchToProps: ({
     setModalCompanyUserShow,
-    addUserType,
+    addCollectionUser,
   }),
   component: LsModalCompanyUser
 });

@@ -69,7 +69,6 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
   ]);
 
   const loadMore = () => {
-    console.log('LFS - collectionUserList.pagination.lastVisible?.exists: ', collectionUserList.pagination.lastVisible?.exists)
     if (isLoggedIn && companyProfile) {
       setCollectionUserListLoadMore(companyProfile.companyId, collectionUserList.pagination.lastVisible, PageListItem.ITEM_100);
     }
