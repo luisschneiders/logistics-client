@@ -20,8 +20,8 @@ import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
 import LsListItemCompanyUser from '../../components/list/ListItemCollectionUser';
 import { add } from 'ionicons/icons';
-import { setModalCompanyUserShow } from '../../data/modal/modal.actions';
-import LsModalCompanyUser from '../../components/modal/ModalCompanyUser';
+import { setModalCollectionUserShow } from '../../data/modal/modal.actions';
+import LsModalCollectionUser from '../../components/modal/ModalCollectionUser';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { setCollectionUserList } from '../../data/collectionUser/collectionUser.actions';
 
@@ -33,7 +33,7 @@ interface StateProps {
 
 interface DispatchProps {
   setCollectionUserList: typeof setCollectionUserList;
-  setModalCompanyUserShow: typeof setModalCompanyUserShow;
+  setModalCollectionUserShow: typeof setModalCollectionUserShow;
 }
 
 interface CompanyUserProps extends StateProps, DispatchProps {}
@@ -43,7 +43,7 @@ const CompanyUserPage: React.FC<CompanyUserProps> = ({
   isFetching,
   companyProfile,
   setCollectionUserList,
-  setModalCompanyUserShow,
+  setModalCollectionUserShow,
 }) => {
  
   useEffect(() => {
@@ -54,7 +54,7 @@ const CompanyUserPage: React.FC<CompanyUserProps> = ({
     isLoggedIn,
     companyProfile,
     setCollectionUserList,
-    setModalCompanyUserShow,
+    setModalCollectionUserShow,
   ]);
 
   return (
@@ -68,7 +68,7 @@ const CompanyUserPage: React.FC<CompanyUserProps> = ({
           <IonFab vertical="center" horizontal="end">
             {(companyProfile?.companyId.length !== 0) && 
               <IonFabButton
-                onClick={() => setModalCompanyUserShow(true)}
+                onClick={() => setModalCollectionUserShow(true)}
                 color={AppColor.TERTIARY}
                 size="small"
                 title="Add new record"
@@ -85,7 +85,7 @@ const CompanyUserPage: React.FC<CompanyUserProps> = ({
       <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
       <IonContent className="ion-no-padding">
         <LsListItemCompanyUser />
-        <LsModalCompanyUser />
+        <LsModalCollectionUser />
       </IonContent>
     </IonPage>
   );
@@ -99,7 +99,7 @@ export default connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: ({
     setCollectionUserList,
-    setModalCompanyUserShow,
+    setModalCollectionUserShow,
   }),
   component: React.memo(CompanyUserPage)
 });

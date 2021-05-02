@@ -1,6 +1,6 @@
 import { RoleType } from '../../enum/RoleType';
 
-export const companyUserOptions = async () => {
+export const collectionUserOptions = async () => {
   return [
     {
       value: RoleType.ADMIN,

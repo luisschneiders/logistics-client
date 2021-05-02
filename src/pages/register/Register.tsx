@@ -186,7 +186,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
       <IonLoading message="Please wait..." duration={0} isOpen={busy}></IonLoading>
       <IonContent className="ion-padding">
         <div className="login-logo">
-          <img src="assets/img/slide2.svg" alt="Logo"/>
+          <img src="assets/img/signup.svg" alt="Logo"/>
         </div>
         <form noValidate onSubmit={register}>
           <IonText><h3>User</h3></IonText>

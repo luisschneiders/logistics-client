@@ -58,6 +58,7 @@ const WelcomePage: React.FC<WelcomeProps> = ({ history, setHasSeenWelcome, setMe
     </IonHeader>
         <IonSlides className="welcome-page__slides" ref={slideRef} onIonSlideWillChange={handleSlideChangeStart} pager={true}>
           <IonSlide>
+            <img src="assets/img/welcome.svg" alt="Logo" className="slide-image" />
             <h2 className="slide-title">
               Welcome!
             </h2>
@@ -66,7 +67,8 @@ const WelcomePage: React.FC<WelcomeProps> = ({ history, setHasSeenWelcome, setMe
             </p>
           </IonSlide>
           <IonSlide>
-            <h2 className="slide-title">Let's signup!</h2>
+            <img src="assets/img/welcome.svg" alt="Logo" className="slide-image" />
+            <h2 className="slide-title">Let's get started!</h2>
             <IonButton fill="clear" onClick={startApp} color={AppColor.LIGHT}>
               Continue
               <IonIcon slot="end" icon={arrowForward} />

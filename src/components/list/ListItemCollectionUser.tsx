@@ -16,7 +16,7 @@ import { PageListItem } from '../../enum/PageListItem';
 import LsMainCard from '../card/MainCard';
 import * as ROUTES from '../../constants/Routes';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { companyUserOptions } from '../../pages/user/CompanyUserOptions';
+import { collectionUserOptions } from '../../pages/user/CollectionUserOptions';
 import { setCollectionUserListLoadMore } from '../../data/collectionUser/collectionUser.actions';
 import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
 
@@ -44,7 +44,7 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
   const [collectionUser, setCollectionUser] = useState<CollectionUser[]>([]);
   const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
   const userActionsOptions = async () => {
-    const actions = companyUserOptions();
+    const actions = collectionUserOptions();
     setCollectionUserOptionsList(await actions);
   }
 
