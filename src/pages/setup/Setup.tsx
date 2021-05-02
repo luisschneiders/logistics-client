@@ -46,11 +46,11 @@ const SetupPage: React.FC<SetupProps> = ({}) => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList lines="full">
-          <IonItem detail={true} routerLink={ROUTES.TABS_COMPANY_USER} routerDirection="none">
+          <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_USER} routerDirection="none">
             <IonIcon slot="start" icon={peopleOutline} />
             <IonLabel>Users</IonLabel>
           </IonItem>
-          <IonItem detail={true} routerLink={ROUTES.TABS_COMPANY_USER} routerDirection="none">
+          <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_CLIENT} routerDirection="none">
             <IonIcon slot="start" icon={businessOutline} />
             <IonLabel>Clients</IonLabel>
           </IonItem>

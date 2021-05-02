@@ -30,7 +30,7 @@ interface StateProps {
   isLoggedIn: boolean;
   companyProfile: CompanyProfile;
   isShowModalCollectionUser: boolean;
-  isSavingCompanyUser: boolean;
+  isSavingCollectionUser: boolean;
 }
 
 interface DispatchProps {
@@ -44,23 +44,22 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionUser,
-    isSavingCompanyUser,
+    isSavingCollectionUser,
     setModalCollectionUserShow,
     addCollectionUser,
   }) => {
 
   const { showModal, isSubmitting, handleShow, handleClose } = useModal();
 
-  const [collectionUserName, setCompanyUserName] = useState<string>('');
-  const [collectionUserOptionsList, setCompanyUserOptionsList] = useState<any[]>([]);
-  const [collectionUserEmail, setCompanyUserEmail] = useState<string>('');
-  const [collectionUserOption, setCompanyUserOption] = useState<string>(RoleType.USER);
+  const [collectionUserName, setCollectionUserName] = useState<string>('');
+  const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
+  const [collectionUserEmail, setCollectionUserEmail] = useState<string>('');
+  const [collectionUserOption, setCollectionUserOption] = useState<string>(RoleType.USER);
 
   const userActionsOptions = async () => {
     const actions = collectionUserOptions();
-    setCompanyUserOptionsList(await actions);
+    setCollectionUserOptionsList(await actions);
   }
-
 
   useEffect(() => {
     if (isShowModalCollectionUser) {
@@ -72,7 +71,7 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionUser,
-    isSavingCompanyUser,
+    isSavingCollectionUser,
     setModalCollectionUserShow,
     handleShow
   ])
@@ -108,7 +107,7 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
 
   return (
     <ModalProvider>
-      <IonLoading message="Please wait..." duration={0} isOpen={isSavingCompanyUser}></IonLoading>
+      <IonLoading message="Please wait..." duration={0} isOpen={isSavingCollectionUser}></IonLoading>
       <LsMainModal
         id="modal-company-user"
         show={showModal}
@@ -125,7 +124,7 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
               value={collectionUserName}
               spellCheck={false}
               autocapitalize="off"
-              onIonChange={(e: any) => setCompanyUserName(e.detail.value!)}
+              onIonChange={(e: any) => setCollectionUserName(e.detail.value!)}
               required
             />
           </IonItem>
@@ -137,14 +136,14 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
               value={collectionUserEmail}
               spellCheck={false}
               autocapitalize="off"
-              onIonChange={(e: any) => setCompanyUserEmail(e.detail.value!)}
+              onIonChange={(e: any) => setCollectionUserEmail(e.detail.value!)}
               required
             />
           </IonItem>
           <IonItem>
             <IonLabel position="stacked">Role</IonLabel>
             <IonSelect
-              onIonChange={e => setCompanyUserOption(e.detail.value)}
+              onIonChange={e => setCollectionUserOption(e.detail.value)}
               value={collectionUserOption}
             >
               {collectionUserOptionsList.map((option: any, index: number) => (
@@ -163,9 +162,9 @@ const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
                 type="submit"
                 shape="round"
                 color={AppColor.PRIMARY}
-                disabled={isSavingCompanyUser ? true : false}
+                disabled={isSavingCollectionUser ? true : false}
               >
-                {isSavingCompanyUser ? 'Saving...' : 'Save'}
+                {isSavingCollectionUser ? 'Saving...' : 'Save'}
               </IonButton>
             </div>
           </IonItem>
@@ -180,7 +179,7 @@ export default connect<{}, StateProps, DispatchProps>({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
     isShowModalCollectionUser: selectorsModal.showModalCollectionUser(state),
-    isSavingCompanyUser: selectorsCollectionUser.isSavingCollectionUser(state),
+    isSavingCollectionUser: selectorsCollectionUser.isSavingCollectionUser(state),
   }),
   mapDispatchToProps: ({
     setModalCollectionUserShow,

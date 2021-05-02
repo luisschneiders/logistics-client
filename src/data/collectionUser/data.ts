@@ -1,9 +1,15 @@
-import { CollectionUserList } from '../../models/CollectionUser';
+import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
 import { RegisterUserForm } from '../../models/RegisterUserForm';
 // import {
 //   UserType,
 // } from '../../models/UserType';
-import { addCollectionUser, fetchCollectionUserList, fetchCollectionUserListLoadMore } from '../api/CollectionUser';
+import {
+  addCollectionUser,
+  fetchCollectionUserById,
+  fetchCollectionUserList,
+  fetchCollectionUserListLoadMore,
+  updateCollectionUser
+} from '../api/CollectionUser';
 
 // import {
 //   updateUserType,
@@ -20,17 +26,17 @@ export const fetchCollectionUserLoadMoreData = async (id: string, lastVisible: a
   return response as CollectionUserList;
 }
 
-// export const fetchUserTypeByIdData = async (userId: number, userTypeId: number) => {
-//   const response: any = await fetchUserTypeById(userId, userTypeId);
-//   return response as UserType;
-// }
+export const fetchCollectionUserByIdData = async (collectionUserId: string) => {
+  const response: any = await fetchCollectionUserById(collectionUserId);
+  return response as CollectionUser;
+}
 
 export const addCollectionUserData = async (data: RegisterUserForm) => {
   const response: any = await addCollectionUser(data);
   return response as RegisterUserForm;
 }
 
-// export const updateUserTypeData = async (data: Partial<UserType>) => {
-//   const response: any = await updateUserType(data);
-//   return response as UserType;
-// }
+export const updateCollectionUserData = async (data: Partial<CollectionUser>) => {
+  const response: any = await updateCollectionUser(data);
+  return response as CollectionUser;
+}

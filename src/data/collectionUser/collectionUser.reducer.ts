@@ -1,15 +1,11 @@
 import {
-  // USER_TYPE_ADD,
-  // USER_TYPE_LIST_SET,
-  // USER_TYPE_LIST_IS_FETCHING,
-  // USER_TYPE_IS_SAVING,
-  // USER_TYPE_UPDATE,
-  // USER_TYPE_BY_ID_SET,
   COLLECTION_USER_ADD,
+  COLLECTION_USER_BY_ID_SET,
   COLLECTION_USER_IS_SAVING,
-  COLLECTION_USER_LIST_IS_FETCHING,
+  COLLECTION_USER_IS_FETCHING,
   COLLECTION_USER_LIST_LOAD_MORE_SET,
   COLLECTION_USER_LIST_SET,
+  COLLECTION_USER_UPDATE,
 } from '../actionTypes';
 import { CollectionUserAction } from './collectionUser.actions';
 import { CollectionUserListState } from './collectionUser.state';
@@ -37,6 +33,10 @@ export const collectionUserReducer = (state: CollectionUserListState, action: Co
           pagination: {...state.collectionUserList.pagination},
         }
       };
+    case COLLECTION_USER_UPDATE:
+      return {
+        ...state
+      };
     case COLLECTION_USER_LIST_SET:
     case COLLECTION_USER_LIST_LOAD_MORE_SET:
       return {
@@ -46,12 +46,12 @@ export const collectionUserReducer = (state: CollectionUserListState, action: Co
           pagination: {...state.collectionUserList.pagination, ...action.payload.pagination},
         }
       }
-    // case USER_TYPE_BY_ID_SET:
-    //   return {
-    //     ...state,
-    //     userType: action.payload
-    //   }
-    case COLLECTION_USER_LIST_IS_FETCHING:
+    case COLLECTION_USER_BY_ID_SET:
+      return {
+        ...state,
+        collectionUser: action.payload
+      }
+    case COLLECTION_USER_IS_FETCHING:
       return {
         ...state,
         isFetching: action.payload

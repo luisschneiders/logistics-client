@@ -31,7 +31,7 @@ export const isSavingCollectionUser = createSelector(
   }
 );
 
-export const getUserTypeFromList = createSelector(
+export const getCollectionUserFromList = createSelector(
   getCollectionUserListData, getIdParam,
   (collectionUserList: CollectionUserList, id: string) => {
     if (collectionUserList && collectionUserList.collectionUsers && collectionUserList.collectionUsers.length > 0) {

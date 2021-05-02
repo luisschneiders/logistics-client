@@ -1,26 +1,22 @@
 import { CollectionUser } from '../../models/CollectionUser';
 import { CollectionUserList } from '../../models/CollectionUser';
 import { RegisterUserForm } from '../../models/RegisterUserForm';
-// import { UserType, UserTypeList } from '../../models/UserType';
 import { ActionType } from '../../util/types';
 import {
-  // USER_TYPE_LIST_SET,
-  // USER_TYPE_LIST_IS_FETCHING,
-  // USER_TYPE_IS_SAVING,
-  // USER_TYPE_UPDATE,
-  // USER_TYPE_BY_ID_SET,
   COLLECTION_USER_ADD,
   COLLECTION_USER_LIST_SET,
-  COLLECTION_USER_LIST_IS_FETCHING,
   COLLECTION_USER_IS_SAVING,
   COLLECTION_USER_LIST_LOAD_MORE_SET,
+  COLLECTION_USER_BY_ID_SET,
+  COLLECTION_USER_UPDATE,
+  COLLECTION_USER_IS_FETCHING,
 } from '../actionTypes';
 import {
-  // updateUserTypeData,
-  // fetchUserTypeByIdData,
   addCollectionUserData,
+  fetchCollectionUserByIdData,
   fetchCollectionUserData,
-  fetchCollectionUserLoadMoreData
+  fetchCollectionUserLoadMoreData,
+  updateCollectionUserData
 } from './data';
 
 const saveCollectionUserAction = (data: Partial<CollectionUser>) => {
@@ -30,12 +26,12 @@ const saveCollectionUserAction = (data: Partial<CollectionUser>) => {
   } as const);
 }
 
-// const updateUserTypeAction = (data: UserType) => {
-//   return ({
-//     type: USER_TYPE_UPDATE,
-//     payload: data
-//   } as const);
-// }
+const updateCollectionUserAction = (data: CollectionUser) => {
+  return ({
+    type: COLLECTION_USER_UPDATE,
+    payload: data
+  } as const);
+}
 
 const setCollectionUserListAction = (data: CollectionUserList) => {
   return ({
@@ -51,16 +47,16 @@ const setCollectionUserListLoadMoreAction = (data: CollectionUserList) => {
   } as const);
 }
 
-// const setUserTypeByIdAction = (data: UserType) => {
-//   return ({
-//     type: USER_TYPE_BY_ID_SET,
-//     payload: data
-//   } as const);
-// }
-
-const isFetchingCollectionUserListAction = (isFetching: boolean) => {
+const setCollectionUserByIdAction = (data: CollectionUser) => {
   return ({
-    type: COLLECTION_USER_LIST_IS_FETCHING,
+    type: COLLECTION_USER_BY_ID_SET,
+    payload: data
+  } as const);
+}
+
+const isFetchingCollectionUserAction = (isFetching: boolean) => {
+  return ({
+    type: COLLECTION_USER_IS_FETCHING,
     payload: isFetching
   } as const);
 }
@@ -73,7 +69,7 @@ const isSavingCollectionUserAction = (isSaving: boolean) => {
 }
 
 export const isFetchingCollectionUserList = (isFetching: boolean) => async () => {
-  return isFetchingCollectionUserListAction(isFetching);
+  return isFetchingCollectionUserAction(isFetching);
 }
 
 export const isSavingCollectionUser = (isSaving: boolean) => async () => {
@@ -81,25 +77,25 @@ export const isSavingCollectionUser = (isSaving: boolean) => async () => {
 }
 
 export const setCollectionUserList = (id: string, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(isFetchingCollectionUserListAction(true));
+  dispatch(isFetchingCollectionUserAction(true));
   const data = await fetchCollectionUserData(id, pageSize);
-  dispatch(isFetchingCollectionUserListAction(false));
+  dispatch(isFetchingCollectionUserAction(false));
   return setCollectionUserListAction(data);
 }
 
 export const setCollectionUserListLoadMore = (id: string, lastVisible: any, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(isFetchingCollectionUserListAction(true));
+  dispatch(isFetchingCollectionUserAction(true));
   const data = await fetchCollectionUserLoadMoreData(id, lastVisible, pageSize);
-  dispatch(isFetchingCollectionUserListAction(false));
+  dispatch(isFetchingCollectionUserAction(false));
   return setCollectionUserListLoadMoreAction(data);
 }
 
-// export const setUserTypeById = (userId: number, userTypeId: number) => async (dispatch: React.Dispatch<any>) => {
-
-//   const data = await fetchUserTypeByIdData(userId, userTypeId);
-
-//   return setUserTypeByIdAction(data);
-// }
+export const setCollectionUserById = (collectionUserId: string) => async (dispatch: React.Dispatch<any>) => {
+  dispatch(isFetchingCollectionUserAction(true));
+  const data = await fetchCollectionUserByIdData(collectionUserId);
+  dispatch(isFetchingCollectionUserAction(false));
+  return setCollectionUserByIdAction(data);
+}
 
 export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: React.Dispatch<any>) => {
   dispatch(isSavingCollectionUserAction(true));
@@ -108,10 +104,10 @@ export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: Re
   return saveCollectionUserAction(collectionUser);
 }
 
-// export const updateUserType = (data: Partial<UserType>) => async (dispatch: React.Dispatch<any>) => {
-//   const userType = await updateUserTypeData(data);
-//   return updateUserTypeAction(userType);
-// }
+export const updateCollectionUser = (data: Partial<CollectionUser>) => async (dispatch: React.Dispatch<any>) => {
+  const collectionUser = await updateCollectionUserData(data);
+  return updateCollectionUserAction(collectionUser);
+}
 
 export type CollectionUserAction = 
   | ActionType<typeof addCollectionUser>
@@ -119,5 +115,5 @@ export type CollectionUserAction =
   | ActionType<typeof setCollectionUserListLoadMore>
   | ActionType<typeof isFetchingCollectionUserList>
   | ActionType<typeof isSavingCollectionUser>
-  // | ActionType<typeof updateUserType>
-  // | ActionType<typeof setUserTypeById>
+  | ActionType<typeof updateCollectionUser>
+  | ActionType<typeof setCollectionUserById>

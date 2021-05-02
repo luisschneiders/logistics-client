@@ -27,8 +27,8 @@ import ExpenseTypeDetailsPage from '../../pages/expense-type/ExpenseTypeDetails'
 import TransactionTypePage from '../../pages/transaction-type/TransactionType';
 import TransactionTypeDetailsPage from '../../pages/transaction-type/TransactionTypeDetails';
 
-import CompanyUserPage from '../../pages/user/CompanyUser';
-import CompanyUserDetailsPage from '../../pages/user/CompanyUserDetails';
+import CompanyUserPage from '../../pages/user/CollectionUser';
+import CompanyUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
 import TodoPage from '../../pages/todo/Todo';
 
@@ -75,8 +75,8 @@ const LsMainTabs: React.FC<StateProps> = ({isAuthenticated}) => {
         {/* <Route path={ROUTES.TABS_USER_TYPE} render={() => <UserTypePage />} exact={true} />
         <Route path={`${ROUTES.TABS_USER_TYPE}/:id`} component={UserTypeDetailsPage} exact={true} /> */}
 
-        <Route path={ROUTES.TABS_COMPANY_USER} render={() => <CompanyUserPage />} exact={true} />
-        <Route path={`${ROUTES.TABS_COMPANY_USER}/:id`} component={CompanyUserDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CompanyUserPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CompanyUserDetailsPage} exact={true} />
 
         {/* <Route path={ROUTES.TABS_VEHICLE} render={() => <VehiclePage />} exact={true} />
         <Route path={`${ROUTES.TABS_VEHICLE}/:id`} component={VehicleDetailsPage} exact={true} /> */}

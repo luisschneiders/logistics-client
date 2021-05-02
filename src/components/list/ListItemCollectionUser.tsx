@@ -83,7 +83,7 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
                 <IonItem
                   lines="none"
                   className="ion-no-padding"
-                  routerLink={`${ROUTES.TABS_COMPANY_USER}/${item.userId}`}
+                  routerLink={`${ROUTES.TABS_COLLECTION_USER}/${item.userId}`}
                 >
                   <IonLabel>
                     <strong className="ion-text-capitalize">Details: </strong>

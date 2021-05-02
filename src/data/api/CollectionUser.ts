@@ -72,39 +72,26 @@ export const fetchCollectionUserListLoadMore = async (id: string, lastVisible: a
   }
 }
 
-// export function fetchUserTypeById(userId: number, userTypeId: number) {
+export const fetchCollectionUserById = async (collectionUserId: string) => {
+  try {
+    const userRef = dbFirestore.collection(Collection.USER).doc(collectionUserId)
 
-//   let resStatus: any = null; 
-  
-//   return fetch(`${ROUTES.SERVER}/user-type-id/userTypeInsertedBy=${userId}&id=${userTypeId}`)
-//           .then(response => {
-//             resStatus = response.status;
-//             return response.json();
-//           })
-//           .then((result: any) => {
-//             switch (resStatus) {
-//               case 200:
-//               case 201:
-//                 const userType: UserType = {
-//                   userTypeId: result.id,
-//                   userTypeDescription: result.peopleDescription,
-//                   userTypeRates: result.peopleRates,
-//                   userTypeOptions: result.peopleType,
-//                   userTypeIsActive: result.peopleIsActive,
-//                   userTypeInsertedBy: result.peopleInsertedBy,
-//                   userTypeCreatedAt: result.created_at,
-//                   userTypeUpdatedAt: result.updated_at,
-//                 };
-//                 return userType;
-//               default:
-//                 toast(`Code: ${resStatus} -> Unhandled`, StatusColor.ERROR, 4000);
-//                 return false;
-//             }
-//           }).catch((error) => {
-//             toast(`Code: ${resStatus} -> ${error}`, StatusColor.ERROR, 4000);
-//             return false;
-//           })
-// }
+    return userRef.get().then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        return null;
+      }
+    }).catch((error) => {
+      toast(`No user was found: ${error}`, StatusColor.ERROR, 4000);
+      return null;
+    });
+
+  } catch (error) {
+    toast(error.message, StatusColor.ERROR, 4000);
+    return false;
+  }
+}
 
 export const addCollectionUser = async (data: RegisterUserForm) => {
   try {
@@ -130,43 +117,6 @@ export const addCollectionUser = async (data: RegisterUserForm) => {
   }
 }
 
-// export function updateUserType(data: Partial<UserType>) {
-//   const requestOptions = {
-//     method: 'PUT',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(data)
-//   };
+export function updateCollectionUser(data: Partial<CollectionUser>) {
 
-//   let resStatus: any = null;
-
-//   return fetch(`${ROUTES.SERVER}/user-type-id/userTypeInsertedBy=${data.userTypeInsertedBy}&id=${data.userTypeId}`, requestOptions)
-//   .then(response => {
-//     resStatus = response.status;
-//     return response.json();
-//   })
-//   .then((result: any) => {
-//     switch (resStatus) {
-//       case 200:
-//       case 201:
-//         const userType: UserType = {
-//           userTypeId: result.userType.id,
-//           userTypeDescription: result.userType.peopleDescription,
-//           userTypeRates: result.userType.peopleRates,
-//           userTypeOptions: result.userType.peopleType,
-//           userTypeIsActive: result.userType.peopleIsActive,
-//           userTypeInsertedBy: result.userType.peopleInsertedBy,
-//           userTypeCreatedAt: result.userType.created_at,
-//           userTypeUpdatedAt: result.userType.updated_at,
-//         };
-//         toast(result.msg, StatusColor.SUCCESS, 4000);
-//         return userType;
-//       default:
-//         toast(`Code: ${resStatus} -> Unhandled`, StatusColor.ERROR, 4000);
-//         return false;
-//     }
-//   }).catch((error) => {
-//     toast(`Code: ${resStatus} -> ${error}`, StatusColor.ERROR, 4000);
-//     return false;
-//   });
-
-// }
+}

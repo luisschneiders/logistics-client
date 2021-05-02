@@ -19,7 +19,8 @@ export const TABS = '/tabs';
 
 export const TABS_BANK = `${TABS}/bank`;
 
-export const TABS_COMPANY_USER = `${TABS}/company-user`;
+export const TABS_COLLECTION_CLIENT = `${TABS}/collection-client`;
+export const TABS_COLLECTION_USER = `${TABS}/collection-user`;
 
 export const TABS_EXPENSES = `${TABS}/expenses`;
 
