@@ -16,12 +16,10 @@ import {
 import './Home.scss';
 import { connect } from '../../data/connect';
 import * as selectorsUser from '../../data/user/user.selectors';
-import LsAppSummary from '../../components/summary/AppSummary';
 import LsTransition from '../../components/time/Transition';
 import * as MOMENT  from '../../util/moment';
 import { Period } from '../../models/Period';
 import { endPeriod, now, startPeriod } from '../../util/moment';
-import { setAppSummary } from '../../data/summary/summary.actions';
 import LsMainChip from '../../components/chip/MainChip';
 import { StatusColor } from '../../enum/StatusColor';
 import { useWindowSize } from '../../hooks/useWindowSize';
@@ -31,13 +29,12 @@ interface StateProps {
   isLoggedIn: boolean;
 }
 interface DispatchProps {
-  setAppSummary: typeof setAppSummary;
+
 }
 interface HomeProps extends StateProps, DispatchProps {}
 
 const HomePage: React.FC<HomeProps> = ({
     isLoggedIn,
-    setAppSummary,
 }) => {
   const [height, width] = useWindowSize();
   const [period, setPeriod] = useState<Period>({
@@ -63,7 +60,6 @@ const HomePage: React.FC<HomeProps> = ({
   },[
     isLoggedIn,
     period,
-    setAppSummary,
   ]);
 
   return (
@@ -101,7 +97,6 @@ const HomePage: React.FC<HomeProps> = ({
         {isError && <IonList className="ion-text-center">
           <LsMainChip text="Something went wrong! 😢" color={StatusColor.ERROR} />
         </IonList>}
-        {!isError && <LsAppSummary />}
       </IonContent>
     </IonPage>
   );
@@ -112,7 +107,6 @@ export default connect<{}, StateProps, DispatchProps>({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
   }),
   mapDispatchToProps: ({
-    setAppSummary,
   }),
   component: React.memo(HomePage)
 });
