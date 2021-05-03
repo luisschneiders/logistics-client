@@ -63,6 +63,7 @@ export const initialState: AppState = {
     },
     isFetching: false,
     isSaving: false,
+    isUpdating: false,
   },
 };
 

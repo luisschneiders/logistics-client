@@ -6,6 +6,7 @@ const getCollectionUserListData = (state: AppState) => state.collectionUserReduc
 const getCollectionUserData = (state: AppState) => state.collectionUserReducer.collectionUser;
 const isFetchingCollectionUserListData = (state: AppState) => state.collectionUserReducer.isFetching;
 const isSavingCollectionUserData = (state: AppState) => state.collectionUserReducer.isSaving;
+const isUpdatingCollectionUserData = (state: AppState) => state.collectionUserReducer.isUpdating;
 const getIdParam = (_state: AppState, props: any) => {
   return props.match.params['id'];
 };
@@ -28,6 +29,13 @@ export const isSavingCollectionUser = createSelector(
   isSavingCollectionUserData,
   (isSaving: boolean) => {
     return isSaving;
+  }
+);
+
+export const isUpdatingCollectionUser = createSelector(
+  isUpdatingCollectionUserData,
+  (isUpdating: boolean) => {
+    return isUpdating;
   }
 );
 

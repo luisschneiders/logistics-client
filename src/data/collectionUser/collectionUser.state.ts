@@ -9,4 +9,5 @@ export interface CollectionUserListState {
   collectionUser: CollectionUser;
   isFetching: boolean;
   isSaving: boolean;
+  isUpdating: boolean;
 }

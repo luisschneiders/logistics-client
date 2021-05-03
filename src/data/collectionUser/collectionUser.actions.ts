@@ -10,6 +10,7 @@ import {
   COLLECTION_USER_BY_ID_SET,
   COLLECTION_USER_UPDATE,
   COLLECTION_USER_IS_FETCHING,
+  COLLECTION_USER_IS_UPDATING,
 } from '../actionTypes';
 import {
   addCollectionUserData,
@@ -68,12 +69,23 @@ const isSavingCollectionUserAction = (isSaving: boolean) => {
   } as const);
 }
 
+const isUpdatingCollectionUserAction = (isUpdating: boolean) => {
+  return ({
+    type: COLLECTION_USER_IS_UPDATING,
+    payload: isUpdating
+  } as const);
+}
+
 export const isFetchingCollectionUserList = (isFetching: boolean) => async () => {
   return isFetchingCollectionUserAction(isFetching);
 }
 
 export const isSavingCollectionUser = (isSaving: boolean) => async () => {
   return isSavingCollectionUserAction(isSaving);
+}
+
+export const isUpdatingCollectionUser = (isUpdating: boolean) => async () => {
+  return isUpdatingCollectionUserAction(isUpdating);
 }
 
 export const setCollectionUserList = (id: string, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
@@ -105,7 +117,9 @@ export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: Re
 }
 
 export const updateCollectionUser = (data: Partial<CollectionUser>) => async (dispatch: React.Dispatch<any>) => {
+  dispatch(isUpdatingCollectionUserAction(true));
   const collectionUser = await updateCollectionUserData(data);
+  dispatch(isUpdatingCollectionUserAction(false));
   return updateCollectionUserAction(collectionUser);
 }
 
@@ -115,5 +129,6 @@ export type CollectionUserAction =
   | ActionType<typeof setCollectionUserListLoadMore>
   | ActionType<typeof isFetchingCollectionUserList>
   | ActionType<typeof isSavingCollectionUser>
+  | ActionType<typeof isUpdatingCollectionUser>
   | ActionType<typeof updateCollectionUser>
   | ActionType<typeof setCollectionUserById>

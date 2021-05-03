@@ -1,10 +1,14 @@
-// import { UserType, UserTypeList } from '../../models/UserType';
-import * as ROUTES from '../../constants/Routes';
+import {
+  dbFirestore,
+  fb,
+  timestamp
+} from './Firebase';
 import { toast } from '../../components/toast/Toast';
 import { StatusColor } from '../../enum/StatusColor';
-import { PageListItem } from '../../enum/PageListItem';
-import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
-import { dbFirestore, fb, timestamp } from './Firebase';
+import {
+  CollectionUser,
+  CollectionUserList
+} from '../../models/CollectionUser';
 import { RegisterUserForm } from '../../models/RegisterUserForm';
 import { Collection } from '../../enum/Collection';
 
@@ -49,10 +53,10 @@ const userReference = (userRef: any, pageSize: number) => {
 
 export const fetchCollectionUserList = async (id: string, pageSize: number) => {
   try {
-      const userRef = dbFirestore.collection(Collection.USER)
-                  .where('companyId', '==', id)
-                  .limit(pageSize);
-      return userReference(userRef, pageSize);
+    const userRef = dbFirestore.collection(Collection.USER)
+                .where('companyId', '==', id)
+                .limit(pageSize);
+    return userReference(userRef, pageSize);
   } catch (error) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
@@ -108,7 +112,7 @@ export const addCollectionUser = async (data: RegisterUserForm) => {
     }
     await dbFirestore.collection(Collection.USER).doc(resultRegisterUser.user.uid).set(addCollectionUser);
 
-    toast('User added successfully.', StatusColor.SUCCESS, 4000);
+    toast('User added successfully!', StatusColor.SUCCESS, 4000);
 
     return addCollectionUser;
   } catch (error) {
@@ -117,6 +121,19 @@ export const addCollectionUser = async (data: RegisterUserForm) => {
   }
 }
 
-export function updateCollectionUser(data: Partial<CollectionUser>) {
+export const updateCollectionUser = async (data: Partial<CollectionUser>) => {
+  try {
+    await dbFirestore.collection(Collection.USER).doc(data.userId).set({
+      userName: data.userName,
+      userRole: data.userRole,
+      updatedAt: timestamp,
+    }, { merge: true });
 
+    toast('User updated successfully!', StatusColor.SUCCESS, 4000);
+
+    return data;
+  } catch (error) {
+    toast(error.message, StatusColor.ERROR, 4000);
+    return false;
+  }
 }

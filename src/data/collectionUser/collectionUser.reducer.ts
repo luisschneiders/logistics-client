@@ -6,6 +6,7 @@ import {
   COLLECTION_USER_LIST_LOAD_MORE_SET,
   COLLECTION_USER_LIST_SET,
   COLLECTION_USER_UPDATE,
+  COLLECTION_USER_IS_UPDATING,
 } from '../actionTypes';
 import { CollectionUserAction } from './collectionUser.actions';
 import { CollectionUserListState } from './collectionUser.state';
@@ -60,6 +61,11 @@ export const collectionUserReducer = (state: CollectionUserListState, action: Co
       return {
         ...state,
         isSaving: action.payload
+      }
+    case COLLECTION_USER_IS_UPDATING:
+      return {
+        ...state,
+        isUpdating: action.payload
       }
   }
 }

@@ -45,7 +45,8 @@ interface StateProps {
   companyProfile: CompanyProfile;
   isFetching: boolean;
   collectionUser: CollectionUser | undefined;
-  userTypeById: CollectionUser;
+  collectionUserById: CollectionUser;
+  isUpdatingCollectionUser: boolean;
 };
 
 interface DispatchProps {
@@ -61,12 +62,15 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
     isFetching,
     match,
     collectionUser,
-    userTypeById,
+    collectionUserById,
+    isUpdatingCollectionUser,
     setCollectionUserById,
     updateCollectionUser,
   }) => {
 
+    const [collectionUserId, setCollectionUserId] = useState<string>('');
     const [collectionUserName, setCollectionUserName] = useState<string>('');
+    const [collectionUserEmail, setCollectionUserEmail] = useState<string>('');
     const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
     const [collectionUserOption, setCollectionUserOption] = useState<string>();
 
@@ -88,11 +92,15 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
       }
 
       if (collectionUser) {
+        setCollectionUserId(collectionUser.userId);
         setCollectionUserName(collectionUser.userName);
+        setCollectionUserEmail(collectionUser.userEmail);
         setCollectionUserOption(collectionUser.userRole);
-      } else if (userTypeById) {
-        setCollectionUserName(userTypeById.userName);
-        setCollectionUserOption(userTypeById.userRole);
+      } else if (collectionUserById) {
+        setCollectionUserId(collectionUserById.userId);
+        setCollectionUserName(collectionUserById.userName);
+        setCollectionUserEmail(collectionUserById.userEmail);
+        setCollectionUserOption(collectionUserById.userRole);
       }
 
     }, [
@@ -101,7 +109,8 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
       isFetching,
       collectionUser,
       match,
-      userTypeById,
+      collectionUserById,
+      isUpdatingCollectionUser,
       setCollectionUserById,
       isById,
     ]);
@@ -116,7 +125,9 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
         return toast('Role is required!', StatusColor.WARNING);
       }
 
-      const newCollectionUser: CollectionUser = collectionUser || userTypeById;
+      const newCollectionUser: CollectionUser = collectionUser || collectionUserById;
+
+      newCollectionUser.userId = collectionUserId;
       newCollectionUser.userName = collectionUserName;
       newCollectionUser.userRole = collectionUserOption;
 
@@ -135,11 +146,11 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
           </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
+      <IonLoading message="Please wait..." duration={0} isOpen={isFetching || isUpdatingCollectionUser}></IonLoading>
       <IonContent>
         <form noValidate onSubmit={formCollectionUser}>
           <IonList>
-            <IonItem lines="full" disabled={!collectionUser && !userTypeById}>
+            <IonItem lines="full" disabled={!collectionUser && !collectionUserById}>
               <IonLabel position="stacked">User name</IonLabel>
               <IonInput name="collectionUserName"
                         type="text"
@@ -166,15 +177,26 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
                 ))}
               </IonSelect>
             </IonItem>
+            <IonItem lines="full">
+              <IonLabel position="stacked">Email</IonLabel>
+              <IonInput name="collectionUserEmail"
+                        type="email"
+                        value={collectionUserEmail}
+                        spellCheck={false}
+                        autocapitalize="off"
+                        disabled
+              >
+              </IonInput>
+            </IonItem>
             <IonItem lines="none">
               <div slot="end">
                 <IonButton
                   type="submit"
                   shape="round"
                   color={AppColor.PRIMARY}
-                  disabled={!collectionUser && !userTypeById}
+                  disabled={!collectionUser && !collectionUserById}
                 >
-                  Update
+                  {isUpdatingCollectionUser ? 'Updating...' : 'Update'}
                 </IonButton>
               </div>
             </IonItem>
@@ -191,7 +213,8 @@ export default connect<OwnProps, StateProps, DispatchProps>({
     companyProfile: selectorsSessions.getCompanyProfile(state),
     isFetching: selectorsCollectionUser.isFetchingCollectionUserList(state),
     collectionUser: selectorsCollectionUser.getCollectionUserFromList(state, OwnProps),
-    userTypeById: selectorsCollectionUser.getCollectionUser(state),
+    collectionUserById: selectorsCollectionUser.getCollectionUser(state),
+    isUpdatingCollectionUser: selectorsCollectionUser.isUpdatingCollectionUser(state),
   }),
   mapDispatchToProps: ({
     setCollectionUserById,
