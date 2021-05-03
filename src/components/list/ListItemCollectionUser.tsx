@@ -16,7 +16,10 @@ import { PageListItem } from '../../enum/PageListItem';
 import LsMainCard from '../card/MainCard';
 import * as ROUTES from '../../constants/Routes';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { setCollectionUserListLoadMore } from '../../data/collectionUser/collectionUser.actions';
+import {
+  setCollectionUserListLoadMore,
+  updateCollectionUser
+} from '../../data/collectionUser/collectionUser.actions';
 import {
   CollectionUser,
   CollectionUserList
@@ -31,7 +34,7 @@ interface StateProps {
 
 interface DispatchProps {
   setCollectionUserListLoadMore: typeof setCollectionUserListLoadMore;
-  // updateUserType: typeof updateUserType;
+  updateCollectionUser: typeof updateCollectionUser;
 }
 
 interface ListUserTypeProps extends StateProps, DispatchProps {}
@@ -42,11 +45,11 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
     isFetching,
     collectionUserList,
     setCollectionUserListLoadMore,
+    updateCollectionUser,
   }) => {
   const [collectionUser, setCollectionUser] = useState<CollectionUser[]>([]);
 
   useEffect(() => {
-    // userActionsOptions();
     if (collectionUserList) {
       setCollectionUser(collectionUserList.collectionUsers);
     }
@@ -63,10 +66,10 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
 
   const changeStatus = async (collectionUser: CollectionUser) => {
     if (collectionUser) {
-      const newCollectionUser: CollectionUser = collectionUser;
-      newCollectionUser.userIsActive = !collectionUser.userIsActive
+      const updatedCollectionUser: CollectionUser = collectionUser;
+      updatedCollectionUser.userIsActive = !collectionUser.userIsActive;
 
-      // updateCollectionUser(newCollectionUser);
+      updateCollectionUser(updatedCollectionUser);
     }
   }
   
@@ -89,9 +92,10 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
                   </IonLabel>
                 </IonItem>
               </IonLabel>
-              <div slot="end">
-                <IonToggle color={StatusColor.SUCCESS} checked={item.userIsActive} onClick={() => changeStatus(item)} />
-              </div>
+              <IonToggle
+                color={StatusColor.SUCCESS}
+                checked={item.userIsActive} onClick={() => changeStatus(item)}
+              />
             </IonItem>
           ))}
         </IonList>
@@ -117,7 +121,7 @@ export default connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: ({
     setCollectionUserListLoadMore,
-    // updateUserType,
+    updateCollectionUser,
   }),
   component: LsListItemCollectionUser
 });

@@ -126,6 +126,7 @@ export const updateCollectionUser = async (data: Partial<CollectionUser>) => {
     await dbFirestore.collection(Collection.USER).doc(data.userId).set({
       userName: data.userName,
       userRole: data.userRole,
+      userIsActive: data.userIsActive,
       updatedAt: timestamp,
     }, { merge: true });
 

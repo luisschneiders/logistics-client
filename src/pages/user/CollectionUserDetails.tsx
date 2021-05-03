@@ -68,7 +68,6 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
     updateCollectionUser,
   }) => {
 
-    const [collectionUserId, setCollectionUserId] = useState<string>('');
     const [collectionUserName, setCollectionUserName] = useState<string>('');
     const [collectionUserEmail, setCollectionUserEmail] = useState<string>('');
     const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
@@ -92,12 +91,10 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
       }
 
       if (collectionUser) {
-        setCollectionUserId(collectionUser.userId);
         setCollectionUserName(collectionUser.userName);
         setCollectionUserEmail(collectionUser.userEmail);
         setCollectionUserOption(collectionUser.userRole);
       } else if (collectionUserById) {
-        setCollectionUserId(collectionUserById.userId);
         setCollectionUserName(collectionUserById.userName);
         setCollectionUserEmail(collectionUserById.userEmail);
         setCollectionUserOption(collectionUserById.userRole);
@@ -127,7 +124,6 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
 
       const newCollectionUser: CollectionUser = collectionUser || collectionUserById;
 
-      newCollectionUser.userId = collectionUserId;
       newCollectionUser.userName = collectionUserName;
       newCollectionUser.userRole = collectionUserOption;
 
