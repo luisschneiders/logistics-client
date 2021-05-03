@@ -15,6 +15,7 @@ import React from 'react';
 import { connect } from '../../data/connect';
 import {
   documentsOutline,
+  fingerPrintOutline,
   keyOutline,
   notificationsOutline,
   peopleOutline
@@ -57,6 +58,10 @@ const TodoPage: React.FC<TodoProps> = () => {
           <IonItem>
             <IonIcon slot="start" icon={documentsOutline} />
             <IonLabel>Improve Firestore pagination</IonLabel>
+          </IonItem>
+          <IonItem>
+            <IonIcon slot="start" icon={fingerPrintOutline} />
+            <IonLabel>Check user can access the app (userIsActive)</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
