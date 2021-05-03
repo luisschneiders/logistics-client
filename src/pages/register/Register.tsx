@@ -14,10 +14,6 @@ import {
   IonCol,
   IonSelect,
   IonSelectOption,
-  IonCard,
-  IonCardHeader,
-  IonCardContent,
-  IonCardTitle,
   IonList,
   IonText
 } from '@ionic/react';
@@ -40,9 +36,11 @@ import { companyTypeOptions } from './CompanyTypeOptions';
 import { RegisterCompanyForm } from '../../models/RegisterCompanyForm';
 import { CompanyType } from '../../enum/CompanyType';
 import { RoleType } from '../../enum/RoleType';
-import { CollectionCompany } from '../../models/CollectionCompany';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { setCompanyProfile, setCompanyUser } from '../../data/sessions/sessions.actions';
+import {
+  setCompanyProfile,
+  setCompanyUser
+} from '../../data/sessions/sessions.actions';
 import { CompanyUser } from '../../models/CompanyUser';
 
 interface OwnProps extends RouteComponentProps {}

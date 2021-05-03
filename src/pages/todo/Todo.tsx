@@ -28,7 +28,7 @@ interface DispatchProps {
 
 interface TodoProps extends StateProps, DispatchProps {}
 
-const TodoPage: React.FC<TodoProps> = ({}) => {
+const TodoPage: React.FC<TodoProps> = () => {
  
   return (
     <IonPage>

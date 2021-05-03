@@ -69,7 +69,6 @@ import {
 import { CompanyProfile } from './models/CompanyProfile';
 import { CompanyType } from './enum/CompanyType';
 import { CompanyUser } from './models/CompanyUser';
-import { RoleType } from './enum/RoleType';
 
 const App: React.FC = () => {
   return (

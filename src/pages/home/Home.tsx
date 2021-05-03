@@ -19,7 +19,10 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import LsTransition from '../../components/time/Transition';
 import * as MOMENT  from '../../util/moment';
 import { Period } from '../../models/Period';
-import { endPeriod, now, startPeriod } from '../../util/moment';
+import {
+  endPeriod,
+  startPeriod
+} from '../../util/moment';
 import LsMainChip from '../../components/chip/MainChip';
 import { StatusColor } from '../../enum/StatusColor';
 import { useWindowSize } from '../../hooks/useWindowSize';

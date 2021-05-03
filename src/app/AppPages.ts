@@ -1,8 +1,6 @@
 import {
   peopleOutline,
   logInOutline,
-  cashOutline,
-  cartOutline,
   mapOutline,
   timeOutline,
   logOutOutline,

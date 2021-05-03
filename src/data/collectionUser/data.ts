@@ -1,8 +1,8 @@
-import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
+import {
+  CollectionUser,
+  CollectionUserList
+} from '../../models/CollectionUser';
 import { RegisterUserForm } from '../../models/RegisterUserForm';
-// import {
-//   UserType,
-// } from '../../models/UserType';
 import {
   addCollectionUser,
   fetchCollectionUserById,
@@ -10,11 +10,6 @@ import {
   fetchCollectionUserListLoadMore,
   updateCollectionUser
 } from '../api/CollectionUser';
-
-// import {
-//   updateUserType,
-//   fetchUserTypeById,
-// } from '../api/UserType';
 
 export const fetchCollectionUserData = async (id: string, pageSize: number) => {
   const response: any = await fetchCollectionUserList(id, pageSize);

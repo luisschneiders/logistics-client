@@ -1,4 +1,3 @@
-import { CompanyType } from '../../enum/CompanyType';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { CompanyUser } from '../../models/CompanyUser';
 import { Period } from '../../models/Period';
@@ -12,7 +11,6 @@ import {
   SESSION_TRANSACTIONS_TIME_TRANSITON_SET,
 } from '../actionTypes';
 import {
-  fetchCompanyProfileData,
   getStorageCompanyProfile,
   getStorageCompanyUser,
   getStorageHomeTimeTransition,

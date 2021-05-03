@@ -33,7 +33,7 @@ interface DispatchProps {}
 
 interface SetupProps extends OwnProps, StateProps, DispatchProps {}
 
-const SetupPage: React.FC<SetupProps> = ({}) => {
+const SetupPage: React.FC<SetupProps> = () => {
   return (
     <IonPage id="setup-page">
       <IonHeader>

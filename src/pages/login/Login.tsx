@@ -18,7 +18,7 @@ import {
 import './Login.scss';
 import { RouteComponentProps } from 'react-router-dom';
 import { toast } from '../../components/toast/Toast';
-import { loginUser, logoutUser } from '../../data/api/Firebase';
+import { loginUser } from '../../data/api/Firebase';
 import { StatusColor } from '../../enum/StatusColor';
 import {
   setIsLoggedIn,

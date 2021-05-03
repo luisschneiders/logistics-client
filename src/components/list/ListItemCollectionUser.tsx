@@ -16,9 +16,11 @@ import { PageListItem } from '../../enum/PageListItem';
 import LsMainCard from '../card/MainCard';
 import * as ROUTES from '../../constants/Routes';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { collectionUserOptions } from '../../pages/user/CollectionUserOptions';
 import { setCollectionUserListLoadMore } from '../../data/collectionUser/collectionUser.actions';
-import { CollectionUser, CollectionUserList } from '../../models/CollectionUser';
+import {
+  CollectionUser,
+  CollectionUserList
+} from '../../models/CollectionUser';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -42,14 +44,9 @@ const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
     setCollectionUserListLoadMore,
   }) => {
   const [collectionUser, setCollectionUser] = useState<CollectionUser[]>([]);
-  const [collectionUserOptionsList, setCollectionUserOptionsList] = useState<any[]>([]);
-  const userActionsOptions = async () => {
-    const actions = collectionUserOptions();
-    setCollectionUserOptionsList(await actions);
-  }
 
   useEffect(() => {
-    userActionsOptions();
+    // userActionsOptions();
     if (collectionUserList) {
       setCollectionUser(collectionUserList.collectionUsers);
     }
