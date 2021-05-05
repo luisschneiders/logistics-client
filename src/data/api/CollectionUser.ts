@@ -24,7 +24,7 @@ const userReference = (userRef: any, pageSize: number) => {
         collectionUsers.push(data);
       });
 
-      const userTypeList: CollectionUserList = {
+      const collectionUserList: CollectionUserList = {
         collectionUsers,
         pagination: {
           page: 0,
@@ -34,9 +34,9 @@ const userReference = (userRef: any, pageSize: number) => {
           lastVisible: lastVisibleBatch,
         }
       };
-      return userTypeList;
+      return collectionUserList;
     } else {
-      const userTypeList: CollectionUserList = {
+      const collectionUserList: CollectionUserList = {
         collectionUsers: [],
         pagination: {
           page: 0,
@@ -46,7 +46,7 @@ const userReference = (userRef: any, pageSize: number) => {
           lastVisible: undefined
         }
       };
-      return userTypeList;
+      return collectionUserList;
     }
   });
 }
