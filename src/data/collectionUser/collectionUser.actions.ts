@@ -20,7 +20,7 @@ import {
   updateCollectionUserData
 } from './data';
 
-const saveCollectionUserAction = (data: Partial<CollectionUser>) => {
+const addCollectionUserAction = (data: Partial<CollectionUser>) => {
   return ({
     type: COLLECTION_USER_ADD,
     payload: data
@@ -113,7 +113,7 @@ export const addCollectionUser = (data: RegisterUserForm) => async (dispatch: Re
   dispatch(isSavingCollectionUserAction(true));
   const collectionUser = await addCollectionUserData(data);
   dispatch(isSavingCollectionUserAction(false));
-  return saveCollectionUserAction(collectionUser);
+  return addCollectionUserAction(collectionUser);
 }
 
 export const updateCollectionUser = (data: Partial<CollectionUser>) => async (dispatch: React.Dispatch<any>) => {

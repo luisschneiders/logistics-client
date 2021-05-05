@@ -37,9 +37,9 @@ interface DispatchProps {
   updateCollectionUser: typeof updateCollectionUser;
 }
 
-interface ListUserTypeProps extends StateProps, DispatchProps {}
+interface ListCollectionUserProps extends StateProps, DispatchProps {}
 
-const LsListItemCollectionUser: React.FC<ListUserTypeProps> = ({
+const LsListItemCollectionUser: React.FC<ListCollectionUserProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,
