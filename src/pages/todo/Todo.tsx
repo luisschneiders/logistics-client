@@ -17,6 +17,7 @@ import {
   documentsOutline,
   fingerPrintOutline,
   keyOutline,
+  navigateOutline,
   notificationsOutline,
   peopleOutline
 } from 'ionicons/icons';
@@ -62,6 +63,10 @@ const TodoPage: React.FC<TodoProps> = () => {
           <IonItem>
             <IonIcon slot="start" icon={fingerPrintOutline} />
             <IonLabel>Check user can access the app (userIsActive)</IonLabel>
+          </IonItem>
+          <IonItem>
+            <IonIcon slot="start" icon={navigateOutline} />
+            <IonLabel>Use Google map API</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
