@@ -8,19 +8,19 @@ import {
   IonLabel
 } from '@ionic/react';
 import { Route, Redirect } from 'react-router';
-import { AppPage } from '../../models/AppPage';
-import { appTabs } from './AppTabs';
-import { connect } from '../../data/connect';
 
+import { connect } from '../../data/connect';
+import { AppPage } from '../../models/AppPage';
 import * as ROUTES from '../../constants/Routes';
+import { appTabs } from './AppTabs';
 
 import HomePage from '../../pages/home/Home';
-
-import CompanyUserPage from '../../pages/user/CollectionUser';
-import CompanyUserDetailsPage from '../../pages/user/CollectionUserDetails';
+import CollectionClientPage from '../../pages/client/CollectionClient';
+import CollectionClientDetailsPage from '../../pages/client/CollectionClientDetails';
+import CollectionUserPage from '../../pages/user/CollectionUser';
+import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
 import TodoPage from '../../pages/todo/Todo';
-
 import SetupPage from '../../pages/setup/Setup';
 
 interface StateProps {
@@ -47,8 +47,10 @@ const LsMainTabs: React.FC<StateProps> = ({isAuthenticated}) => {
 
         <Route path={ROUTES.TABS_SETUP} render={() => <SetupPage />} exact={true} />
 
-        <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CompanyUserPage />} exact={true} />
-        <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CompanyUserDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_CLIENT} render={() => <CollectionClientPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_CLIENT}/:id`} component={CollectionClientDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CollectionUserPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CollectionUserDetailsPage} exact={true} />
 
         <Route path={ROUTES.TABS_TODO} render={() => <TodoPage />} exact={true} />
 
