@@ -38,9 +38,9 @@ interface DispatchProps {
   addCollectionUser: typeof addCollectionUser;
 }
 
-interface ModalUserTypeProps extends StateProps, DispatchProps {}
+interface ModalCollectionUserProps extends StateProps, DispatchProps {}
 
-const LsModalCollectionUser: React.FC<ModalUserTypeProps> = ({
+const LsModalCollectionUser: React.FC<ModalCollectionUserProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionUser,
