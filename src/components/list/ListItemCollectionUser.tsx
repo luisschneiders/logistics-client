@@ -5,6 +5,8 @@ import {
   IonList,
   IonButton,
   IonToggle,
+  IonAvatar,
+  IonIcon,
 } from '@ionic/react';
 import { connect } from '../../data/connect';
 import * as selectorsUser from '../../data/user/user.selectors';
@@ -24,6 +26,7 @@ import {
   CollectionUser,
   CollectionUserList
 } from '../../models/CollectionUser';
+import { businessOutline, peopleOutline } from 'ionicons/icons';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -85,10 +88,12 @@ const LsListItemCollectionUser: React.FC<ListCollectionUserProps> = ({
                   className="ion-no-padding"
                   routerLink={`${ROUTES.TABS_COLLECTION_USER}/${item.userId}`}
                 >
+                  <IonAvatar slot="start">
+                    <IonIcon size="large" icon={peopleOutline} color={AppColor.SECONDARY} />
+                  </IonAvatar>
                   <IonLabel>
-                    <strong className="ion-text-capitalize">Details: </strong>
-                    <div>{item.userName}</div>
-                    <div>{item.userEmail}</div>
+                    <h2>{item.userName}</h2>
+                    <p>{item.userEmail}</p>
                   </IonLabel>
                 </IonItem>
               </IonLabel>
