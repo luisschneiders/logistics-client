@@ -26,7 +26,7 @@ import {
   CollectionUser,
   CollectionUserList
 } from '../../models/CollectionUser';
-import { businessOutline, peopleOutline } from 'ionicons/icons';
+import { peopleOutline } from 'ionicons/icons';
 
 interface StateProps {
   isLoggedIn: boolean;
