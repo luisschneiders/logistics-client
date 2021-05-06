@@ -3,7 +3,7 @@ import { StatusColor } from '../../enum/StatusColor';
 import { toast } from '../../components/toast/Toast';
 import { Collection } from '../../enum/Collection';
 
-export async function fetchCompanyProfile(userId: string) {
+export const fetchCompanyProfile = async (userId: string) => {
   // Check if user exist in the collection
   const userRef = dbFirestore.collection(Collection.USER).doc(userId);
 
@@ -31,7 +31,7 @@ export async function fetchCompanyProfile(userId: string) {
   });
 }
 
-export async function fetchCompanyUser(userId: string) {
+export const fetchCompanyUser = async (userId: string) => {
   // Check if user exist in the collection
   const userRef = dbFirestore.collection(Collection.USER).doc(userId);
 
