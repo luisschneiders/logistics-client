@@ -87,6 +87,7 @@ const LsListItemCollectionUser: React.FC<ListCollectionUserProps> = ({
                   lines="none"
                   className="ion-no-padding"
                   routerLink={`${ROUTES.TABS_COLLECTION_USER}/${item.userId}`}
+                  detail={true}
                 >
                   <IonAvatar slot="start">
                     <IonIcon size="large" icon={peopleOutline} color={AppColor.SECONDARY} />
