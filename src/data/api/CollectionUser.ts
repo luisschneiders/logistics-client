@@ -133,6 +133,7 @@ export const updateCollectionUser = async (data: Partial<CollectionUser>) => {
     toast('User updated successfully!', StatusColor.SUCCESS, 4000);
 
     return data;
+
   } catch (error) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
