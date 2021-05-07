@@ -18,7 +18,7 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsCollectionUser from '../../data/collectionUser/collectionUser.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
-import LsListItemCollectionUser from '../../components/list/ListItemCollectionUser';
+import LsListCollectionUser from '../../components/list/ListCollectionUser';
 import { add } from 'ionicons/icons';
 import { setModalCollectionUserShow } from '../../data/modal/modal.actions';
 import LsModalCollectionUser from '../../components/modal/ModalCollectionUser';
@@ -84,7 +84,7 @@ const CollectionUserPage: React.FC<CollectionUserProps> = ({
       </IonHeader>
       <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
       <IonContent className="ion-no-padding">
-        <LsListItemCollectionUser />
+        <LsListCollectionUser />
         <LsModalCollectionUser />
       </IonContent>
     </IonPage>

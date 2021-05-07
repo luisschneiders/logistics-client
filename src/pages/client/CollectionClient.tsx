@@ -20,7 +20,7 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
-import LsListItemCollectionClient from '../../components/list/ListItemCollectionClient';
+import LsListCollectionClient from '../../components/list/ListCollectionClient';
 import { add } from 'ionicons/icons';
 import { setModalCollectionClientShow } from '../../data/modal/modal.actions';
 import LsModalCollectionClient from '../../components/modal/ModalCollectionClient';
@@ -40,7 +40,7 @@ interface DispatchProps {
 
 interface CollectionClientProps extends StateProps, DispatchProps {}
 
-const CollectionClientPage: React.FC<CollectionClientProps> = ({
+const CollectionClientListPage: React.FC<CollectionClientProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,
@@ -86,7 +86,7 @@ const CollectionClientPage: React.FC<CollectionClientProps> = ({
       </IonHeader>
       <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
       <IonContent className="ion-no-padding">
-        <LsListItemCollectionClient />
+        <LsListCollectionClient />
         <LsModalCollectionClient />
       </IonContent>
     </IonPage>
@@ -103,5 +103,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setCollectionClientList,
     setModalCollectionClientShow,
   }),
-  component: React.memo(CollectionClientPage)
+  component: React.memo(CollectionClientListPage)
 });

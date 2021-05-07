@@ -42,7 +42,7 @@ interface DispatchProps {
 
 interface ListCollectionUserProps extends StateProps, DispatchProps {}
 
-const LsListItemCollectionUser: React.FC<ListCollectionUserProps> = ({
+const LsListCollectionUser: React.FC<ListCollectionUserProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,
@@ -129,5 +129,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setCollectionUserListLoadMore,
     updateCollectionUser,
   }),
-  component: LsListItemCollectionUser
+  component: LsListCollectionUser
 });
