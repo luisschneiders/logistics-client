@@ -13,26 +13,37 @@ import {
   IonButton,
   IonList,
   IonLoading,
+  IonIcon,
+  IonAvatar,
+  IonChip,
 } from '@ionic/react';
 import {
   withRouter,
   RouteComponentProps,
 } from 'react-router';
+import {
+  addOutline,
+  closeCircle,
+} from 'ionicons/icons';
+
+import './CollectionClient.scss';
+
 import { connect } from '../../data/connect';
+
+import { ClientEmployee, CollectionClient } from '../../models/CollectionClient';
+
 import * as ROUTES from '../../constants/Routes';
 import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
-import { StatusColor } from '../../enum/StatusColor';
-import { toast } from '../../components/toast/Toast';
-import { CollectionClient } from '../../models/CollectionClient';
-
-import { CompanyProfile } from '../../models/CompanyProfile';
-import { AppColor } from '../../enum/AppColor';
 import {
   setCollectionClientById,
   updateCollectionClient
 } from '../../data/collectionClient/collectionClient.actions';
+import { StatusColor } from '../../enum/StatusColor';
+import { toast } from '../../components/toast/Toast';
+import { CompanyProfile } from '../../models/CompanyProfile';
+import { AppColor } from '../../enum/AppColor';
 
 interface OwnProps extends RouteComponentProps<{
   id: string;
@@ -71,9 +82,10 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
     const [suburb, setSuburb] = useState<string>('');
     const [postcode, setPostcode] = useState<number>();
     const [state, setState] = useState<string>('');
-  
-    const [isById, setIsById] = useState<boolean>(false);
+    const [employee, setEmployee] = useState<string>('');
+    const [clientEmployee, setClientEmployee] = useState<ClientEmployee[]>([]);
 
+    const [isById, setIsById] = useState<boolean>(false);
 
     useEffect(() => {
       if (isLoggedIn && companyProfile) {
@@ -90,12 +102,14 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
         setSuburb(collectionClient.clientAddress.suburb);
         setPostcode(collectionClient.clientAddress.postcode);
         setState(collectionClient.clientAddress.state);
+        collectionClient.clientEmployee ? setClientEmployee(collectionClient.clientEmployee) : setClientEmployee([]);
       } else if (collectionClientById) {
         setClientName(collectionClientById.clientName);
         setAddress(collectionClientById.clientAddress.address);
         setSuburb(collectionClientById.clientAddress.suburb);
         setPostcode(collectionClientById.clientAddress.postcode);
         setState(collectionClientById.clientAddress.state);
+        collectionClientById.clientEmployee ? setClientEmployee(collectionClientById.clientEmployee) : setClientEmployee([]);
       }
 
     }, [
@@ -109,6 +123,17 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
       setCollectionClientById,
       isById,
     ]);
+
+    const handleAddEmployee = (clientEmployee: ClientEmployee[]) => {
+      // set employee into array clientEmployee
+      setClientEmployee([...clientEmployee, {name: employee}]);
+      setEmployee('');
+    }
+
+    const handleRemoveEmployee = (index: number) => {
+      const filteredItems = clientEmployee.slice(0, index).concat(clientEmployee.slice(index + 1, clientEmployee.length));
+      setClientEmployee(filteredItems);
+    }
 
     const formCollectionClient = async (e: React.FormEvent) => {
       e.preventDefault();
@@ -139,6 +164,7 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
       newCollectionClient.clientAddress.suburb = suburb;
       newCollectionClient.clientAddress.state = state;
       newCollectionClient.clientAddress.postcode = postcode;
+      newCollectionClient.clientEmployee = clientEmployee;
 
       updateCollectionClient(newCollectionClient);
     }
@@ -219,6 +245,52 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
                 min="0"
                 required
               />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Employees</IonLabel>
+              <IonInput
+                name="employee"
+                type="text"
+                value={employee}
+                spellCheck={false}
+                autocapitalize="off"
+                onIonChange={(e: any) => setEmployee(e.detail.value!)}
+                required
+              />
+              <div slot="end" className="ion-padding-top">
+              <IonButton
+                size="small"
+                shape="round"
+                fill="outline"
+                color={AppColor.SECONDARY}
+                onClick={() => handleAddEmployee(clientEmployee)}
+                disabled={employee.length <=0}
+              >
+                Add to list
+              </IonButton>
+              </div>
+            </IonItem>
+            <IonItem lines="none" className="collection-client-details-page__item-no-input">
+              <IonLabel position="stacked">List of employees</IonLabel>
+            </IonItem>
+            <IonItem>
+              <div className="">
+                {clientEmployee.map((employee, index) => (
+                      <IonChip
+                        key={index}
+                        color={AppColor.TERTIARY}
+                      >
+                        <IonAvatar>
+                          <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
+                        </IonAvatar>
+                        <IonLabel>{employee.name}</IonLabel>
+                        <IonIcon
+                          icon={closeCircle}
+                          onClick={() => handleRemoveEmployee(index)}
+                        />
+                      </IonChip>
+                ))}
+              </div>
             </IonItem>
             <IonItem lines="none">
               <div slot="end">
