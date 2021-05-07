@@ -1,6 +1,5 @@
 import {
   dbFirestore,
-  fb,
   timestamp
 } from './Firebase';
 import { toast } from '../../components/toast/Toast';
@@ -125,6 +124,7 @@ export const updateCollectionClient = async (data: Partial<CollectionClient>) =>
     await dbFirestore.collection(Collection.CLIENT).doc(data.clientId).set({
       clientName: data.clientName,
       clientAddress: data.clientAddress,
+      clientEmployee: data.clientEmployee,
       updatedAt: timestamp,
     }, { merge: true });
 
