@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  IonAvatar,
   IonButton,
-  IonChip,
-  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -24,7 +21,6 @@ import { setModalCollectionClientShow } from '../../data/modal/modal.actions';
 import { addCollectionClient } from '../../data/collectionClient/collectionClient.actions';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { MapLocation } from '../../models/MapLocation';
-import { addOutline, closeCircle } from 'ionicons/icons';
 
 interface StateProps {
   isLoggedIn: boolean;
