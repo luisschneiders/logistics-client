@@ -13,9 +13,9 @@ interface DispatchProps {
   getHasSeenWelcome: typeof getHasSeenWelcome;
 }
 
-interface HomeOrWelcomeProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const HomeOrWelcome: React.FC<HomeOrWelcomeProps> = ({ hasSeenWelcome, getHasSeenWelcome }) => {
+const HomeOrWelcome: React.FC<ContainerProps> = ({ hasSeenWelcome, getHasSeenWelcome }) => {
 
   getHasSeenWelcome();
 

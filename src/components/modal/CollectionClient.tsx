@@ -34,9 +34,9 @@ interface DispatchProps {
   addCollectionClient: typeof addCollectionClient;
 }
 
-interface ModalCollectionClientProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const LsCollectionClient: React.FC<ModalCollectionClientProps> = ({
+const LsCollectionClient: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionClient,
