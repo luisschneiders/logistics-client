@@ -29,7 +29,6 @@ interface StateProps {
 
 interface DispatchProps {
   setCollectionClientList: typeof setCollectionClientList;
-  setModalCollectionClientShow: typeof setModalCollectionClientShow;
 }
 
 interface CollectionClientProps extends StateProps, DispatchProps {}
@@ -39,7 +38,6 @@ const CollectionClientPage: React.FC<CollectionClientProps> = ({
   isFetching,
   companyProfile,
   setCollectionClientList,
-  setModalCollectionClientShow,
 }) => {
 
   useEffect(() => {
@@ -50,7 +48,6 @@ const CollectionClientPage: React.FC<CollectionClientProps> = ({
     isLoggedIn,
     companyProfile,
     setCollectionClientList,
-    setModalCollectionClientShow,
   ]);
 
   return (
@@ -63,7 +60,7 @@ const CollectionClientPage: React.FC<CollectionClientProps> = ({
           <IonTitle>Clients</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
+      <IonLoading message="Fetching clients..." duration={0} isOpen={isFetching}></IonLoading>
       <IonContent className="ion-no-padding">
         <LsListCollectionClientDetails />
       </IonContent>
@@ -79,7 +76,6 @@ export default connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: ({
     setCollectionClientList,
-    setModalCollectionClientShow,
   }),
   component: React.memo(CollectionClientPage)
 });
