@@ -274,21 +274,21 @@ const CollectionClientDetailsPage: React.FC<CollectionClientDetailsProps> = ({
               <IonLabel position="stacked">List of employees</IonLabel>
             </IonItem>
             <IonItem>
-              <div className="">
+              <div>
                 {clientEmployee.map((employee, index) => (
-                      <IonChip
-                        key={index}
-                        color={AppColor.TERTIARY}
-                      >
-                        <IonAvatar>
-                          <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
-                        </IonAvatar>
-                        <IonLabel>{employee.name}</IonLabel>
-                        <IonIcon
-                          icon={closeCircle}
-                          onClick={() => handleRemoveEmployee(index)}
-                        />
-                      </IonChip>
+                  <IonChip
+                    key={index}
+                    color={AppColor.SECONDARY}
+                  >
+                    <IonAvatar>
+                      <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
+                    </IonAvatar>
+                    <IonLabel>{employee.name}</IonLabel>
+                    <IonIcon
+                      icon={closeCircle}
+                      onClick={() => handleRemoveEmployee(index)}
+                    />
+                  </IonChip>
                 ))}
               </div>
             </IonItem>
