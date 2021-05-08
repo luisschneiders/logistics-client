@@ -20,10 +20,10 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
-import LsListCollectionClient from '../../components/list/ListCollectionClient';
+import LsListCollectionClient from '../../components/list/CollectionClient';
 import { add } from 'ionicons/icons';
 import { setModalCollectionClientShow } from '../../data/modal/modal.actions';
-import LsModalCollectionClient from '../../components/modal/ModalCollectionClient';
+import LsModalCollectionClient from '../../components/modal/CollectionClient';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { setCollectionClientList } from '../../data/collectionClient/collectionClient.actions';
 

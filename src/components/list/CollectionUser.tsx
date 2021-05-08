@@ -15,7 +15,7 @@ import * as selectorsCollectionUser from '../../data/collectionUser/collectionUs
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
-import LsMainCard from '../card/MainCard';
+import LsCard from '../card/Card';
 import * as ROUTES from '../../constants/Routes';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import {
@@ -40,9 +40,9 @@ interface DispatchProps {
   updateCollectionUser: typeof updateCollectionUser;
 }
 
-interface ListCollectionUserProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const LsListCollectionUser: React.FC<ListCollectionUserProps> = ({
+const LsCollectionUser: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,
@@ -112,7 +112,7 @@ const LsListCollectionUser: React.FC<ListCollectionUserProps> = ({
         </div>
       }
       {(!collectionUser.length && !isFetching)&& 
-        <LsMainCard color={StatusColor.WARNING} message="No records found!"></LsMainCard>
+        <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
   );
@@ -129,5 +129,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setCollectionUserListLoadMore,
     updateCollectionUser,
   }),
-  component: LsListCollectionUser
+  component: LsCollectionUser
 });

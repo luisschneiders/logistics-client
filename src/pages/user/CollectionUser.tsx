@@ -18,10 +18,10 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsCollectionUser from '../../data/collectionUser/collectionUser.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
-import LsListCollectionUser from '../../components/list/ListCollectionUser';
+import LsListCollectionUser from '../../components/list/CollectionUser';
 import { add } from 'ionicons/icons';
 import { setModalCollectionUserShow } from '../../data/modal/modal.actions';
-import LsModalCollectionUser from '../../components/modal/ModalCollectionUser';
+import LsModalCollectionUser from '../../components/modal/CollectionUser';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { setCollectionUserList } from '../../data/collectionUser/collectionUser.actions';
 

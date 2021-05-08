@@ -23,7 +23,7 @@ import {
   endPeriod,
   startPeriod
 } from '../../util/moment';
-import LsMainChip from '../../components/chip/MainChip';
+import LsChip from '../../components/chip/Chip';
 import { StatusColor } from '../../enum/StatusColor';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { MOBILE_VIEW } from '../../constants/App';
@@ -98,7 +98,7 @@ const HomePage: React.FC<HomeProps> = ({
       <IonLoading message="Fetching data..." duration={0} isOpen={isLoaded}></IonLoading>
       <IonContent>
         {isError && <IonList className="ion-text-center">
-          <LsMainChip text="Something went wrong! 😢" color={StatusColor.ERROR} />
+          <LsChip text="Something went wrong! 😢" color={StatusColor.ERROR} />
         </IonList>}
       </IonContent>
     </IonPage>

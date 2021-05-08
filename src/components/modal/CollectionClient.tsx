@@ -8,7 +8,7 @@ import {
 } from '@ionic/react';
 import { AppColor } from '../../enum/AppColor';
 import { ModalProvider } from './ModalProvider';
-import LsMainModal from './MainModal';
+import LsModal from './Modal';
 import { toast } from '../toast/Toast';
 import { StatusColor } from '../../enum/StatusColor';
 import { useModal } from '../../hooks/useModal';
@@ -36,7 +36,7 @@ interface DispatchProps {
 
 interface ModalCollectionClientProps extends StateProps, DispatchProps {}
 
-const LsModalCollectionClient: React.FC<ModalCollectionClientProps> = ({
+const LsCollectionClient: React.FC<ModalCollectionClientProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionClient,
@@ -52,8 +52,6 @@ const LsModalCollectionClient: React.FC<ModalCollectionClientProps> = ({
   const [suburb, setSuburb] = useState<string>('');
   const [postcode, setPostcode] = useState<number>();
   const [state, setState] = useState<string>('');
-  // const [employee, setEmployee] = useState<string>('');
-  // const [clientEmployee, setClientEmployee] = useState<any[]>([]);
 
   useEffect(() => {
     if (isShowModalCollectionClient) {
@@ -106,7 +104,7 @@ const LsModalCollectionClient: React.FC<ModalCollectionClientProps> = ({
   return (
     <ModalProvider>
       <IonLoading message="Please wait..." duration={0} isOpen={isSavingCollectionClient}></IonLoading>
-      <LsMainModal
+      <LsModal
         id="modal-company-client"
         show={showModal}
         title="Add new client"
@@ -177,49 +175,6 @@ const LsModalCollectionClient: React.FC<ModalCollectionClientProps> = ({
               required
             />
           </IonItem>
-          {/* <IonItem>
-            <IonLabel position="stacked">Employees</IonLabel>
-            <IonInput
-              name="employee"
-              type="text"
-              value={employee}
-              spellCheck={false}
-              autocapitalize="off"
-              className="ion-text-uppercase"
-              onIonChange={(e: any) => setEmployee(e.detail.value!)}
-              required
-            />
-            <div slot="end" className="ion-padding-top">
-            <IonButton
-              size="small"
-              shape="round"
-              fill="outline"
-              color={AppColor.SECONDARY}
-            >
-              Add
-              <IonIcon slot="end" icon={addOutline} />
-            </IonButton>
-            </div>
-          </IonItem>
-          <IonItem lines="none">
-            <IonLabel position="stacked">List of employees</IonLabel>
-          </IonItem>
-          <IonItem>
-              <IonChip>
-                <IonAvatar>
-                  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-                </IonAvatar>
-                <IonLabel>Avatar 1</IonLabel>
-                <IonIcon icon={closeCircle} />
-              </IonChip>
-              <IonChip>
-                <IonAvatar>
-                  <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-                </IonAvatar>
-                <IonLabel>Avatar 2</IonLabel>
-                <IonIcon icon={closeCircle} />
-              </IonChip>
-          </IonItem> */}
           <IonItem lines="none">
             <div slot="end" className="ion-padding-vertical">
               <IonButton
@@ -233,7 +188,7 @@ const LsModalCollectionClient: React.FC<ModalCollectionClientProps> = ({
             </div>
           </IonItem>
         </form>
-      </LsMainModal>
+      </LsModal>
     </ModalProvider>
   );
 }
@@ -249,5 +204,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setModalCollectionClientShow,
     addCollectionClient,
   }),
-  component: LsModalCollectionClient
+  component: LsCollectionClient
 });

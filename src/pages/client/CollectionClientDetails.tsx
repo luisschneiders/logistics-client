@@ -22,7 +22,6 @@ import {
   RouteComponentProps,
 } from 'react-router';
 import {
-  addOutline,
   closeCircle,
 } from 'ionicons/icons';
 

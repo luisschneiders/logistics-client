@@ -6,7 +6,7 @@ interface ContainerProps {
   message: string | undefined;
 }
 
-const LsMainCard: React.FC<ContainerProps> = ({color, message}) => {
+const LsCard: React.FC<ContainerProps> = ({color, message}) => {
   return (
     <IonCard color={color}>
     <IonCardContent className="ion-text-center">
@@ -16,4 +16,4 @@ const LsMainCard: React.FC<ContainerProps> = ({color, message}) => {
   );
 }
 
-export default LsMainCard;
+export default LsCard;

@@ -31,7 +31,7 @@ import {
 import { connect } from '../../data/connect';
 import { appPages } from '../../app/AppPages';
 import { AppColor } from '../../enum/AppColor';
-import LsMainChip from '../chip/MainChip';
+import LsChip from '../chip/Chip';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { StatusColor } from '../../enum/StatusColor';
@@ -49,9 +49,9 @@ interface DispatchProps {
   setDarkMode: typeof setDarkMode
 }
 
-interface MenuProps extends RouteComponentProps, StateProps, DispatchProps {}
+interface ContainerProps extends RouteComponentProps, StateProps, DispatchProps {}
 
-const LsMenu: React.FC<MenuProps> = ({
+const LsMenu: React.FC<ContainerProps> = ({
     history,
     darkMode,
     isAuthenticated,
@@ -147,7 +147,7 @@ const LsMenu: React.FC<MenuProps> = ({
           <IonItem>
             <IonIcon slot="start" icon={businessOutline}></IonIcon>
             <IonLabel color={AppColor.TERTIARY}>Schneiders Tech</IonLabel>
-            <span className="ion-text-uppercase company-division-title"><LsMainChip text="Logistics" color={AppColor.SUCCESS} /></span>
+            <span className="ion-text-uppercase company-division-title"><LsChip text="Logistics" color={AppColor.SUCCESS} /></span>
           </IonItem>
         </IonList>
         <IonList lines="none">

@@ -8,11 +8,11 @@ import {
   IonTitle
 } from '@ionic/react';
 import React from 'react';
-import './MainModal.scss'
+import './Modal.scss'
 import { closeSharp } from 'ionicons/icons';
 import { AppColor } from '../../enum/AppColor';
 
-interface ModalProps {
+interface ContainerProps {
   id: string;
   show: boolean;
   title?: string;
@@ -20,7 +20,7 @@ interface ModalProps {
   closeModal: () => void;
   children?: React.ReactNode;
 }
-const LsMainModal: React.FC<ModalProps> = (props: ModalProps) => {
+const LsModal: React.FC<ContainerProps> = (props: ContainerProps) => {
 
   return (
       <IonModal
@@ -53,4 +53,4 @@ const LsMainModal: React.FC<ModalProps> = (props: ModalProps) => {
   );
 }
 
-export default LsMainModal;
+export default LsModal;

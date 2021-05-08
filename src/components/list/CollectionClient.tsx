@@ -6,17 +6,12 @@ import {
   IonButton,
   IonIcon,
   IonAvatar,
-  IonChip,
-  IonSearchbar,
 } from '@ionic/react';
-
-import './List.scss';
 
 import { connect } from '../../data/connect';
 
 import { CompanyProfile } from '../../models/CompanyProfile';
 import {
-  ClientEmployee,
   CollectionClient,
   CollectionClientList
 } from '../../models/CollectionClient';
@@ -33,10 +28,8 @@ import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
 import * as ROUTES from '../../constants/Routes';
 
-import LsMainCard from '../card/MainCard';
-import {
-  businessOutline
-} from 'ionicons/icons';
+import LsCard from '../card/Card';
+import { businessOutline } from 'ionicons/icons';
 
 
 interface StateProps {
@@ -50,9 +43,9 @@ interface DispatchProps {
   setCollectionClientListLoadMore: typeof setCollectionClientListLoadMore;
 }
 
-interface ListCollectionClientProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const LsListCollectionClientDetails: React.FC<ListCollectionClientProps> = ({
+const LsCollectionClient: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,
@@ -60,7 +53,6 @@ const LsListCollectionClientDetails: React.FC<ListCollectionClientProps> = ({
     setCollectionClientListLoadMore,
   }) => {
   const [collectionClient, setCollectionClient] = useState<CollectionClient[]>([]);
-  const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     if (collectionClientList) {
@@ -77,29 +69,17 @@ const LsListCollectionClientDetails: React.FC<ListCollectionClientProps> = ({
     }
   };
 
-  const handleOnChange = async (e: any) => {
-    const clientFiltered: any = collectionClientList.collectionClients.filter(client => client.clientName.toLowerCase().includes(e.detail.value!.toLowerCase()));
-    setCollectionClient(clientFiltered);
-    setSearchText(e.detail.value!);
-  }
-
-
   return (
     <>
-      <IonSearchbar
-        value={searchText}
-        onIonChange={handleOnChange}
-        animated
-      ></IonSearchbar>
       {collectionClient && collectionClient.length > 0 &&
-        <IonList lines="full" className="ion-no-padding list-collection-client-details">
+        <IonList lines="full" className="ion-no-padding">
           {collectionClient.map((item: CollectionClient, index: number) => (
             <IonItem key={index}>
               <IonLabel>
                 <IonItem
                   lines="none"
                   className="ion-no-padding"
-                  routerLink={`${ROUTES.TABS_COLLECTION_CLIENT_LIST}/${item.clientId}`}
+                  routerLink={`${ROUTES.TABS_COLLECTION_CLIENT}/${item.clientId}`}
                   detail={true}
                 >
                   <IonAvatar slot="start">
@@ -109,20 +89,9 @@ const LsListCollectionClientDetails: React.FC<ListCollectionClientProps> = ({
                     <h2>
                       {item.clientName}
                     </h2>
-                    <div className="list-collection-client-details__item-employee">
-                      {item.clientEmployee?.map((employee: ClientEmployee, employeeIndex: number) => (
-                      <IonChip
-                        key={employeeIndex}
-                        color={AppColor.SECONDARY}
-                      >
-                        <IonAvatar>
-                          <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
-                        </IonAvatar>
-                        <IonLabel>{employee.name}</IonLabel>
-                      </IonChip>
-
-                      ))}
-                    </div>
+                    <p>
+                      {item.clientAddress.suburb}
+                    </p>
                   </IonLabel>
                 </IonItem>
               </IonLabel>
@@ -136,7 +105,7 @@ const LsListCollectionClientDetails: React.FC<ListCollectionClientProps> = ({
         </div>
       }
       {(!collectionClient.length && !isFetching)&& 
-        <LsMainCard color={StatusColor.WARNING} message="No records found!"></LsMainCard>
+        <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
   );
@@ -152,5 +121,5 @@ export default connect<{}, StateProps, DispatchProps>({
   mapDispatchToProps: ({
     setCollectionClientListLoadMore,
   }),
-  component: LsListCollectionClientDetails
+  component: LsCollectionClient
 });

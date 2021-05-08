@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 import { AppColor } from '../../enum/AppColor';
 import { ModalProvider } from './ModalProvider';
-import LsMainModal from './MainModal';
+import LsModal from './Modal';
 import { toast } from '../toast/Toast';
 import { StatusColor } from '../../enum/StatusColor';
 import { useModal } from '../../hooks/useModal';
@@ -38,9 +38,9 @@ interface DispatchProps {
   addCollectionUser: typeof addCollectionUser;
 }
 
-interface ModalCollectionUserProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const LsModalCollectionUser: React.FC<ModalCollectionUserProps> = ({
+const LsCollectionUser: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isShowModalCollectionUser,
@@ -108,7 +108,7 @@ const LsModalCollectionUser: React.FC<ModalCollectionUserProps> = ({
   return (
     <ModalProvider>
       <IonLoading message="Please wait..." duration={0} isOpen={isSavingCollectionUser}></IonLoading>
-      <LsMainModal
+      <LsModal
         id="modal-company-user"
         show={showModal}
         title="Add new user"
@@ -169,7 +169,7 @@ const LsModalCollectionUser: React.FC<ModalCollectionUserProps> = ({
             </div>
           </IonItem>
         </form>
-      </LsMainModal>
+      </LsModal>
     </ModalProvider>
   );
 }
@@ -185,5 +185,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setModalCollectionUserShow,
     addCollectionUser,
   }),
-  component: LsModalCollectionUser
+  component: LsCollectionUser
 });

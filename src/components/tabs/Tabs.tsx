@@ -28,7 +28,7 @@ interface StateProps {
   isAuthenticated: boolean;
 }
 
-const LsMainTabs: React.FC<StateProps> = ({isAuthenticated}) => {
+const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
   const renderTabItems = (tabs: AppPage[]) => {
     return tabs
       .filter(route => !!route.url)
@@ -69,5 +69,5 @@ export default connect<{}, StateProps, {}>({
   mapStateToProps: (state) => ({
     isAuthenticated: state.userReducer.isLoggedIn,
   }),
-  component: LsMainTabs
+  component: LsTabs
 });

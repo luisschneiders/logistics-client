@@ -44,7 +44,7 @@ import {
   getDarkMode,
 } from './data/user/user.actions';
 
-import LsMainTabs from './components/tabs/MainTabs';
+import LsTabs from './components/tabs/Tabs';
 import LsMenu from './components/menu/Menu';
 import { toast } from './components/toast/Toast';
 import HomeOrWelcome from './components/HomeOrWelcome';
@@ -174,7 +174,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                     <Route path={ROUTES.REGISTER} component={RegisterPage} exact={true} />
 
                     <Route path={ROUTES.TABS}>
-                      {isAuthenticated || isLoggedIn ? <LsMainTabs /> : <Redirect to={ROUTES.LOGIN} />}
+                      {isAuthenticated || isLoggedIn ? <LsTabs /> : <Redirect to={ROUTES.LOGIN} />}
                     </Route>
 
                     <Route path={ROUTES.ACCOUNT} render={() => {

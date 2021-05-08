@@ -6,7 +6,7 @@ interface ContainerProps {
   text: string | undefined;
 }
 
-const LsMainChip: React.FC<ContainerProps> = ({color, text}) => {
+const LsChip: React.FC<ContainerProps> = ({color, text}) => {
   return (
     <IonChip color={color}>
       <IonLabel>{text}</IonLabel>
@@ -14,4 +14,4 @@ const LsMainChip: React.FC<ContainerProps> = ({color, text}) => {
   );
 }
 
-export default LsMainChip;
+export default LsChip;

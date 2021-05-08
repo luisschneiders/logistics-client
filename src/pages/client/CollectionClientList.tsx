@@ -16,8 +16,7 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
-import LsListCollectionClientDetails from '../../components/list/ListCollectionClientDetails';
-import { setModalCollectionClientShow } from '../../data/modal/modal.actions';
+import LsListCollectionClientDetails from '../../components/list/CollectionClientDetails';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import { setCollectionClientList } from '../../data/collectionClient/collectionClient.actions';
 
