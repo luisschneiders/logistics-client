@@ -35,6 +35,7 @@ import {
   setCollectionUserById,
   updateCollectionUser
 } from '../../data/collectionUser/collectionUser.actions';
+import { setCompanyUser } from '../../data/sessions/sessions.actions';
 
 interface OwnProps extends RouteComponentProps<{
   id: string;
@@ -52,6 +53,7 @@ interface StateProps {
 interface DispatchProps {
   setCollectionUserById: typeof setCollectionUserById;
   updateCollectionUser: typeof updateCollectionUser;
+  setCompanyUser: typeof setCompanyUser;
 };
 
 interface CollectionUserDetailsProps extends OwnProps, StateProps, DispatchProps {};
@@ -66,6 +68,7 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
     isUpdatingCollectionUser,
     setCollectionUserById,
     updateCollectionUser,
+    setCompanyUser,
   }) => {
 
     const [collectionUserName, setCollectionUserName] = useState<string>('');
@@ -128,6 +131,7 @@ const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
       newCollectionUser.userRole = collectionUserOption;
 
       updateCollectionUser(newCollectionUser);
+      setCompanyUser(newCollectionUser);
     }
 
   return (
@@ -215,6 +219,7 @@ export default connect<OwnProps, StateProps, DispatchProps>({
   mapDispatchToProps: ({
     setCollectionUserById,
     updateCollectionUser,
+    setCompanyUser,
   }),
   component: withRouter(CollectionUserDetailsPage)
 });
