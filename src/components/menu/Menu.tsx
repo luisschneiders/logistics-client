@@ -17,12 +17,16 @@ import {
   IonToggle,
   IonPopover,
   IonBadge,
-  IonButton
+  IonButton,
+  IonAvatar,
+
 } from '@ionic/react';
 import './Menu.scss'
 import {
   businessOutline,
-  moonOutline, sunnyOutline, warning,
+  moonOutline,
+  sunnyOutline,
+  warning,
 } from 'ionicons/icons';
 import { connect } from '../../data/connect';
 import { appPages } from '../../app/AppPages';
@@ -31,12 +35,14 @@ import LsMainChip from '../chip/MainChip';
 import { CompanyProfile } from '../../models/CompanyProfile';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { StatusColor } from '../../enum/StatusColor';
+import { CompanyUser } from '../../models/CompanyUser';
 
 interface StateProps {
   darkMode: boolean;
   isAuthenticated: boolean;
   menuEnabled: boolean;
   companyProfile: CompanyProfile;
+  companyUser: CompanyUser;
 }
 
 interface DispatchProps {
@@ -51,6 +57,7 @@ const LsMenu: React.FC<MenuProps> = ({
     isAuthenticated,
     menuEnabled,
     companyProfile,
+    companyUser,
     setDarkMode,
   }) => {
   const location = useLocation();
@@ -101,15 +108,27 @@ const LsMenu: React.FC<MenuProps> = ({
             </IonList>
           </IonPopover>
         }
+        {(companyProfile && companyProfile.companyId) &&
+          <IonList lines="full" className="ion-no-padding">
+            <IonItem>
+              
+                <IonAvatar slot="start">
+                  <img src="assets/img/avatar.svg" alt="User" />
+                </IonAvatar>
+                <IonLabel>{companyUser.userName}</IonLabel>
+              
+            </IonItem>
+          </IonList>
+        }
         <IonList lines="none">
           {(!companyProfile || !companyProfile.companyId) &&
-          <IonItem>
-            {/* TODO: create a proper notification centre */}
-            <IonLabel>Notifications</IonLabel>
-            <IonButton fill="clear">
-              <IonBadge color={StatusColor.ERROR} slot="end" onClick={(e: any) => { e.persist(); setShowPopover({showPopover: true, event: e}) }}>1</IonBadge>
-            </IonButton>
-          </IonItem>}
+            <IonItem>
+              {/* TODO: create a proper notification centre */}
+              <IonLabel>Notifications</IonLabel>
+              <IonButton fill="clear">
+                <IonBadge color={StatusColor.ERROR} slot="end" onClick={(e: any) => { e.persist(); setShowPopover({showPopover: true, event: e}) }}>1</IonBadge>
+              </IonButton>
+            </IonItem>}
           {isAuthenticated ? renderMenuItems(appPages().authenticated, 'Menu') : renderMenuItems(appPages().unauthenticated, 'Menu')}
         </IonList>
         <IonList lines="none">
@@ -145,6 +164,7 @@ export default connect<{}, StateProps, DispatchProps>({
     isAuthenticated: state.userReducer.isLoggedIn,
     menuEnabled: state.sessionsReducer.menuEnabled,
     companyProfile: selectorsSessions.getCompanyProfile(state),
+    companyUser: selectorsSessions.getCompanyUser(state),
   }),
   mapDispatchToProps: ({
     setDarkMode
