@@ -18,7 +18,7 @@ export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
 export async function loginUser(email: string, password: string) {
   try {
     const response: any = await fb.auth().signInWithEmailAndPassword(email, password);
-    toast(`Welcome back ${response?.user?.displayName || ''}!`, StatusColor.DEFAULT);
+    toast('Welcome back!', StatusColor.DEFAULT);
     return response;
   } catch(error) {
     toast(error.message, StatusColor.ERROR, 4000);
