@@ -30,9 +30,9 @@ interface DispatchProps {
   setCollectionClientList: typeof setCollectionClientList;
 }
 
-interface CollectionClientProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const CollectionClientPage: React.FC<CollectionClientProps> = ({
+const CollectionClientPage: React.FC<ContainerProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,

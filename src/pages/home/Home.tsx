@@ -34,9 +34,9 @@ interface StateProps {
 interface DispatchProps {
 
 }
-interface HomeProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const HomePage: React.FC<HomeProps> = ({
+const HomePage: React.FC<ContainerProps> = ({
     isLoggedIn,
 }) => {
   const [height, width] = useWindowSize();

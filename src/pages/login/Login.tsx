@@ -46,9 +46,9 @@ interface DispatchProps {
   setMenuEnabled: typeof setMenuEnabled;
 }
 
-interface LoginProps extends OwnProps, DispatchProps {}
+interface ContainerProps extends OwnProps, DispatchProps {}
 
-const LoginPage: React.FC<LoginProps> = ({
+const LoginPage: React.FC<ContainerProps> = ({
     getCompanyProfile,
     getCompanyUser,
     setIsLoggedIn,

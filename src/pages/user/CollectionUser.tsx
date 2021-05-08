@@ -36,9 +36,9 @@ interface DispatchProps {
   setModalCollectionUserShow: typeof setModalCollectionUserShow;
 }
 
-interface CollectionUserProps extends StateProps, DispatchProps {}
+interface ContainerProps extends StateProps, DispatchProps {}
 
-const CollectionUserPage: React.FC<CollectionUserProps> = ({
+const CollectionUserPage: React.FC<ContainerProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,

@@ -52,9 +52,9 @@ interface DispatchProps {
   setCompanyUser: typeof setCompanyUser;
 }
 
-interface RegisterProps extends OwnProps, DispatchProps { }
+interface ContainerProps extends OwnProps, DispatchProps { }
 
-const RegisterPage: React.FC<RegisterProps> = ({
+const RegisterPage: React.FC<ContainerProps> = ({
     setIsLoggedIn,
     setCompanyProfile,
     setCompanyUser,

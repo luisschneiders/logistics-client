@@ -26,9 +26,9 @@ interface DispatchProps {
   setMenuEnabled: typeof setMenuEnabled;
 }
 
-interface WelcomeProps extends OwnProps, DispatchProps {};
+interface ContainerProps extends OwnProps, DispatchProps {};
 
-const WelcomePage: React.FC<WelcomeProps> = ({ history, setHasSeenWelcome, setMenuEnabled }) => {
+const WelcomePage: React.FC<ContainerProps> = ({ history, setHasSeenWelcome, setMenuEnabled }) => {
   const [showSkip, setShowSkip] = useState(true);
   const slideRef = useRef<HTMLIonSlidesElement>(null);
 

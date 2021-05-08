@@ -56,9 +56,9 @@ interface DispatchProps {
   setCompanyUser: typeof setCompanyUser;
 };
 
-interface CollectionUserDetailsProps extends OwnProps, StateProps, DispatchProps {};
+interface ContainerProps extends OwnProps, StateProps, DispatchProps {};
 
-const CollectionUserDetailsPage: React.FC<CollectionUserDetailsProps> = ({
+const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,

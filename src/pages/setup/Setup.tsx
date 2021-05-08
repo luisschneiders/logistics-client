@@ -31,9 +31,9 @@ interface StateProps {
 
 interface DispatchProps {}
 
-interface SetupProps extends OwnProps, StateProps, DispatchProps {}
+interface ContainerProps extends OwnProps, StateProps, DispatchProps {}
 
-const SetupPage: React.FC<SetupProps> = () => {
+const SetupPage: React.FC<ContainerProps> = () => {
   return (
     <IonPage id="setup-page">
       <IonHeader>

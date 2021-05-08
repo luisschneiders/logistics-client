@@ -49,9 +49,9 @@ interface DispatchProps {
   setPhotoURL: typeof setPhotoURL;
 }
 
-interface AccountProps extends OwnProps, StateProps, DispatchProps {}
+interface ContainerProps extends OwnProps, StateProps, DispatchProps {}
 
-const AccountPage: React.FC<AccountProps> = ({
+const AccountPage: React.FC<ContainerProps> = ({
     setDisplayName,
     displayName,
     setPhotoURL,
