@@ -165,7 +165,7 @@ const RegisterPage: React.FC<RegisterProps> = ({
       await setCompanyProfile(companyProfile);
       await setCompanyUser(companyUser);
 
-      history.push(ROUTES.TABS_HOME, {direction: 'none'});
+      history.push(ROUTES.TABS_COLLECTION_CLIENT_LIST, {direction: 'none'});
 
       setBusy(false);
 

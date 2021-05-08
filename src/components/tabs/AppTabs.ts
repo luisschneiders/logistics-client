@@ -3,22 +3,19 @@ import {
   starOutline,
   cogOutline,
   readerOutline,
-  homeOutline,
+  businessOutline,
 } from 'ionicons/icons';
 import { AppPage } from '../../models/AppPage';
 import * as ROUTES from '../../constants/Routes'
 
 export function appTabs() {
   const authenticated: AppPage[] = [
-    { url: ROUTES.TABS_HOME, label: 'Home', icon: homeOutline },
+    { url: ROUTES.TABS_COLLECTION_CLIENT_LIST, label: 'Clients', icon: businessOutline },
     { url: ROUTES.TABS_HOME, label: 'Daily runs', icon: readerOutline },
-    // { url: ROUTES.TABS_EXPENSES, label: 'Expenses', icon: cartOutline },
-    // { url: ROUTES.TABS_TRANSACTIONS, label: 'Transactions', icon: cashOutline },
     { url: ROUTES.TABS_SETUP, label: 'Setup', icon: cogOutline },
   ];
 
   const unauthenticated: AppPage[] = [
-    // { url: ROUTES.WELCOME, label: 'Welcome', icon: happyOutline },
     { url: ROUTES.LOGIN, label: 'Login', icon: logInOutline },
     { url: ROUTES.REGISTER, label: 'Register', icon: starOutline },
     { url: '/', label: '', icon: '' },
