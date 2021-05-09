@@ -7,7 +7,7 @@ export interface CollectionClientListState {
     pagination: Pagination;
   };
   collectionClient: CollectionClient;
-  isFetching: boolean;
+  isFetchingList: boolean;
   isSaving: boolean;
   isUpdating: boolean;
 }

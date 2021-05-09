@@ -2,11 +2,11 @@ import {
   COLLECTION_CLIENT_ADD,
   COLLECTION_CLIENT_BY_ID_SET,
   COLLECTION_CLIENT_IS_SAVING,
-  COLLECTION_CLIENT_IS_FETCHING,
   COLLECTION_CLIENT_LIST_LOAD_MORE_SET,
   COLLECTION_CLIENT_LIST_SET,
   COLLECTION_CLIENT_UPDATE,
   COLLECTION_CLIENT_IS_UPDATING,
+  COLLECTION_CLIENT_IS_FETCHING_LIST,
 } from '../actionTypes';
 import { CollectionClientAction } from './collectionClient.actions';
 import { CollectionClientListState } from './collectionClient.state';
@@ -32,11 +32,23 @@ export const collectionClientReducer = (state: CollectionClientListState, action
         collectionClientList: {
           collectionClients: [action.payload, ...collectionClients],
           pagination: {...state.collectionClientList.pagination},
-        }
+        },
       };
     case COLLECTION_CLIENT_UPDATE:
+      const index = action.payload.clientId;
+      const newState = { ...state };
+      newState.collectionClientList.collectionClients.map((item) => {
+        if (item.clientId !== index) {
+          return item;
+        }
+        return {
+          ...item,
+          ...action.payload,
+        }
+      })
       return {
-        ...state
+        ...state,
+        ...newState,
       };
     case COLLECTION_CLIENT_LIST_SET:
     case COLLECTION_CLIENT_LIST_LOAD_MORE_SET:
@@ -52,10 +64,10 @@ export const collectionClientReducer = (state: CollectionClientListState, action
         ...state,
         collectionClient: action.payload
       }
-    case COLLECTION_CLIENT_IS_FETCHING:
+    case COLLECTION_CLIENT_IS_FETCHING_LIST:
       return {
         ...state,
-        isFetching: action.payload
+        isFetchingList: action.payload
       }
     case COLLECTION_CLIENT_IS_SAVING:
       return {

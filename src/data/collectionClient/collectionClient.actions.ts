@@ -8,8 +8,8 @@ import {
   COLLECTION_CLIENT_LIST_LOAD_MORE_SET,
   COLLECTION_CLIENT_BY_ID_SET,
   COLLECTION_CLIENT_UPDATE,
-  COLLECTION_CLIENT_IS_FETCHING,
   COLLECTION_CLIENT_IS_UPDATING,
+  COLLECTION_CLIENT_IS_FETCHING_LIST,
 } from '../actionTypes';
 import {
   addCollectionClientData,
@@ -54,10 +54,10 @@ const setCollectionClientByIdAction = (data: CollectionClient) => {
   } as const);
 }
 
-const isFetchingCollectionClientAction = (isFetching: boolean) => {
+const isFetchingListCollectionClientAction = (isFetchingList: boolean) => {
   return ({
-    type: COLLECTION_CLIENT_IS_FETCHING,
-    payload: isFetching
+    type: COLLECTION_CLIENT_IS_FETCHING_LIST,
+    payload: isFetchingList
   } as const);
 }
 
@@ -75,8 +75,8 @@ const isUpdatingCollectionClientAction = (isUpdating: boolean) => {
   } as const);
 }
 
-export const isFetchingCollectionClientList = (isFetching: boolean) => async () => {
-  return isFetchingCollectionClientAction(isFetching);
+export const isFetchingCollectionClientList = (isFetchingList: boolean) => async () => {
+  return isFetchingListCollectionClientAction(isFetchingList);
 }
 
 export const isSavingCollectionClient = (isSaving: boolean) => async () => {
@@ -88,23 +88,23 @@ export const isUpdatingCollectionClient = (isUpdating: boolean) => async () => {
 }
 
 export const setCollectionClientList = (id: string, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(isFetchingCollectionClientAction(true));
+  dispatch(isFetchingListCollectionClientAction(true));
   const data = await fetchCollectionClientData(id, pageSize);
-  dispatch(isFetchingCollectionClientAction(false));
+  dispatch(isFetchingListCollectionClientAction(false));
   return setCollectionClientListAction(data);
 }
 
 export const setCollectionClientListLoadMore = (id: string, lastVisible: any, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(isFetchingCollectionClientAction(true));
+  dispatch(isFetchingListCollectionClientAction(true));
   const data = await fetchCollectionClientLoadMoreData(id, lastVisible, pageSize);
-  dispatch(isFetchingCollectionClientAction(false));
+  dispatch(isFetchingListCollectionClientAction(false));
   return setCollectionClientListLoadMoreAction(data);
 }
 
 export const setCollectionClientById = (collectionClientId: string) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(isFetchingCollectionClientAction(true));
+  dispatch(isFetchingListCollectionClientAction(true));
   const data = await fetchCollectionClientByIdData(collectionClientId);
-  dispatch(isFetchingCollectionClientAction(false));
+  dispatch(isFetchingListCollectionClientAction(false));
   return setCollectionClientByIdAction(data);
 }
 

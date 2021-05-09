@@ -38,7 +38,7 @@ interface DispatchProps {
 
 interface ContainerProps extends StateProps, DispatchProps {}
 
-const CollectionUserPage: React.FC<ContainerProps> = ({
+const CollectionUserListPage: React.FC<ContainerProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,
@@ -101,5 +101,5 @@ export default connect<{}, StateProps, DispatchProps>({
     setCollectionUserList,
     setModalCollectionUserShow,
   }),
-  component: React.memo(CollectionUserPage)
+  component: React.memo(CollectionUserListPage)
 });

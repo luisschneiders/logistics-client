@@ -43,7 +43,7 @@ export const initialState: AppState = {
   collectionClientReducer: {
     collectionClientList: {
       collectionClients: [],
-      pagination: { page: 1, pageSize: PageListItem.ITEM_12, pageCount: 0, rowCount: 0 },
+      pagination: { page: 1, pageSize: PageListItem.ITEM_100, pageCount: 0, rowCount: 0 },
     },
     collectionClient: {
       companyId: '',
@@ -64,14 +64,14 @@ export const initialState: AppState = {
       createdAt: '',
       updatedAt: '',
     },
-    isFetching: false,
+    isFetchingList: false,
     isSaving: false,
     isUpdating: false,
   },
   collectionUserReducer: {
     collectionUserList: {
       collectionUsers: [],
-      pagination: { page: 1, pageSize: PageListItem.ITEM_12, pageCount: 0, rowCount: 0 },
+      pagination: { page: 1, pageSize: PageListItem.ITEM_100, pageCount: 0, rowCount: 0 },
     },
     collectionUser: {
       companyId: '',

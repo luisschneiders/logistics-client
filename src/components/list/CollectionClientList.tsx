@@ -6,17 +6,12 @@ import {
   IonButton,
   IonIcon,
   IonAvatar,
-  IonChip,
-  IonSearchbar,
 } from '@ionic/react';
-
-import './List.scss';
 
 import { connect } from '../../data/connect';
 
 import { CompanyProfile } from '../../models/CompanyProfile';
 import {
-  ClientEmployee,
   CollectionClient,
   CollectionClientList
 } from '../../models/CollectionClient';
@@ -34,9 +29,7 @@ import { PageListItem } from '../../enum/PageListItem';
 import * as ROUTES from '../../constants/Routes';
 
 import LsCard from '../card/Card';
-import {
-  businessOutline
-} from 'ionicons/icons';
+import { businessOutline } from 'ionicons/icons';
 
 
 interface StateProps {
@@ -52,7 +45,7 @@ interface DispatchProps {
 
 interface ContainerProps extends StateProps, DispatchProps {}
 
-const LsCollectionClientDetails: React.FC<ContainerProps> = ({
+const LsCollectionClientList: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
     isFetching,
@@ -60,7 +53,6 @@ const LsCollectionClientDetails: React.FC<ContainerProps> = ({
     setCollectionClientListLoadMore,
   }) => {
   const [collectionClient, setCollectionClient] = useState<CollectionClient[]>([]);
-  const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     if (collectionClientList) {
@@ -77,22 +69,10 @@ const LsCollectionClientDetails: React.FC<ContainerProps> = ({
     }
   };
 
-  const handleOnChange = async (e: any) => {
-    const clientFiltered: any = collectionClientList.collectionClients.filter(client => client.clientName.toLowerCase().includes(e.detail.value!.toLowerCase()));
-    setCollectionClient(clientFiltered);
-    setSearchText(e.detail.value!);
-  }
-
-
   return (
     <>
-      <IonSearchbar
-        value={searchText}
-        onIonChange={handleOnChange}
-        animated
-      ></IonSearchbar>
       {collectionClient && collectionClient.length > 0 &&
-        <IonList lines="full" className="ion-no-padding list-collection-client-details">
+        <IonList lines="full" className="ion-no-padding">
           {collectionClient.map((item: CollectionClient, index: number) => (
             <IonItem key={index}>
               <IonLabel>
@@ -109,20 +89,9 @@ const LsCollectionClientDetails: React.FC<ContainerProps> = ({
                     <h2>
                       {item.clientName}
                     </h2>
-                    <div className="list-collection-client-details__item-employee">
-                      {item.clientEmployee?.map((employee: ClientEmployee, employeeIndex: number) => (
-                      <IonChip
-                        key={employeeIndex}
-                        color={AppColor.SECONDARY}
-                      >
-                        <IonAvatar>
-                          <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
-                        </IonAvatar>
-                        <IonLabel>{employee.name}</IonLabel>
-                      </IonChip>
-
-                      ))}
-                    </div>
+                    <p>
+                      {item.clientAddress.suburb}
+                    </p>
                   </IonLabel>
                 </IonItem>
               </IonLabel>
@@ -152,5 +121,5 @@ export default connect<{}, StateProps, DispatchProps>({
   mapDispatchToProps: ({
     setCollectionClientListLoadMore,
   }),
-  component: LsCollectionClientDetails
+  component: LsCollectionClientList
 });

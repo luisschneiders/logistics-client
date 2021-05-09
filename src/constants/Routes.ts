@@ -15,9 +15,9 @@ export const SERVER = process.env.REACT_APP_SERVER_URL;
 
 export const TABS = '/tabs';
 
-export const TABS_COLLECTION_CLIENT = `${TABS}/collection-client`;
 export const TABS_COLLECTION_CLIENT_LIST = `${TABS}/collection-client-list`;
-export const TABS_COLLECTION_USER = `${TABS}/collection-user`;
+export const TABS_COLLECTION_CLIENT_VIEW = `${TABS}/collection-client-view`;
+export const TABS_COLLECTION_USER_LIST = `${TABS}/collection-user-list`;
 
 export const TABS_HOME = `${TABS}/home`;
 

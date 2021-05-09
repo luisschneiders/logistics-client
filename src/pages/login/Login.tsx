@@ -85,7 +85,7 @@ const LoginPage: React.FC<ContainerProps> = ({
       await setDisplayNameAction(response.user.displayName ? response.user.displayName : null);
       await setPhotoURLAction(response.user.photoURL ? response.user.photoURL : getAvatar(response.user.email));
 
-      history.push(ROUTES.TABS_COLLECTION_CLIENT_LIST, {direction: 'none'});
+      history.push(ROUTES.TABS_COLLECTION_CLIENT_VIEW, {direction: 'none'});
     }
   }
 

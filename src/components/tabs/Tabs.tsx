@@ -14,11 +14,11 @@ import { AppPage } from '../../models/AppPage';
 import * as ROUTES from '../../constants/Routes';
 import { appTabs } from './AppTabs';
 
-import CollectionClientPage from '../../pages/client/CollectionClient';
 import CollectionClientListPage from '../../pages/client/CollectionClientList';
+import CollectionClientViewPage from '../../pages/client/CollectionClientView';
 import CollectionClientDetailsPage from '../../pages/client/CollectionClientDetails';
 
-import CollectionUserPage from '../../pages/user/CollectionUser';
+import CollectionUserListPage from '../../pages/user/CollectionUserList';
 import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
 import TodoPage from '../../pages/todo/Todo';
@@ -43,20 +43,20 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Redirect path={ROUTES.TABS} to={ROUTES.TABS_COLLECTION_CLIENT_LIST} exact={true} />
-        <Route path={ROUTES.TABS_COLLECTION_CLIENT_LIST} render={() => <CollectionClientListPage />} exact={true} />
+        <Redirect path={ROUTES.TABS} to={ROUTES.TABS_COLLECTION_CLIENT_VIEW} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_CLIENT_VIEW} render={() => <CollectionClientViewPage />} exact={true} />
 
         <Route path={ROUTES.TABS_SETUP} render={() => <SetupPage />} exact={true} />
 
-        <Route path={ROUTES.TABS_COLLECTION_CLIENT} render={() => <CollectionClientPage />} exact={true} />
-        <Route path={`${ROUTES.TABS_COLLECTION_CLIENT}/:id`} component={CollectionClientDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_CLIENT_LIST} render={() => <CollectionClientListPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_CLIENT_LIST}/:id`} component={CollectionClientDetailsPage} exact={true} />
 
-        <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CollectionUserPage />} exact={true} />
-        <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CollectionUserDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_USER_LIST} render={() => <CollectionUserListPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_USER_LIST}/:id`} component={CollectionUserDetailsPage} exact={true} />
 
         <Route path={ROUTES.TABS_TODO} render={() => <TodoPage />} exact={true} />
 
-        <Route path='/' render={() => <Redirect to={ROUTES.TABS_COLLECTION_CLIENT_LIST} />} exact={true} />
+        <Route path='/' render={() => <Redirect to={ROUTES.TABS_COLLECTION_CLIENT_VIEW} />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         {isAuthenticated ? renderTabItems(appTabs().authenticated) : renderTabItems(appTabs().unauthenticated)}

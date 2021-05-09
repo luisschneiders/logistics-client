@@ -173,7 +173,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_CLIENT}></IonBackButton>
+            <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_CLIENT_LIST}></IonBackButton>
           </IonButtons>
           <IonTitle className="ion-text-capitalize">
             Update <span className="ion-text-underline"> {clientName}</span>

@@ -4,7 +4,7 @@ import { AppState } from '../app/app.state';
 
 const getCollectionClientListData = (state: AppState) => state.collectionClientReducer.collectionClientList;
 const getCollectionClientData = (state: AppState) => state.collectionClientReducer.collectionClient;
-const isFetchingCollectionClientListData = (state: AppState) => state.collectionClientReducer.isFetching;
+const isFetchingCollectionClientListData = (state: AppState) => state.collectionClientReducer.isFetchingList;
 const isSavingCollectionClientData = (state: AppState) => state.collectionClientReducer.isSaving;
 const isUpdatingCollectionClientData = (state: AppState) => state.collectionClientReducer.isUpdating;
 const getIdParam = (_state: AppState, props: any) => {
@@ -20,8 +20,8 @@ export const getCollectionClientList = createSelector(
 
 export const isFetchingCollectionClientList = createSelector(
   isFetchingCollectionClientListData,
-  (isFetching: boolean) => {
-    return isFetching;
+  (isFetchingList: boolean) => {
+    return isFetchingList;
   }
 );
 
