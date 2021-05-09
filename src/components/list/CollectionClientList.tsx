@@ -6,6 +6,7 @@ import {
   IonButton,
   IonIcon,
   IonAvatar,
+  IonSearchbar,
 } from '@ionic/react';
 
 import { connect } from '../../data/connect';
@@ -53,6 +54,7 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
     setCollectionClientListLoadMore,
   }) => {
   const [collectionClient, setCollectionClient] = useState<CollectionClient[]>([]);
+  const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     if (collectionClientList) {
@@ -69,8 +71,19 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
     }
   };
 
+  const handleOnChange = async (e: any) => {
+    const clientFiltered: any = collectionClientList.collectionClients.filter(client => client.clientName.toLowerCase().includes(e.detail.value!.toLowerCase()));
+    setCollectionClient(clientFiltered);
+    setSearchText(e.detail.value!);
+  }
+
   return (
     <>
+      <IonSearchbar
+        value={searchText}
+        onIonChange={handleOnChange}
+        animated
+      ></IonSearchbar>
       {collectionClient && collectionClient.length > 0 &&
         <IonList lines="full" className="ion-no-padding">
           {collectionClient.map((item: CollectionClient, index: number) => (

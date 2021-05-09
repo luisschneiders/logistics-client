@@ -7,6 +7,7 @@ import {
   IonToggle,
   IonAvatar,
   IonIcon,
+  IonSearchbar,
 } from '@ionic/react';
 import { connect } from '../../data/connect';
 import * as selectorsUser from '../../data/user/user.selectors';
@@ -51,6 +52,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
     updateCollectionUser,
   }) => {
   const [collectionUser, setCollectionUser] = useState<CollectionUser[]>([]);
+  const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
     if (collectionUserList) {
@@ -75,9 +77,20 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
       updateCollectionUser(updatedCollectionUser);
     }
   }
-  
+
+  const handleOnChange = async (e: any) => {
+    const userFiltered: any = collectionUserList.collectionUsers.filter(user => user.userName.toLowerCase().includes(e.detail.value!.toLowerCase()));
+    setCollectionUser(userFiltered);
+    setSearchText(e.detail.value!);
+  }
+
   return (
     <>
+      <IonSearchbar
+        value={searchText}
+        onIonChange={handleOnChange}
+        animated
+      ></IonSearchbar>
       {collectionUser && collectionUser.length > 0 &&
         <IonList lines="full" className="ion-no-padding">
           {collectionUser.map((item: CollectionUser, index: number) => (

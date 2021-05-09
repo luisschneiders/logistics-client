@@ -84,7 +84,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
     setSearchText(e.detail.value!);
   }
 
-
   return (
     <>
       <IonSearchbar
