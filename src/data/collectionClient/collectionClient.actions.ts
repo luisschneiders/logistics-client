@@ -10,6 +10,7 @@ import {
   COLLECTION_CLIENT_UPDATE,
   COLLECTION_CLIENT_IS_UPDATING,
   COLLECTION_CLIENT_IS_FETCHING_LIST,
+  COLLECTION_CLIENT_LIST_RESET,
 } from '../actionTypes';
 import {
   addCollectionClientData,
@@ -30,6 +31,13 @@ const updateCollectionClientAction = (data: CollectionClient) => {
   return ({
     type: COLLECTION_CLIENT_UPDATE,
     payload: data
+  } as const);
+}
+
+const resetCollectionClientListAction = () => {
+  return ({
+    type: COLLECTION_CLIENT_LIST_RESET,
+    payload: {}
   } as const);
 }
 
@@ -87,6 +95,10 @@ export const isUpdatingCollectionClient = (isUpdating: boolean) => async () => {
   return isUpdatingCollectionClientAction(isUpdating);
 }
 
+export const resetCollectionClientList = () => async () => {
+  return resetCollectionClientListAction();
+}
+
 export const setCollectionClientList = (id: string, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
   dispatch(isFetchingListCollectionClientAction(true));
   const data = await fetchCollectionClientData(id, pageSize);
@@ -124,6 +136,7 @@ export const updateCollectionClient = (data: Partial<CollectionClient>) => async
 
 export type CollectionClientAction = 
   | ActionType<typeof addCollectionClient>
+  | ActionType<typeof resetCollectionClientList>
   | ActionType<typeof setCollectionClientList>
   | ActionType<typeof setCollectionClientListLoadMore>
   | ActionType<typeof isFetchingCollectionClientList>

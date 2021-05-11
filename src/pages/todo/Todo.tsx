@@ -19,7 +19,8 @@ import {
   keyOutline,
   navigateOutline,
   notificationsOutline,
-  peopleOutline
+  peopleOutline,
+  shareSocialOutline
 } from 'ionicons/icons';
 
 interface StateProps {
@@ -67,6 +68,10 @@ const TodoPage: React.FC<ContainerProps> = () => {
           <IonItem>
             <IonIcon slot="start" icon={navigateOutline} />
             <IonLabel>Use Google map API</IonLabel>
+          </IonItem>
+          <IonItem>
+            <IonIcon slot="start" icon={shareSocialOutline} />
+            <IonLabel>Review Redux strategy</IonLabel>
           </IonItem>
         </IonList>
       </IonContent>

@@ -56,7 +56,7 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
 
         <Route path={ROUTES.TABS_TODO} render={() => <TodoPage />} exact={true} />
 
-        <Route path='/' render={() => <Redirect to={ROUTES.TABS_COLLECTION_CLIENT_VIEW} />} exact={true} />
+        <Route path='/' render={() => <Redirect to={ROUTES.TABS} />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
         {isAuthenticated ? renderTabItems(appTabs().authenticated) : renderTabItems(appTabs().unauthenticated)}

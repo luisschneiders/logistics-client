@@ -24,10 +24,6 @@ import {
 import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
-// import {
-//   setCollectionClientViewLoadMore,
-// } from '../../data/collectionClient/collectionClient.actions';
-
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
@@ -43,7 +39,6 @@ import { setCollectionClientListLoadMore } from '../../data/collectionClient/col
 interface StateProps {
   isLoggedIn: boolean;
   companyProfile: CompanyProfile;
-  // isFetching: boolean;
   collectionClientList: CollectionClientList;
 }
 
@@ -56,7 +51,6 @@ interface ContainerProps extends StateProps, DispatchProps {}
 const LsCollectionClientView: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
-    // isFetching,
     collectionClientList,
     setCollectionClientListLoadMore,
   }) => {
@@ -69,7 +63,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
     }
   }, [
     collectionClientList,
-    // isFetching,
   ]);
 
   const loadMore = () => {
@@ -131,11 +124,9 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
       }
       {((collectionClient && collectionClient.length > 0) && collectionClientList.pagination.lastVisible?.exists) &&
         <div className="ion-text-center">
-          {/* <IonButton fill="clear" color={AppColor.TERTIARY} disabled={isFetching} onClick={loadMore}>Load more...</IonButton> */}
           <IonButton fill="clear" color={AppColor.TERTIARY} disabled={!collectionClient.length} onClick={loadMore}>Load more...</IonButton>
         </div>
       }
-      {/* {(!collectionClient.length && !isFetching)&&  */}
       {(!collectionClient.length)&& 
         <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
@@ -147,7 +138,6 @@ export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
-    // isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
     collectionClientList: selectorsCollectionClient.getCollectionClientList(state),
   }),
   mapDispatchToProps: ({

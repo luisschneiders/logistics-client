@@ -2,7 +2,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-
+  IonLoading,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -13,39 +13,50 @@ import React, { useEffect } from 'react';
 import { connect } from '../../data/connect';
 
 import * as selectorsUser from '../../data/user/user.selectors';
-// import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
+import * as selectorsFetch from '../../data/fetch/fetch.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
-// import { PageListItem } from '../../enum/PageListItem';
+import { PageListItem } from '../../enum/PageListItem';
 import LsCollectionClientView from '../../components/list/CollectionClientView';
 import { CompanyProfile } from '../../models/CompanyProfile';
-// import { setCollectionClientView } from '../../data/collectionClient/collectionClient.actions';
+import {
+  resetCollectionClientList,
+  setCollectionClientList
+} from '../../data/collectionClient/collectionClient.actions';
 
 interface StateProps {
-  companyProfile: CompanyProfile;
   isLoggedIn: boolean;
-  // isFetching: boolean;
+  companyProfile: CompanyProfile;
+  isFetching: boolean;
 }
 
 interface DispatchProps {
-  // setCollectionClientView: typeof setCollectionClientView;
+  resetCollectionClientList: typeof resetCollectionClientList;
+  setCollectionClientList: typeof setCollectionClientList;
 }
 
 interface ContainerProps extends StateProps, DispatchProps {}
 
-const CollectionClientViewPage: React.FC<ContainerProps> = ({
+const CollectionClientViewPage: React.FC<ContainerProps> = (
+  {
   isLoggedIn,
-  // isFetching,
+  isFetching,
   companyProfile,
-  // setCollectionClientView,
-}) => {
+  resetCollectionClientList,
+  setCollectionClientList,
+  }
+) => {
+
+  resetCollectionClientList();
 
   useEffect(() => {
     if (isLoggedIn && companyProfile) {
+      setCollectionClientList(companyProfile.companyId, PageListItem.ITEM_100);
     }
   }, [
     isLoggedIn,
     companyProfile,
-    // setCollectionClientView,
+    isFetching,
+    setCollectionClientList,
   ]);
 
   return (
@@ -58,7 +69,7 @@ const CollectionClientViewPage: React.FC<ContainerProps> = ({
           <IonTitle>Clients</IonTitle>
         </IonToolbar>
       </IonHeader>
-      {/* <IonLoading message="Fetching clients..." duration={0} isOpen={isFetching}></IonLoading> */}
+      <IonLoading message="Fetching clients..." duration={0} isOpen={isFetching}></IonLoading>
       <IonContent className="ion-no-padding">
         <LsCollectionClientView />
       </IonContent>
@@ -69,11 +80,12 @@ const CollectionClientViewPage: React.FC<ContainerProps> = ({
 export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
-    // isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
+    isFetching: selectorsFetch.isFetchingCollectionClientView(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
   }),
   mapDispatchToProps: ({
-    // setCollectionClientView,
+    resetCollectionClientList,
+    setCollectionClientList,
   }),
   component: React.memo(CollectionClientViewPage)
 });

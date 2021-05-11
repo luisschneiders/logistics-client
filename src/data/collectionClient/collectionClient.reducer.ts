@@ -7,6 +7,7 @@ import {
   COLLECTION_CLIENT_UPDATE,
   COLLECTION_CLIENT_IS_UPDATING,
   COLLECTION_CLIENT_IS_FETCHING_LIST,
+  COLLECTION_CLIENT_LIST_RESET,
 } from '../actionTypes';
 import { CollectionClientAction } from './collectionClient.actions';
 import { CollectionClientListState } from './collectionClient.state';
@@ -50,6 +51,14 @@ export const collectionClientReducer = (state: CollectionClientListState, action
         ...state,
         ...newState,
       };
+    case COLLECTION_CLIENT_LIST_RESET:
+      return {
+        ...state,
+        collectionClientList: {
+          collectionClients: [],
+          pagination: {  page: 1, pageSize:0, rowCount: 0, pageCount: 0,}
+        }
+      }
     case COLLECTION_CLIENT_LIST_SET:
     case COLLECTION_CLIENT_LIST_LOAD_MORE_SET:
       return {

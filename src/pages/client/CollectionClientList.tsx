@@ -25,7 +25,10 @@ import { add } from 'ionicons/icons';
 import { setModalCollectionClientShow } from '../../data/modal/modal.actions';
 import LsModalCollectionClient from '../../components/modal/CollectionClient';
 import { CompanyProfile } from '../../models/CompanyProfile';
-import { setCollectionClientList } from '../../data/collectionClient/collectionClient.actions';
+import {
+  resetCollectionClientList,
+  setCollectionClientList
+} from '../../data/collectionClient/collectionClient.actions';
 
 interface StateProps {
   companyProfile: CompanyProfile;
@@ -34,6 +37,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
+  resetCollectionClientList: typeof resetCollectionClientList;
   setCollectionClientList: typeof setCollectionClientList;
   setModalCollectionClientShow: typeof setModalCollectionClientShow;
 }
@@ -44,10 +48,13 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,
+  resetCollectionClientList,
   setCollectionClientList,
   setModalCollectionClientShow,
 }) => {
- 
+
+  resetCollectionClientList();
+
   useEffect(() => {
     if (isLoggedIn && companyProfile) {
       setCollectionClientList(companyProfile.companyId, PageListItem.ITEM_100);
@@ -100,6 +107,7 @@ export default connect<{}, StateProps, DispatchProps>({
     companyProfile: selectorsSessions.getCompanyProfile(state),
   }),
   mapDispatchToProps: ({
+    resetCollectionClientList,
     setCollectionClientList,
     setModalCollectionClientShow,
   }),
