@@ -18,6 +18,8 @@ import CollectionClientListPage from '../../pages/client/CollectionClientList';
 import CollectionClientViewPage from '../../pages/client/CollectionClientView';
 import CollectionClientDetailsPage from '../../pages/client/CollectionClientDetails';
 
+import CollectionDeliveryListPage from '../../pages/delivery/CollectionDeliveryList';
+
 import CollectionUserListPage from '../../pages/user/CollectionUserList';
 import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
@@ -50,6 +52,9 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
 
         <Route path={ROUTES.TABS_COLLECTION_CLIENT_LIST} render={() => <CollectionClientListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_CLIENT_LIST}/:id`} component={CollectionClientDetailsPage} exact={true} />
+
+        <Route path={ROUTES.TABS_COLLECTION_DELIVERY} render={() => <CollectionDeliveryListPage />} exact={true} />
+        {/* <Route path={`${ROUTES.TABS_COLLECTION_DELIVERY}/:id`} component={CollectionDeliveryDetailsPage} exact={true} /> */}
 
         <Route path={ROUTES.TABS_COLLECTION_USER_LIST} render={() => <CollectionUserListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_USER_LIST}/:id`} component={CollectionUserDetailsPage} exact={true} />

@@ -15,7 +15,7 @@ import * as ROUTES from '../constants/Routes'
 export function appPages() {
   const authenticated: AppPage[] = [
     { level: 'Menu', url: ROUTES.TABS_COLLECTION_CLIENT_VIEW, label: 'Clients', icon: businessOutline },
-    { level: 'Menu', url: ROUTES.TABS_HOME, label: 'Daily runs', icon: readerOutline },
+    { level: 'Menu', url: ROUTES.TABS_COLLECTION_DELIVERY, label: 'Daily run', icon: readerOutline },
     { level: 'Menu', url: ROUTES.TABS_TIMESHEETS, label: 'Timesheet', icon: timeOutline },
     { level: 'Menu', url: ROUTES.TABS_TRIPS, label: 'Trips', icon: mapOutline },
     // { level: 'Settings', url: ROUTES.ACCOUNT, label: 'Account', icon: peopleOutline },

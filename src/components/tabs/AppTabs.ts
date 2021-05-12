@@ -11,7 +11,7 @@ import * as ROUTES from '../../constants/Routes'
 export function appTabs() {
   const authenticated: AppPage[] = [
     { url: ROUTES.TABS_COLLECTION_CLIENT_VIEW, label: 'Clients', icon: businessOutline },
-    { url: ROUTES.TABS_HOME, label: 'Daily runs', icon: readerOutline },
+    { url: ROUTES.TABS_COLLECTION_DELIVERY, label: 'Daily run', icon: readerOutline },
     { url: ROUTES.TABS_SETUP, label: 'Setup', icon: cogOutline },
   ];
 
