@@ -103,7 +103,7 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
                       {item.clientName}
                     </h2>
                     <p>
-                      {item.clientAddress.suburb}
+                      {`${item.clientAddress.suburb}, ${item.clientAddress.state.toUpperCase()} ${item.clientAddress.postcode}`}
                     </p>
                   </IonLabel>
                 </IonItem>

@@ -120,7 +120,6 @@ const LsCollectionClient: React.FC<ContainerProps> = ({
               value={clientName}
               spellCheck={false}
               autocapitalize="off"
-              className="ion-text-capitalize"
               onIonChange={(e: any) => setClientName(e.detail.value!)}
               required
             />
