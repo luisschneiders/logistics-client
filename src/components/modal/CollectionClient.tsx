@@ -179,6 +179,7 @@ const LsCollectionClient: React.FC<ContainerProps> = ({
               <IonButton
                 type="submit"
                 shape="round"
+                size="default"
                 color={AppColor.PRIMARY}
                 disabled={isSavingCollectionClient ? true : false}
               >

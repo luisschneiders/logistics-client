@@ -33,7 +33,7 @@ import { AppColor } from '../../enum/AppColor';
 import {
   add,
   ellipsisVertical,
-  print
+  printOutline
 } from 'ionicons/icons';
 
 interface StateProps {
@@ -89,8 +89,8 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                 // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
               >
                 <IonIcon
-                  color={AppColor.DARK}
-                  icon={print}
+                  color={AppColor.SECONDARY}
+                  icon={printOutline}
                 />
               </IonFabButton>
             </IonFabList>
@@ -108,9 +108,14 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
               </IonCol>
               <IonCol size="1" push="2" className="ion-no-padding">
                 <IonFab vertical="center" horizontal="end">
-                  <IonFabButton color={AppColor.LIGHT} size="small" title="Search">
+                  <IonFabButton
+                    color={AppColor.LIGHT}
+                    size="small"
+                    title="Print"
+                  >
                     <IonIcon
-                      icon={print}
+                      icon={printOutline}
+                      color={AppColor.SECONDARY}
                       // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
                       size="small"
                     />

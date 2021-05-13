@@ -5,7 +5,6 @@ import {
   IonFabButton,
   IonHeader,
   IonIcon,
-  IonLoading,
   IonMenuButton,
   IonPage,
   IonTitle,
@@ -17,7 +16,6 @@ import { connect } from '../../data/connect';
 
 import { AppColor } from '../../enum/AppColor';
 import * as selectorsUser from '../../data/user/user.selectors';
-import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import { PageListItem } from '../../enum/PageListItem';
 import LsCollectionClientList from '../../components/list/CollectionClientList';
@@ -31,9 +29,9 @@ import {
 } from '../../data/collectionClient/collectionClient.actions';
 
 interface StateProps {
-  companyProfile: CompanyProfile;
   isLoggedIn: boolean;
-  isFetching: boolean;
+  companyProfile: CompanyProfile;
+  // isFetching: boolean;
 }
 
 interface DispatchProps {
@@ -46,7 +44,7 @@ interface ContainerProps extends StateProps, DispatchProps {}
 
 const CollectionClientListPage: React.FC<ContainerProps> = ({
   isLoggedIn,
-  isFetching,
+  // isFetching,
   companyProfile,
   resetCollectionClientList,
   setCollectionClientList,
@@ -91,7 +89,7 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
           </IonFab>
         </IonToolbar>
       </IonHeader>
-      <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading>
+      {/* <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading> */}
       <IonContent className="ion-no-padding">
         <LsCollectionClientList />
         <LsModalCollectionClient />
@@ -103,7 +101,7 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
 export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
-    isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
+    // isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
   }),
   mapDispatchToProps: ({

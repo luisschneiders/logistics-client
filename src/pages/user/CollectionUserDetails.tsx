@@ -193,6 +193,7 @@ const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
                 <IonButton
                   type="submit"
                   shape="round"
+                  size="default"
                   color={AppColor.PRIMARY}
                   disabled={!collectionUser && !collectionUserById}
                 >

@@ -36,15 +36,13 @@ interface DispatchProps {
 
 interface ContainerProps extends StateProps, DispatchProps {}
 
-const CollectionClientViewPage: React.FC<ContainerProps> = (
-  {
+const CollectionClientViewPage: React.FC<ContainerProps> = ({
   isLoggedIn,
   isFetching,
   companyProfile,
   resetCollectionClientList,
   setCollectionClientList,
-  }
-) => {
+}) => {
 
   resetCollectionClientList();
 

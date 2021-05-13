@@ -161,6 +161,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
               <IonButton
                 type="submit"
                 shape="round"
+                size="default"
                 color={AppColor.PRIMARY}
                 disabled={isSavingCollectionUser ? true : false}
               >

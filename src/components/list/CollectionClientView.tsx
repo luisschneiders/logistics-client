@@ -58,7 +58,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
-    // console.log('LFS - collectionClientList VIEW: ', collectionClientList);
     if (collectionClientList) {
       setCollectionClient(collectionClientList.collectionClients);
     }

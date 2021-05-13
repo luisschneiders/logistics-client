@@ -176,7 +176,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
             <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_CLIENT_LIST}></IonBackButton>
           </IonButtons>
           <IonTitle className="ion-text-capitalize">
-            Update <span className="ion-text-underline"> {clientName}</span>
+            <span className="ion-text-underline"> {clientName}</span>
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -246,7 +246,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
               />
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked">Employees</IonLabel>
+              <IonLabel position="stacked">Team member</IonLabel>
               <IonInput
                 name="employee"
                 type="text"
@@ -258,9 +258,9 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
               />
               <div slot="end" className="ion-padding-top">
               <IonButton
-                size="small"
                 shape="round"
                 fill="outline"
+                size="default"
                 color={AppColor.SECONDARY}
                 onClick={() => handleAddEmployee(clientEmployee)}
                 disabled={employee.length <=0}
@@ -270,7 +270,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
               </div>
             </IonItem>
             <IonItem lines="none" className="collection-client-details-page__item-no-input">
-              <IonLabel position="stacked">List of employees</IonLabel>
+              <IonLabel position="stacked">Team member list</IonLabel>
             </IonItem>
             <IonItem>
               <div>
@@ -296,6 +296,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
                 <IonButton
                   type="submit"
                   shape="round"
+                  size="default"
                   color={AppColor.PRIMARY}
                   disabled={!collectionClient && !collectionClientById}
                 >
