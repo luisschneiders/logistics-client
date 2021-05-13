@@ -48,7 +48,7 @@ const SetupPage: React.FC<ContainerProps> = () => {
         <IonList lines="full">
           <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_USER_LIST} routerDirection="none">
             <IonIcon slot="start" icon={peopleOutline} />
-            <IonLabel>Users</IonLabel>
+            <IonLabel>User</IonLabel>
           </IonItem>
           <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_CLIENT_LIST} routerDirection="none">
             <IonIcon slot="start" icon={businessOutline} />
