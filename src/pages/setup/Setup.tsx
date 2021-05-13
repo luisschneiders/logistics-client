@@ -52,7 +52,7 @@ const SetupPage: React.FC<ContainerProps> = () => {
           </IonItem>
           <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_CLIENT_LIST} routerDirection="none">
             <IonIcon slot="start" icon={businessOutline} />
-            <IonLabel>Clients</IonLabel>
+            <IonLabel>Client</IonLabel>
           </IonItem>
           <IonItem detail={true} routerLink={ROUTES.TABS_TODO} routerDirection="none">
             <IonIcon slot="start" icon={hammerOutline} />
