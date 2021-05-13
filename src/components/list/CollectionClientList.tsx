@@ -36,7 +36,7 @@ import { businessOutline } from 'ionicons/icons';
 interface StateProps {
   isLoggedIn: boolean;
   companyProfile: CompanyProfile;
-  isFetching: boolean;
+  // isFetching: boolean;
   collectionClientList: CollectionClientList;
 }
 
@@ -49,7 +49,7 @@ interface ContainerProps extends StateProps, DispatchProps {}
 const LsCollectionClientList: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
-    isFetching,
+    // isFetching,
     collectionClientList,
     setCollectionClientListLoadMore,
   }) => {
@@ -57,12 +57,13 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
+    // console.log('LFS - collectionClientList LIST: ', collectionClientList);
     if (collectionClientList) {
       setCollectionClient(collectionClientList.collectionClients);
     }
   }, [
     collectionClientList,
-    isFetching,
+    // isFetching,
   ]);
 
   const loadMore = () => {
@@ -84,7 +85,7 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
         onIonChange={handleOnChange}
         animated
       ></IonSearchbar>
-      {collectionClient && collectionClient.length > 0 &&
+      {(collectionClient && collectionClient.length > 0) &&
         <IonList lines="full" className="ion-no-padding">
           {collectionClient.map((item: CollectionClient, index: number) => (
             <IonItem key={index}>
@@ -114,10 +115,17 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
       }
       {((collectionClient && collectionClient.length > 0) && collectionClientList.pagination.lastVisible?.exists) &&
         <div className="ion-text-center">
-          <IonButton fill="clear" color={AppColor.TERTIARY} disabled={isFetching} onClick={loadMore}>Load more...</IonButton>
+          <IonButton
+            fill="clear"
+            color={AppColor.TERTIARY}
+            // disabled={isFetching}
+            onClick={loadMore}
+          >
+            Load more...
+          </IonButton>
         </div>
       }
-      {(!collectionClient.length && !isFetching)&& 
+      {(!collectionClient.length) && 
         <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
@@ -128,7 +136,7 @@ export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
-    isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
+    // isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
     collectionClientList: selectorsCollectionClient.getCollectionClientList(state),
   }),
   mapDispatchToProps: ({

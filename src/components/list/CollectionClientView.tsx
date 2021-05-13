@@ -58,6 +58,7 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
+    // console.log('LFS - collectionClientList VIEW: ', collectionClientList);
     if (collectionClientList) {
       setCollectionClient(collectionClientList.collectionClients);
     }
@@ -84,7 +85,7 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
         onIonChange={handleOnChange}
         animated
       ></IonSearchbar>
-      {collectionClient && collectionClient.length > 0 &&
+      {(collectionClient && collectionClient.length > 0) &&
         <IonList lines="full" className="ion-no-padding">
           {collectionClient.map((item: CollectionClient, index: number) => (
             <IonItem key={index}>
@@ -124,10 +125,17 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
       }
       {((collectionClient && collectionClient.length > 0) && collectionClientList.pagination.lastVisible?.exists) &&
         <div className="ion-text-center">
-          <IonButton fill="clear" color={AppColor.TERTIARY} disabled={!collectionClient.length} onClick={loadMore}>Load more...</IonButton>
+          <IonButton
+            fill="clear"
+            color={AppColor.TERTIARY}
+            // disabled={isFetching}
+            onClick={loadMore}
+          >
+            Load more...
+          </IonButton>
         </div>
       }
-      {(!collectionClient.length)&& 
+      {(!collectionClient.length) && 
         <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
