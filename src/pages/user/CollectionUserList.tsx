@@ -71,7 +71,7 @@ const CollectionUserListPage: React.FC<ContainerProps> = ({
                 onClick={() => setModalCollectionUserShow(true)}
                 color={AppColor.TERTIARY}
                 size="small"
-                title="Add new record"
+                title="Add record"
               >
                 <IonIcon
                   icon={add}

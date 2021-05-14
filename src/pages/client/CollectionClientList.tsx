@@ -78,7 +78,7 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
                 onClick={() => setModalCollectionClientShow(true)}
                 color={AppColor.TERTIARY}
                 size="small"
-                title="Add new record"
+                title="Add record"
               >
                 <IonIcon
                   icon={add}

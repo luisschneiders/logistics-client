@@ -55,7 +55,7 @@ const SetupPage: React.FC<ContainerProps> = () => {
             <IonLabel>Client</IonLabel>
           </IonItem>
           <IonItem detail={true} routerLink={ROUTES.TABS_TODO} routerDirection="none">
-            <IonIcon slot="start" icon={hammerOutline} />
+            <IonIcon slot="start" icon={hammerOutline} color={AppColor.TERTIARY} />
             <IonLabel color={AppColor.TERTIARY}>TODO</IonLabel>
           </IonItem>
         </IonList>

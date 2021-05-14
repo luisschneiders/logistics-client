@@ -17,7 +17,7 @@ export const collectionClientReducer = (state: CollectionClientListState, action
   switch (action.type) {
     case COLLECTION_CLIENT_ADD:
       // TODO
-      // Add new Client in the list, 
+      // Add Client in the list, 
       // then remove the last item from the array list
       // and check if page is smaller than pageCount, to prevent the slice
       // const collectionClients: any[] = (
