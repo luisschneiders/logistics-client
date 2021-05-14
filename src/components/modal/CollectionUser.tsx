@@ -76,7 +76,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
     handleShow
   ])
 
-  const collectionUserForm = async (e: React.FormEvent) => {
+  const form = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!isLoggedIn || !companyProfile) {
@@ -111,11 +111,11 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
       <LsModal
         id="modal-company-user"
         show={showModal}
-        title="Add new user"
+        title="Add user"
         isSubmitting={isSubmitting}
         closeModal={handleClose}
       >
-        <form noValidate onSubmit={collectionUserForm}>
+        <form noValidate onSubmit={form}>
           <IonItem>
             <IonLabel position="stacked">User name</IonLabel>
             <IonInput

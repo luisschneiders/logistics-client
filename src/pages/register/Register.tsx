@@ -84,7 +84,7 @@ const RegisterPage: React.FC<ContainerProps> = ({
     companyTypeOption,
   ])
 
-  const register = async (e: React.FormEvent) => {
+  const form = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const isNumber = /^\d+$/.test(companyAbnAcn);
@@ -186,7 +186,7 @@ const RegisterPage: React.FC<ContainerProps> = ({
         <div className="login-logo">
           <img src="assets/img/signup.png" alt="Logo"/>
         </div>
-        <form noValidate onSubmit={register}>
+        <form noValidate onSubmit={form}>
           <IonText><h3>User</h3></IonText>
           <IonList lines="full">
             <IonItem>

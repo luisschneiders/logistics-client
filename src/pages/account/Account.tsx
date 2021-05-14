@@ -71,7 +71,7 @@ const AccountPage: React.FC<ContainerProps> = ({
 
   const altImage: any = displayName;
 
-  const account = async (e: React.FormEvent) => {
+  const form = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage('Uploading...')
     setBusy(true);
@@ -101,7 +101,7 @@ const AccountPage: React.FC<ContainerProps> = ({
       </IonHeader>
       <IonLoading message={message} duration={0} isOpen={busy}></IonLoading>
       <IonContent className="ion-padding">
-        <form noValidate onSubmit={account}>
+        <form noValidate onSubmit={form}>
           <IonCard>
             <IonCardHeader class="ion-text-center">
               <IonCardTitle>

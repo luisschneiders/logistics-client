@@ -134,7 +134,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
       setClientEmployee(filteredItems);
     }
 
-    const formCollectionClient = async (e: React.FormEvent) => {
+    const form = async (e: React.FormEvent) => {
       e.preventDefault();
 
       if (!isLoggedIn || !companyProfile) {
@@ -182,7 +182,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
       </IonHeader>
       <IonLoading message="Please wait..." duration={0} isOpen={isFetching || isUpdatingCollectionClient}></IonLoading>
       <IonContent>
-        <form noValidate onSubmit={formCollectionClient}>
+        <form noValidate onSubmit={form}>
           <IonList>
             <IonItem lines="full" disabled={!collectionClient && !collectionClientById}>
               <IonLabel position="stacked">Client name</IonLabel>

@@ -66,7 +66,7 @@ const LoginPage: React.FC<ContainerProps> = ({
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
 
-  const login = async (e: React.FormEvent) => {
+  const form = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (email.trim() === '' || password.trim() === '') {
@@ -101,7 +101,7 @@ const LoginPage: React.FC<ContainerProps> = ({
         <div className="login-logo">
           <img src="assets/img/signup.png" alt="Logo"/>
         </div>
-        <form noValidate onSubmit={login}>
+        <form noValidate onSubmit={form}>
           <IonList lines="full">
             <IonItem>
               <IonLabel position="stacked" color={AppColor.PRIMARY}>Email</IonLabel>

@@ -115,7 +115,7 @@ const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
       isById,
     ]);
 
-    const formCollectionUser = async (e: React.FormEvent) => {
+    const form = async (e: React.FormEvent) => {
       e.preventDefault();
 
       if (collectionUserName.trim() === '') {
@@ -148,7 +148,7 @@ const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
       </IonHeader>
       <IonLoading message="Please wait..." duration={0} isOpen={isFetching || isUpdatingCollectionUser}></IonLoading>
       <IonContent>
-        <form noValidate onSubmit={formCollectionUser}>
+        <form noValidate onSubmit={form}>
           <IonList>
             <IonItem lines="full" disabled={!collectionUser && !collectionUserById}>
               <IonLabel position="stacked">User name</IonLabel>
