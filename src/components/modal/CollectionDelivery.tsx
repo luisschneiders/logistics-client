@@ -99,13 +99,13 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
     if (!isLoggedIn || !companyProfile) {
       return toast('Could not find associated company!', StatusColor.WARNING);
     }
-    
-    if (deliveryInvoice.trim() === '') {
-      return toast('Invoice is required!', StatusColor.WARNING);
-    }
 
     if (deliverySchedule.trim() === '') {
       return toast('Delivery schedule required!', StatusColor.WARNING);
+    }
+    
+    if (deliveryInvoice.trim() === '') {
+      return toast('Invoice is required!', StatusColor.WARNING);
     }
 
     if (deliveryClientId.trim() === '') {
@@ -116,6 +116,7 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
       companyId: companyProfile.companyId,
       deliveryDate,
       deliveryClientId,
+      deliveryClient: deliveryClientIdOptionsList.find((e:any) => e.clientId === deliveryClientId),
       deliveryInvoice,
       deliverySchedule,
       deliveryIsActive: true,

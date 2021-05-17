@@ -22,15 +22,15 @@ const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
         <IonIcon size="large" icon={businessOutline} color={AppColor.SECONDARY} />
       </IonAvatar>
       <IonLabel>
-        <h2>{data.deliveryClientId}</h2>
+        <h2>{data.deliveryClient.clientName}</h2>
         <p>Invoice: {data.deliveryInvoice}</p>
         <IonButton
           fill="clear"
           color={AppColor.TERTIARY}
-          onClick={() => navigator.clipboard.writeText(data.deliveryInvoice)}
+          onClick={() => navigator.clipboard.writeText(data.deliveryClient.clientAddress.address)}
           className="ion-no-padding"
         >
-          {`${data.deliveryInvoice} `}
+          {`${data.deliveryClient.clientAddress.suburb}, ${data.deliveryClient.clientAddress.state} ${data.deliveryClient.clientAddress.postcode}`}
           <IonIcon icon={copyOutline} color={AppColor.TERTIARY} />
         </IonButton>
       </IonLabel>
