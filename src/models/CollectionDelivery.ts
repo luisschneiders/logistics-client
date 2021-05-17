@@ -1,3 +1,5 @@
+import { CollectionClient } from "./CollectionClient";
+
 export interface CollectionDeliveryGroup {
   group: CollectionDelivery[];
 }
@@ -5,6 +7,12 @@ export interface CollectionDeliveryGroup {
 export interface CollectionDeliveryList {
   collectionDeliveries: CollectionDelivery[];
 }
+
+/**
+ * TODO:
+ * Remove @param deliveryClient in the future
+ * Use @param deliveryClientId as reference to get client details
+ */
 
 export interface CollectionDelivery {
   companyId: string;
@@ -14,6 +22,7 @@ export interface CollectionDelivery {
   deliveryInvoice: string;
   deliverySchedule: string;
   deliveryIsActive: boolean;
+  deliveryClient: CollectionClient;
   createdAt: any;
   updatedAt: any;
 }
