@@ -11,7 +11,7 @@ export interface CollectionClient {
   clientName: string;
   clientAddress: MapLocation;
   clientPhone?: string;
-  companyAbnAcn?: string;
+  clientAbnAcn?: string;
   clientEmployee?: ClientEmployee[];
   clientIsActive: boolean;
   createdAt: any;
@@ -21,4 +21,8 @@ export interface CollectionClient {
 export interface CollectionClientList {
   collectionClients: CollectionClient[];
   pagination: Pagination;
+}
+
+export interface CollectionClientListActive {
+  collectionClients: CollectionClient[];
 }
