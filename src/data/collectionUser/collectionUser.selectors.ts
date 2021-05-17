@@ -45,12 +45,12 @@ export const getCollectionUserFromList = createSelector(
     if (collectionUserList && collectionUserList.collectionUsers && collectionUserList.collectionUsers.length > 0) {
       return collectionUserList.collectionUsers.find((e: any) => e.userId === id);
     }
-  }  
+  }
 );
 
 export const getCollectionUser = createSelector(
   getCollectionUserData,
   (collectionUsers: CollectionUser) => {
     return collectionUsers;
-  }  
+  }
 );
