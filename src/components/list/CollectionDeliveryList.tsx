@@ -4,9 +4,10 @@ import {
   IonItem,
   IonAvatar,
   IonIcon,
+  IonButton,
 } from '@ionic/react';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
-import { businessOutline } from 'ionicons/icons';
+import { businessOutline, copyOutline } from 'ionicons/icons';
 import { AppColor } from '../../enum/AppColor';
 
 interface ContainerProps {
@@ -22,7 +23,16 @@ const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
       </IonAvatar>
       <IonLabel>
         <h2>{data.deliveryClientId}</h2>
-        <h4>{data.deliveryInvoice}</h4>
+        <p>Invoice: {data.deliveryInvoice}</p>
+        <IonButton
+          fill="clear"
+          color={AppColor.TERTIARY}
+          onClick={() => navigator.clipboard.writeText(data.deliveryInvoice)}
+          className="ion-no-padding"
+        >
+          {`${data.deliveryInvoice} `}
+          <IonIcon icon={copyOutline} color={AppColor.TERTIARY} />
+        </IonButton>
       </IonLabel>
     </IonItem>
   );
