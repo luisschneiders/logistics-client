@@ -112,7 +112,7 @@ export const addCollectionUser = async (data: RegisterUserForm) => {
     }
     await dbFirestore.collection(Collection.USER).doc(resultRegisterUser.user.uid).set(addCollectionUser);
 
-    toast('User added successfully!', StatusColor.SUCCESS, 4000);
+    toast('User added successfully!', StatusColor.SUCCESS, 1000);
 
     return addCollectionUser;
   } catch (error) {
@@ -130,7 +130,7 @@ export const updateCollectionUser = async (data: Partial<CollectionUser>) => {
       updatedAt: timestamp,
     }, { merge: true });
 
-    toast('User updated successfully!', StatusColor.SUCCESS, 4000);
+    toast('User updated successfully!', StatusColor.SUCCESS, 1000);
 
     return data;
 
