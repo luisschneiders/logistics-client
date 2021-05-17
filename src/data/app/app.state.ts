@@ -1,5 +1,6 @@
 import { combineReducers } from '../combineReducers';
 import { collectionClientReducer } from '../collectionClient/collectionClient.reducer';
+import { collectionDeliveryReducer } from '../collectionDelivery/collectionDelivery.reducer';
 import { collectionUserReducer } from '../collectionUser/collectionUser.reducer';
 import { sessionsReducer } from '../sessions/sessions.reducer';
 import { userReducer } from '../user/user.reducer';
@@ -39,6 +40,7 @@ export const initialState: AppState = {
   },
   modalReducer: {
     isShowModalCollectionClient: false,
+    isShowModalCollectionDelivery: false,
     isShowModalCollectionUser: false,
   },
   fetchReducer: {
@@ -50,6 +52,9 @@ export const initialState: AppState = {
     collectionClientList: {
       collectionClients: [],
       pagination: { page: 1, pageSize: PageListItem.ITEM_100, pageCount: 0, rowCount: 0 },
+    },
+    collectionClientListActive: {
+      collectionClients: [],
     },
     collectionClient: {
       companyId: '',
@@ -64,13 +69,19 @@ export const initialState: AppState = {
         state: ''
       },
       clientPhone: '',
-      companyAbnAcn: '',
+      clientAbnAcn: '',
       clientEmployee: [],
       clientIsActive: false,
       createdAt: '',
       updatedAt: '',
     },
     isFetchingList: false,
+    isSaving: false,
+    isUpdating: false,
+  },
+  collectionDeliveryReducer: {
+    collectionDeliveryList: [],
+    isFetching: false,
     isSaving: false,
     isUpdating: false,
   },
@@ -96,8 +107,9 @@ export const initialState: AppState = {
 };
 
 export const rootReducer = combineReducers({
-  collectionUserReducer,
   collectionClientReducer,
+  collectionDeliveryReducer,
+  collectionUserReducer,
   sessionsReducer,
   userReducer,
   modalReducer,
