@@ -6,7 +6,8 @@ import { toast } from '../../components/toast/Toast';
 import { StatusColor } from '../../enum/StatusColor';
 import {
   CollectionClient,
-  CollectionClientList
+  CollectionClientList,
+  CollectionClientListActive
 } from '../../models/CollectionClient';
 import { Collection } from '../../enum/Collection';
 
@@ -49,11 +50,12 @@ const clientReference = (clientRef: any, pageSize: number) => {
   });
 }
 
-export const fetchCollectionClientList = async (id: string, pageSize: number) => {
+export const fetchCollectionClientList = async (companyId: string, pageSize: number) => {
   try {
     const clientRef = dbFirestore.collection(Collection.CLIENT)
-                .where('companyId', '==', id)
-                .limit(pageSize);
+      .where('companyId', '==', companyId)
+      .limit(pageSize);
+
     return clientReference(clientRef, pageSize);
   } catch (error) {
     toast(error.message, StatusColor.ERROR, 4000);
@@ -61,13 +63,41 @@ export const fetchCollectionClientList = async (id: string, pageSize: number) =>
   }
 }
 
-export const fetchCollectionClientListLoadMore = async (id: string, lastVisible: any, pageSize: number) => {
+export const fetchCollectionClientListLoadMore = async (companyId: string, lastVisible: any, pageSize: number) => {
   try {
     const clientRef = dbFirestore.collection(Collection.CLIENT)
-                .where('companyId', '==', id)
-                .startAfter(lastVisible)
-                .limit(pageSize);
+      .where('companyId', '==', companyId)
+      .startAfter(lastVisible)
+      .limit(pageSize);
+
     return clientReference(clientRef, pageSize);
+  } catch (error) {
+    toast(error.message, StatusColor.ERROR, 4000);
+    return false;
+  }
+}
+
+export const fetchCollectionClientListActive = async (companyId: string) => {
+  try {
+    const clientRef = dbFirestore.collection(Collection.CLIENT)
+      .where('companyId', '==', companyId)
+      .where('clientIsActive', '==', true);
+
+    return clientRef.get().then((documentSnapshots: any) => {
+      const collectionClients: any[] = [];
+
+      documentSnapshots.forEach((doc: any) => {
+        const data: any = doc.data();
+        collectionClients.push(data);
+      });
+
+      const collectionClientListActive: CollectionClientListActive = {
+        collectionClients,
+      };
+
+      return collectionClientListActive;
+
+    });
   } catch (error) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
