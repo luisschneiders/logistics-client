@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
-import { CollectionClient, CollectionClientList } from '../../models/CollectionClient';
+import { CollectionClient, CollectionClientList, CollectionClientListActive } from '../../models/CollectionClient';
 import { AppState } from '../app/app.state';
 
 const getCollectionClientListData = (state: AppState) => state.collectionClientReducer.collectionClientList;
+const getCollectionClientListActiveData = (state: AppState) => state.collectionClientReducer.collectionClientListActive;
 const getCollectionClientData = (state: AppState) => state.collectionClientReducer.collectionClient;
 const isFetchingCollectionClientListData = (state: AppState) => state.collectionClientReducer.isFetchingList;
 const isSavingCollectionClientData = (state: AppState) => state.collectionClientReducer.isSaving;
@@ -15,6 +16,13 @@ export const getCollectionClientList = createSelector(
   getCollectionClientListData,
   (collectionClientList: CollectionClientList) => {
     return collectionClientList;
+  }
+);
+
+export const getCollectionClientListActive = createSelector(
+  getCollectionClientListActiveData,
+  (data: CollectionClientListActive) => {
+    return data;
   }
 );
 
@@ -45,12 +53,21 @@ export const getCollectionClientFromList = createSelector(
     if (collectionClientList && collectionClientList.collectionClients && collectionClientList.collectionClients.length > 0) {
       return collectionClientList.collectionClients.find((e: any) => e.clientId === id);
     }
-  }  
+  }
+);
+
+export const getCollectionClientActiveFromList = createSelector(
+  getCollectionClientListActiveData, getIdParam,
+  (collectionClientList: CollectionClientListActive, id: string) => {
+    if (collectionClientList && collectionClientList.collectionClients && collectionClientList.collectionClients.length > 0) {
+      return collectionClientList.collectionClients.find((e: any) => e.clientId === id);
+    }
+  }
 );
 
 export const getCollectionClient = createSelector(
   getCollectionClientData,
   (collectionClients: CollectionClient) => {
     return collectionClients;
-  }  
+  }
 );

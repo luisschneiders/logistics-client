@@ -1,4 +1,4 @@
-import { CollectionClient } from '../../models/CollectionClient';
+import { CollectionClient, CollectionClientListActive } from '../../models/CollectionClient';
 import { CollectionClientList } from '../../models/CollectionClient';
 import { ActionType } from '../../util/types';
 import {
@@ -11,11 +11,14 @@ import {
   COLLECTION_CLIENT_IS_UPDATING,
   COLLECTION_CLIENT_IS_FETCHING_LIST,
   COLLECTION_CLIENT_LIST_RESET,
+  COLLECTION_CLIENT_LIST_ACTIVE_SET,
+  COLLECTION_CLIENT_LIST_ACTIVE_RESET,
 } from '../actionTypes';
 import {
   addCollectionClientData,
   fetchCollectionClientByIdData,
   fetchCollectionClientData,
+  fetchCollectionClientListActiveData,
   fetchCollectionClientLoadMoreData,
   updateCollectionClientData
 } from './data';
@@ -41,9 +44,23 @@ const resetCollectionClientListAction = () => {
   } as const);
 }
 
+const resetCollectionClientListActiveAction = () => {
+  return ({
+    type: COLLECTION_CLIENT_LIST_ACTIVE_RESET,
+    payload: {}
+  } as const);
+}
+
 const setCollectionClientListAction = (data: CollectionClientList) => {
   return ({
     type: COLLECTION_CLIENT_LIST_SET,
+    payload: data
+  } as const);
+}
+
+const setCollectionClientListActiveAction = (data: CollectionClientListActive) => {
+  return ({
+    type: COLLECTION_CLIENT_LIST_ACTIVE_SET,
     payload: data
   } as const);
 }
@@ -99,11 +116,20 @@ export const resetCollectionClientList = () => async () => {
   return resetCollectionClientListAction();
 }
 
+export const resetCollectionClientListActive = () => async () => {
+  return resetCollectionClientListActiveAction();
+}
+
 export const setCollectionClientList = (id: string, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
   dispatch(isFetchingListCollectionClientAction(true));
   const data = await fetchCollectionClientData(id, pageSize);
   dispatch(isFetchingListCollectionClientAction(false));
   return setCollectionClientListAction(data);
+}
+
+export const setCollectionClientListActive = (companyId: string) => async () => {
+  const data = await fetchCollectionClientListActiveData(companyId);
+  return setCollectionClientListActiveAction(data)
 }
 
 export const setCollectionClientListLoadMore = (id: string, lastVisible: any, pageSize: number) => async (dispatch: React.Dispatch<any>) => {
@@ -137,7 +163,9 @@ export const updateCollectionClient = (data: Partial<CollectionClient>) => async
 export type CollectionClientAction = 
   | ActionType<typeof addCollectionClient>
   | ActionType<typeof resetCollectionClientList>
+  | ActionType<typeof resetCollectionClientListActive>
   | ActionType<typeof setCollectionClientList>
+  | ActionType<typeof setCollectionClientListActive>
   | ActionType<typeof setCollectionClientListLoadMore>
   | ActionType<typeof isFetchingCollectionClientList>
   | ActionType<typeof isSavingCollectionClient>

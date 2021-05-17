@@ -9,6 +9,8 @@ import {
   COLLECTION_CLIENT_IS_UPDATING,
   COLLECTION_CLIENT_IS_FETCHING_LIST,
   COLLECTION_CLIENT_LIST_RESET,
+  COLLECTION_CLIENT_LIST_ACTIVE_SET,
+  COLLECTION_CLIENT_LIST_ACTIVE_RESET,
 } from '../actionTypes';
 import { CollectionClientAction } from './collectionClient.actions';
 import { CollectionClientListState } from './collectionClient.state';
@@ -60,6 +62,13 @@ export const collectionClientReducer = (state: CollectionClientListState, action
           pagination: {  page: 1, pageSize: PageListItem.ITEM_100, rowCount: 0, pageCount: 0,}
         }
       }
+    case COLLECTION_CLIENT_LIST_ACTIVE_RESET:
+      return {
+        ...state,
+        collectionClientListActive: {
+          collectionClients: [],
+        }
+      }
     case COLLECTION_CLIENT_LIST_SET:
     case COLLECTION_CLIENT_LIST_LOAD_MORE_SET:
       return {
@@ -67,6 +76,13 @@ export const collectionClientReducer = (state: CollectionClientListState, action
         collectionClientList: {
           collectionClients: [...state.collectionClientList.collectionClients, ...action.payload.collectionClients],
           pagination: {...state.collectionClientList.pagination, ...action.payload.pagination},
+        }
+      }
+    case COLLECTION_CLIENT_LIST_ACTIVE_SET:
+      return {
+        ...state,
+        collectionClientListActive: {
+          collectionClients: [...state.collectionClientListActive.collectionClients, ...action.payload.collectionClients],
         }
       }
     case COLLECTION_CLIENT_BY_ID_SET:
