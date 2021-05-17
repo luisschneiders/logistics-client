@@ -134,24 +134,12 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
       >
         <form noValidate onSubmit={form} className="collection-delivery">
           <IonItem>
-              <IonLabel position="stacked">Delivery Date</IonLabel>
-              <IonDatetime
-                displayFormat="MMM DD, YYYY"
-                placeholder="Delivery Date"
-                value={dateFormatYYYYMMDD(deliveryDate)}
-                onIonChange={e => setDeliveryDate(e.detail.value!)}
-              />
-            </IonItem>
-          <IonItem>
-            <IonLabel position="stacked">Invoice</IonLabel>
-            <IonInput
-              name="deliveryInvoice"
-              type="text"
-              value={deliveryInvoice}
-              spellCheck={false}
-              autocapitalize="off"
-              onIonChange={(e: any) => setDeliveryInvoice(e.detail.value!)}
-              required
+            <IonLabel position="stacked">Delivery Date</IonLabel>
+            <IonDatetime
+              displayFormat="MMM DD, YYYY"
+              placeholder="Delivery Date"
+              value={dateFormatYYYYMMDD(deliveryDate)}
+              onIonChange={e => setDeliveryDate(e.detail.value!)}
             />
           </IonItem>
           <IonItem>
@@ -169,6 +157,18 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
                 </IonSelectOption>
               ))}
             </IonSelect>
+          </IonItem>
+          <IonItem>
+            <IonLabel position="stacked">Invoice</IonLabel>
+            <IonInput
+              name="deliveryInvoice"
+              type="text"
+              value={deliveryInvoice}
+              spellCheck={false}
+              autocapitalize="off"
+              onIonChange={(e: any) => setDeliveryInvoice(e.detail.value!)}
+              required
+            />
           </IonItem>
           <IonItem>
             <IonLabel position="stacked">Client</IonLabel>
