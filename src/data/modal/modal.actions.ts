@@ -1,31 +1,44 @@
 import { ActionType } from '../../util/types';
 import {
   MODAL_COLLECTION_CLIENT_SHOW_SET,
+  MODAL_COLLECTION_DELIVERY_SHOW_SET,
   MODAL_COLLECTION_USER_SHOW_SET,
 } from '../actionTypes';
 
-const setModalCollectionClientShowAction = (isShowModalCollectionClient: boolean) => {
+const setModalCollectionClientShowAction = (isShow: boolean) => {
   return ({
     type: MODAL_COLLECTION_CLIENT_SHOW_SET,
-    payload: isShowModalCollectionClient
+    payload: isShow
   } as const);
 }
 
-const setModalCollectionUserShowAction = (isShowModalCollectionUser: boolean) => {
+const setModalCollectionUserShowAction = (isShow: boolean) => {
   return ({
     type: MODAL_COLLECTION_USER_SHOW_SET,
-    payload: isShowModalCollectionUser
+    payload: isShow
   } as const);
 }
 
-export const setModalCollectionClientShow = (isShowModalCollectionClient: boolean) => async () => {
-  return setModalCollectionClientShowAction(isShowModalCollectionClient);
+const setModalCollectionDeliveryShowAction = (isShow: boolean) => {
+  return ({
+    type: MODAL_COLLECTION_DELIVERY_SHOW_SET,
+    payload: isShow
+  } as const);
 }
 
-export const setModalCollectionUserShow = (isShowModalCollectionUser: boolean) => async () => {
-  return setModalCollectionUserShowAction(isShowModalCollectionUser);
+export const setModalCollectionClientShow = (isShow: boolean) => async () => {
+  return setModalCollectionClientShowAction(isShow);
+}
+
+export const setModalCollectionUserShow = (isShow: boolean) => async () => {
+  return setModalCollectionUserShowAction(isShow);
+}
+
+export const setModalCollectionDeliveryShow = (isShow: boolean) => async () => {
+  return setModalCollectionDeliveryShowAction(isShow);
 }
 
 export type ModalAction = 
   | ActionType<typeof setModalCollectionClientShow>
   | ActionType<typeof setModalCollectionUserShow>
+  | ActionType<typeof setModalCollectionDeliveryShow>
