@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  IonContent,
   IonHeader,
   IonPage,
   IonTitle,
@@ -35,19 +34,33 @@ import {
   ellipsisVertical,
   printOutline
 } from 'ionicons/icons';
+import { setModalCollectionDeliveryShow } from '../../data/modal/modal.actions';
+import LsComponentCollectionDelivery from '../../components/delivery/CollectionDelivery';
+import LsModalCollectionDelivery from '../../components/modal/CollectionDelivery';
+import { resetCollectionClientListActive, setCollectionClientListActive } from '../../data/collectionClient/collectionClient.actions';
+import { resetCollectionDeliveryList, setCollectionDeliveryList } from '../../data/collectionDelivery/collectionDelivery.actions';
 
 interface StateProps {
   isLoggedIn: boolean;
   companyProfile: CompanyProfile;
 }
 interface DispatchProps {
-
+  resetCollectionDeliveryList: typeof resetCollectionDeliveryList;
+  resetCollectionClientListActive: typeof resetCollectionClientListActive;
+  setCollectionClientListActive: typeof setCollectionClientListActive;
+  setModalCollectionDeliveryShow: typeof setModalCollectionDeliveryShow;
+  setCollectionDeliveryList: typeof setCollectionDeliveryList;
 }
 interface ContainerProps extends StateProps, DispatchProps {}
 
 const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
+    resetCollectionDeliveryList,
+    resetCollectionClientListActive,
+    setCollectionClientListActive,
+    setModalCollectionDeliveryShow,
+    setCollectionDeliveryList,
 }) => {
   const [height, width] = useWindowSize();
   const [period, setPeriod] = useState<Period>({
@@ -57,12 +70,16 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
 
   useEffect(() => {
     if (isLoggedIn && companyProfile) {
-      // setAppSummary(userProfileServer.userId, parseInt(period.startDate));
+      resetCollectionDeliveryList();
+      setCollectionDeliveryList(companyProfile.companyId, period);
     }
   },[
     isLoggedIn,
     companyProfile,
     period,
+    resetCollectionDeliveryList,
+    setModalCollectionDeliveryShow,
+    setCollectionDeliveryList,
   ]);
 
   return (
@@ -81,12 +98,19 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
             </IonFabButton>
             <IonFabList side="start">
               <IonFabButton
-                // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
+                onClick={() => [
+                  resetCollectionClientListActive(),
+                  setModalCollectionDeliveryShow(true),
+                  setCollectionClientListActive(companyProfile.companyId)
+                ]}
               >
                 <IonIcon color={AppColor.SUCCESS} icon={add} />
               </IonFabButton>
               <IonFabButton
-                // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
+                onClick={() => [
+                  // setModalCollectionDeliveryShow(true),
+                  // setCollectionClientListActive(companyProfile.companyId)
+                ]}
               >
                 <IonIcon
                   color={AppColor.SECONDARY}
@@ -116,7 +140,10 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     <IonIcon
                       icon={printOutline}
                       color={AppColor.SECONDARY}
-                      // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
+                      onClick={() => [
+                        // setModalCollectionDeliveryShow(true),
+                        // setCollectionClientListActive(companyProfile.companyId)
+                      ]}
                       size="small"
                     />
                   </IonFabButton>
@@ -124,10 +151,13 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
               </IonCol>
               <IonCol size="1" push="2" className="ion-no-padding">
                 <IonFab vertical="center" horizontal="end">
-                  <IonFabButton color={AppColor.TERTIARY} size="small" title="Add new record">
+                  <IonFabButton color={AppColor.TERTIARY} size="small" title="Add record">
                     <IonIcon
                       icon={add}
-                      // onClick={() => [setModalCollectionDeliveryShow(true), setCollectionDeliveryListActive(companyProfile.companyId)]}
+                      onClick={() => [
+                        setModalCollectionDeliveryShow(true),
+                        setCollectionClientListActive(companyProfile.companyId)
+                      ]}
                       size="small"
                     />
                   </IonFabButton>
@@ -145,9 +175,8 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
           />
         </IonToolbar>}
       </IonHeader>
-      {/* <IonLoading message="Fetching deliveries..." duration={0} isOpen={isLoaded}></IonLoading> */}
-      <IonContent>
-      </IonContent>
+      <LsComponentCollectionDelivery />
+      <LsModalCollectionDelivery />
     </IonPage>
   );
 };
@@ -158,6 +187,11 @@ export default connect<{}, StateProps, DispatchProps>({
     companyProfile: selectorsSessions.getCompanyProfile(state),
   }),
   mapDispatchToProps: ({
+    resetCollectionDeliveryList,
+    resetCollectionClientListActive,
+    setCollectionClientListActive,
+    setModalCollectionDeliveryShow,
+    setCollectionDeliveryList,
   }),
   component: React.memo(CollectionDeliveryListPage)
 });
