@@ -17,7 +17,7 @@ interface ContainerProps {
   index: number;
 }
 
-const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
+const LsCollectionDelivery: React.FC<ContainerProps> = ({data, index}) => {
   return (
     <IonItem
       key={index}
@@ -49,4 +49,4 @@ const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
   );
 };
 
-export default React.memo(LsCollectionDeliveryList);
+export default React.memo(LsCollectionDelivery);

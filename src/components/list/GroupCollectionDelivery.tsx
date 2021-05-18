@@ -7,7 +7,7 @@ import {
   IonText,
   IonReorderGroup,
 } from '@ionic/react';
-import LsCollectionDeliveryList from './CollectionDeliveryList';
+import LsCollectionDelivery from './CollectionDelivery';
 import { AppColor } from '../../enum/AppColor';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
 
@@ -39,7 +39,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({data, groupBy}) =>
             </IonItemDivider>
             <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
               {groups.map((data: CollectionDelivery, itemIndex: number) => (
-                <LsCollectionDeliveryList
+                <LsCollectionDelivery
                   index={index}
                   data={data}
                   key={`group-${index}-${itemIndex}`} />
