@@ -46,7 +46,7 @@ const SetupPage: React.FC<ContainerProps> = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonList lines="full">
-          <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_USER_LIST} routerDirection="none">
+          <IonItem detail={true} routerLink={ROUTES.TABS_COLLECTION_USER} routerDirection="none">
             <IonIcon slot="start" icon={peopleOutline} />
             <IonLabel>User</IonLabel>
           </IonItem>

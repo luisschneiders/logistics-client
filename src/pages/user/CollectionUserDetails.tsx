@@ -139,7 +139,7 @@ const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_USER_LIST}></IonBackButton>
+            <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_USER}></IonBackButton>
           </IonButtons>
           <IonTitle className="ion-text-capitalize">
             <span className="ion-text-underline"> {collectionUserName}</span>

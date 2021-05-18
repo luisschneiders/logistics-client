@@ -18,7 +18,7 @@ export const TABS = '/tabs';
 export const TABS_COLLECTION_CLIENT_LIST = `${TABS}/collection-client-list`;
 export const TABS_COLLECTION_CLIENT_VIEW = `${TABS}/collection-client-view`;
 export const TABS_COLLECTION_DELIVERY = `${TABS}/collection-delivery`;
-export const TABS_COLLECTION_USER_LIST = `${TABS}/collection-user-list`;
+export const TABS_COLLECTION_USER = `${TABS}/collection-user`;
 
 export const TABS_SETUP = `${TABS}/setup`;
 

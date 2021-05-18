@@ -99,7 +99,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
                 <IonItem
                   lines="none"
                   className="ion-no-padding"
-                  routerLink={`${ROUTES.TABS_COLLECTION_USER_LIST}/${item.userId}`}
+                  routerLink={`${ROUTES.TABS_COLLECTION_USER}/${item.userId}`}
                   detail={true}
                 >
                   <IonAvatar slot="start">

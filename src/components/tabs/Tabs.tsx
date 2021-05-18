@@ -56,8 +56,8 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
         <Route path={ROUTES.TABS_COLLECTION_DELIVERY} render={() => <CollectionDeliveryListPage />} exact={true} />
         {/* <Route path={`${ROUTES.TABS_COLLECTION_DELIVERY}/:id`} component={CollectionDeliveryDetailsPage} exact={true} /> */}
 
-        <Route path={ROUTES.TABS_COLLECTION_USER_LIST} render={() => <CollectionUserListPage />} exact={true} />
-        <Route path={`${ROUTES.TABS_COLLECTION_USER_LIST}/:id`} component={CollectionUserDetailsPage} exact={true} />
+        <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CollectionUserListPage />} exact={true} />
+        <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CollectionUserDetailsPage} exact={true} />
 
         <Route path={ROUTES.TABS_TODO} render={() => <TodoPage />} exact={true} />
 
