@@ -8,8 +8,9 @@ import {
   IonReorder,
 } from '@ionic/react';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
-import { businessOutline, copyOutline } from 'ionicons/icons';
+import { copyOutline } from 'ionicons/icons';
 import { AppColor } from '../../enum/AppColor';
+import * as ROUTES from '../../constants/Routes';
 
 interface ContainerProps {
   data: CollectionDelivery;
@@ -18,24 +19,32 @@ interface ContainerProps {
 
 const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
   return (
-    <IonItem key={index}>
-      <IonAvatar slot="start">
-        <IonIcon size="large" icon={businessOutline} color={AppColor.SECONDARY} />
-      </IonAvatar>
+    <IonItem
+      key={index}
+    >
       <IonLabel>
-        <h2>{data.deliveryClient.clientName}</h2>
-        <p>Invoice: {data.deliveryInvoice}</p>
+        <IonItem
+          lines="none"
+          className="ion-no-padding"
+          detail={true}
+          routerLink={`${ROUTES.TABS_COLLECTION_DELIVERY}/${data.deliveryId}`}
+        >
+          <IonLabel>
+            <h2>{data.deliveryClient.clientName}</h2>
+            <p>Inv: {data.deliveryInvoice}</p>
+          </IonLabel>
+        </IonItem>
         <IonButton
           fill="clear"
-          color={AppColor.TERTIARY}
+          color={AppColor.PRIMARY}
           onClick={() => navigator.clipboard.writeText(data.deliveryClient.clientAddress.address)}
           className="ion-no-padding"
         >
-          {`${data.deliveryClient.clientAddress.suburb}, ${data.deliveryClient.clientAddress.state} ${data.deliveryClient.clientAddress.postcode}`}
-          <IonIcon icon={copyOutline} color={AppColor.TERTIARY} />
+          {`${data.deliveryClient.clientAddress.suburb}, ${data.deliveryClient.clientAddress.state.toUpperCase()} ${data.deliveryClient.clientAddress.postcode}`}
+          <IonIcon icon={copyOutline} color={AppColor.PRIMARY} />
         </IonButton>
       </IonLabel>
-      <IonReorder slot="end" />
+      <IonReorder slot="start" />
     </IonItem>
   );
 };
