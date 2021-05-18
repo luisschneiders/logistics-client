@@ -5,6 +5,7 @@ import {
   IonAvatar,
   IonIcon,
   IonButton,
+  IonReorder,
 } from '@ionic/react';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
 import { businessOutline, copyOutline } from 'ionicons/icons';
@@ -17,7 +18,7 @@ interface ContainerProps {
 
 const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
   return (
-    <IonItem>
+    <IonItem key={index}>
       <IonAvatar slot="start">
         <IonIcon size="large" icon={businessOutline} color={AppColor.SECONDARY} />
       </IonAvatar>
@@ -34,6 +35,7 @@ const LsCollectionDeliveryList: React.FC<ContainerProps> = ({data, index}) => {
           <IonIcon icon={copyOutline} color={AppColor.TERTIARY} />
         </IonButton>
       </IonLabel>
+      <IonReorder slot="end" />
     </IonItem>
   );
 };

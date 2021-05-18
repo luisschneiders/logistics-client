@@ -5,6 +5,7 @@ import {
   IonItemGroup,
   IonItemDivider,
   IonText,
+  IonReorderGroup,
 } from '@ionic/react';
 import LsCollectionDeliveryList from './CollectionDeliveryList';
 import { AppColor } from '../../enum/AppColor';
@@ -16,6 +17,14 @@ interface ContainerProps {
 }
 
 const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({data, groupBy}) => {
+
+  const doReorder = (event: any) => {
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    event.detail.complete();
+  }
+
   return (
     <>
       <IonList lines="full">
@@ -28,12 +37,14 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({data, groupBy}) =>
                 </IonText>
               </IonLabel>
             </IonItemDivider>
-            {groups.map((data: CollectionDelivery, itemIndex: number) => (
-              <LsCollectionDeliveryList
-                index={index}
-                data={data}
-                key={`group-${index}-${itemIndex}`} />
-            ))}
+            <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
+              {groups.map((data: CollectionDelivery, itemIndex: number) => (
+                <LsCollectionDeliveryList
+                  index={index}
+                  data={data}
+                  key={`group-${index}-${itemIndex}`} />
+              ))}
+            </IonReorderGroup>
           </IonItemGroup>
         ))}
       </IonList>
