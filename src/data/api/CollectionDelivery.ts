@@ -77,7 +77,7 @@ export const addCollectionDelivery = async (data: Partial<CollectionDelivery>) =
     }
     await dbFirestore.collection(Collection.DELIVERY).doc(clientRef.id).set(collectionDelivery);
 
-    toast('Delivery added successfully!', StatusColor.SUCCESS, 1000);
+    toast('Delivery added successfully!', StatusColor.SUCCESS, 800);
 
     return collectionDelivery;
   } catch (error) {
@@ -99,7 +99,7 @@ export const updateCollectionDelivery = async (data: Partial<CollectionDelivery>
       updatedAt: timestamp,
     }, { merge: true });
 
-    toast('Delivery updated successfully!', StatusColor.SUCCESS, 500);
+    toast('Delivery updated successfully!', StatusColor.SUCCESS, 800);
 
     return data;
 
