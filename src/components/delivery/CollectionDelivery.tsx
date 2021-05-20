@@ -56,5 +56,5 @@ export default connect<{}, StateProps, DispatchProps> ({
     isFetching: selectorsCollectionDelivery.isFetchingCollectionDelivery(state),
   }),
   mapDispatchToProps: ({}),
-  component: React.memo(LsCollectionDelivery)
+  component: LsCollectionDelivery
 });
