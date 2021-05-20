@@ -80,7 +80,40 @@ export const initialState: AppState = {
     isUpdating: false,
   },
   collectionDeliveryReducer: {
-    collectionDeliveryList: [],
+    collectionDeliveryList: {
+      collectionDeliveries: []
+    },
+    collectionDelivery: {
+      companyId: '',
+      deliveryId: '',
+      deliveryDate: '',
+      deliveryClientId: '',
+      deliveryInvoice: '',
+      deliverySchedule: '',
+      deliveryIsActive: false,
+      deliveryClient: {
+        companyId: '',
+        clientId: '',
+        clientName: '',
+        clientAddress: {
+          address: '',
+          lat: undefined,
+          lng: undefined,
+          suburb: '',
+          postcode: 0,
+          state: ''
+        },
+        clientPhone: '',
+        clientAbnAcn: '',
+        clientEmployee: [],
+        clientIsActive: false,
+        createdAt: '',
+        updatedAt: '',
+      },
+      deliveryReceiver: '',
+      createdAt: '',
+      updatedAt: '',
+    },
     isFetching: false,
     isSaving: false,
     isUpdating: false,

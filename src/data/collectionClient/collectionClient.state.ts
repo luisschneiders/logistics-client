@@ -1,5 +1,5 @@
 import { Pagination } from '../../models/Pagination';
-import { CollectionClient, CollectionClientListActive } from '../../models/CollectionClient';
+import { CollectionClient } from '../../models/CollectionClient';
 
 export interface CollectionClientListState {
   collectionClientList: {

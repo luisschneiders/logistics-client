@@ -49,7 +49,7 @@ export const collectionClientReducer = (state: CollectionClientListState, action
           ...item,
           ...action.payload,
         }
-      })
+      });
       return {
         ...state,
         ...newState,

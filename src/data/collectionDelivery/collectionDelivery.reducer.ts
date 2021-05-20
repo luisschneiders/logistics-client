@@ -6,6 +6,7 @@ import {
   COLLECTION_DELIVERY_IS_FETCHING,
   COLLECTION_DELIVERY_LIST_SET,
   COLLECTION_DELIVERY_LIST_RESET,
+  COLLECTION_DELIVERY_BY_ID_SET,
 } from '../actionTypes';
 import { CollectionDeliveryAction } from './collectionDelivery.actions';
 import { CollectionDeliveryState } from './collectionDelivery.state';
@@ -15,34 +16,46 @@ export const collectionDeliveryReducer = (state: CollectionDeliveryState, action
     case COLLECTION_DELIVERY_LIST_RESET:
       return {
         ...state,
-        collectionDeliveryList: []
+        collectionDeliveryList: {
+          collectionDeliveries: []
+        }
       }
     case COLLECTION_DELIVERY_LIST_SET:
       return {
         ...state,
-        collectionDeliveryList: [...state.collectionDeliveryList, ...action.payload.collectionDeliveries],
+        collectionDeliveryList: {
+          collectionDeliveries: [...state.collectionDeliveryList.collectionDeliveries, ...action.payload.collectionDeliveries]
+        },
+      }
+
+    case COLLECTION_DELIVERY_BY_ID_SET:
+      return {
+        ...state,
+        collectionDelivery: action.payload
       }
     case COLLECTION_DELIVERY_ADD:
       const collectionDeliveries: any[] = (
-        state.collectionDeliveryList
+        state.collectionDeliveryList.collectionDeliveries
       );
 
       return {
         ...state,
-        collectionDeliveryList: [action.payload, ...collectionDeliveries],
+        collectionDeliveryList: {
+          collectionDeliveries: [action.payload, ...collectionDeliveries]
+        },
       };
     case COLLECTION_DELIVERY_UPDATE:
-      const index = action.payload.deliveryId;
+      const deliveryId = action.payload.deliveryId;
       const newState = { ...state };
-      newState.collectionDeliveryList.map((item) => {
-        if (item.deliveryId !== index) {
+      newState.collectionDeliveryList.collectionDeliveries.map((item) => {
+        if (item.deliveryId !== deliveryId) {
           return item;
         }
         return {
           ...item,
           ...action.payload,
         }
-      })
+      });
       return {
         ...state,
         ...newState,

@@ -3,6 +3,7 @@ import { Period } from '../../models/Period';
 import { ActionType } from '../../util/types';
 import {
   COLLECTION_DELIVERY_ADD,
+  COLLECTION_DELIVERY_BY_ID_SET,
   COLLECTION_DELIVERY_IS_FETCHING,
   COLLECTION_DELIVERY_IS_SAVING,
   COLLECTION_DELIVERY_IS_UPDATING,
@@ -12,6 +13,7 @@ import {
 } from '../actionTypes';
 import {
   addCollectionDeliveryData,
+  fetchCollectionDeliveryByIdData,
   fetchCollectionDeliveryData,
   updateCollectionDeliveryData
 } from './data';
@@ -26,6 +28,13 @@ const resetCollectionDeliveryListAction = () => {
 const setCollectionDeliveryListAction = (data: CollectionDeliveryList) => {
   return ({
     type: COLLECTION_DELIVERY_LIST_SET,
+    payload: data
+  } as const);
+}
+
+const setCollectionDeliveryByIdAction = (data: CollectionDelivery) => {
+  return ({
+    type: COLLECTION_DELIVERY_BY_ID_SET,
     payload: data
   } as const);
 }
@@ -76,6 +85,13 @@ export const setCollectionDeliveryList = (companyId: string, period: Period) => 
   return setCollectionDeliveryListAction(data);
 }
 
+export const setCollectionDeliveryById = (deliveryId: string) => async (dispatch: React.Dispatch<any>) => {
+  // dispatch(isFetchingCollectionDeliveryAction(true));
+  const data = await fetchCollectionDeliveryByIdData(deliveryId);
+  // dispatch(isFetchingCollectionDeliveryAction(false));
+  return setCollectionDeliveryByIdAction(data);
+}
+
 export const isFetchingCollectionDelivery = (isFetching: boolean) => async () => {
   return isFetchingCollectionDeliveryAction(isFetching);
 }
@@ -104,6 +120,7 @@ export const updateCollectionDelivery = (data: Partial<CollectionDelivery>) => a
 
 export type CollectionDeliveryAction =
   | ActionType<typeof resetCollectionDeliveryList>
+  | ActionType<typeof setCollectionDeliveryById>
   | ActionType<typeof setCollectionDeliveryList>
   | ActionType<typeof addCollectionDelivery>
   | ActionType<typeof isFetchingCollectionDelivery>
