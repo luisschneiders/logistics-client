@@ -86,9 +86,7 @@ export const setCollectionDeliveryList = (companyId: string, period: Period) => 
 }
 
 export const setCollectionDeliveryById = (deliveryId: string) => async (dispatch: React.Dispatch<any>) => {
-  // dispatch(isFetchingCollectionDeliveryAction(true));
   const data = await fetchCollectionDeliveryByIdData(deliveryId);
-  // dispatch(isFetchingCollectionDeliveryAction(false));
   return setCollectionDeliveryByIdAction(data);
 }
 
