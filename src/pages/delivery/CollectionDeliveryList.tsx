@@ -37,8 +37,14 @@ import {
 import { setModalCollectionDeliveryShow } from '../../data/modal/modal.actions';
 import LsComponentCollectionDelivery from '../../components/delivery/CollectionDelivery';
 import LsModalCollectionDelivery from '../../components/modal/CollectionDelivery';
-import { resetCollectionClientListActive, setCollectionClientListActive } from '../../data/collectionClient/collectionClient.actions';
-import { resetCollectionDeliveryList, setCollectionDeliveryList } from '../../data/collectionDelivery/collectionDelivery.actions';
+import {
+  resetCollectionClientListActive,
+  setCollectionClientListActive
+} from '../../data/collectionClient/collectionClient.actions';
+import {
+  resetCollectionDeliveryList,
+  setCollectionDeliveryList
+} from '../../data/collectionDelivery/collectionDelivery.actions';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -107,10 +113,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                 <IonIcon color={AppColor.SUCCESS} icon={add} />
               </IonFabButton>
               <IonFabButton
-                onClick={() => [
-                  // setModalCollectionDeliveryShow(true),
-                  // setCollectionClientListActive(companyProfile.companyId)
-                ]}
+                onClick={() => window.print()}
               >
                 <IonIcon
                   color={AppColor.SECONDARY}
@@ -140,10 +143,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     <IonIcon
                       icon={printOutline}
                       color={AppColor.SECONDARY}
-                      onClick={() => [
-                        // setModalCollectionDeliveryShow(true),
-                        // setCollectionClientListActive(companyProfile.companyId)
-                      ]}
+                      onClick={() => window.print()}
                       size="small"
                     />
                   </IonFabButton>
