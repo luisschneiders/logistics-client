@@ -155,6 +155,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     <IonIcon
                       icon={add}
                       onClick={() => [
+                        resetCollectionClientListActive(),
                         setModalCollectionDeliveryShow(true),
                         setCollectionClientListActive(companyProfile.companyId)
                       ]}

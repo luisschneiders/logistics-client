@@ -59,7 +59,7 @@ export const collectionClientReducer = (state: CollectionClientListState, action
         ...state,
         collectionClientList: {
           collectionClients: [],
-          pagination: {  page: 1, pageSize: PageListItem.ITEM_100, rowCount: 0, pageCount: 0,}
+          pagination: {  page: 1, pageSize: PageListItem.ITEM_100, rowCount: 0, pageCount: 0}
         }
       }
     case COLLECTION_CLIENT_LIST_ACTIVE_RESET:
