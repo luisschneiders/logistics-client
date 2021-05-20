@@ -43,8 +43,8 @@ export const getCollectionDeliveryList = createSelector(
 export const getCollectionDeliveryFromList = createSelector(
   getCollectionDeliveryListData, getIdParam,
   (collectionDeliveryList: CollectionDeliveryList, id: string) => {
-    if (collectionDeliveryList && collectionDeliveryList.collectionDeliveries.length > 0) {
-      return collectionDeliveryList.collectionDeliveries.find((e: any) => e.userId === id);
+    if (collectionDeliveryList && collectionDeliveryList.collectionDeliveries && collectionDeliveryList.collectionDeliveries.length > 0) {
+      return collectionDeliveryList.collectionDeliveries.find((e: any) => e.deliveryId === id);
     }
   }
 );
