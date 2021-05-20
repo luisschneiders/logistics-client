@@ -37,6 +37,27 @@ export const fetchCollectionDeliveryList = async (companyId: string, period: Per
   }
 }
 
+export const fetchCollectionDeliveryById = async (deliveryId: string) => {
+  try {
+    const deliveryRef = dbFirestore.collection(Collection.DELIVERY).doc(deliveryId)
+
+    return deliveryRef.get().then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        return null;
+      }
+    }).catch((error) => {
+      toast(`No delivery was found: ${error}`, StatusColor.ERROR, 4000);
+      return null;
+    });
+
+  } catch (error) {
+    toast(error.message, StatusColor.ERROR, 4000);
+    return false;
+  }
+}
+
 export const addCollectionDelivery = async (data: Partial<CollectionDelivery>) => {
   try {
     // Add a new document with a generated id.
@@ -50,6 +71,7 @@ export const addCollectionDelivery = async (data: Partial<CollectionDelivery>) =
       deliveryInvoice: data.deliveryInvoice,
       deliverySchedule: data.deliverySchedule,
       deliveryIsActive: data.deliveryIsActive,
+      deliveryReceiver: '',
       createdAt: timestamp,
       updatedAt: timestamp,
     }
@@ -69,13 +91,15 @@ export const updateCollectionDelivery = async (data: Partial<CollectionDelivery>
     await dbFirestore.collection(Collection.DELIVERY).doc(data.deliveryId).set({
       deliveryDate: data.deliveryDate,
       deliveryClientId: data.deliveryClientId,
+      deliveryClient: data.deliveryClient,
       deliveryInvoice: data.deliveryInvoice,
       deliverySchedule: data.deliverySchedule,
       deliveryIsActive: data.deliveryIsActive,
+      deliveryReceiver: data.deliveryReceiver,
       updatedAt: timestamp,
     }, { merge: true });
 
-    toast('Delivery updated successfully!', StatusColor.SUCCESS, 1000);
+    toast('Delivery updated successfully!', StatusColor.SUCCESS, 500);
 
     return data;
 

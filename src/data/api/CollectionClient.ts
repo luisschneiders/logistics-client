@@ -158,7 +158,7 @@ export const updateCollectionClient = async (data: Partial<CollectionClient>) =>
       updatedAt: timestamp,
     }, { merge: true });
 
-    toast('Client updated successfully!', StatusColor.SUCCESS, 1000);
+    toast('Client updated successfully!', StatusColor.SUCCESS, 500);
 
     return data;
 

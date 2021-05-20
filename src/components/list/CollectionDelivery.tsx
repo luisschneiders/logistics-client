@@ -7,7 +7,7 @@ import {
   IonReorder,
 } from '@ionic/react';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
-import { copyOutline } from 'ionicons/icons';
+import { navigateOutline } from 'ionicons/icons';
 import { AppColor } from '../../enum/AppColor';
 import * as ROUTES from '../../constants/Routes';
 
@@ -30,7 +30,8 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({data, index}) => {
         >
           <IonLabel>
             <h2>{data.deliveryClient.clientName}</h2>
-            <p>Inv: {data.deliveryInvoice}</p>
+            <p>Invoice: {data.deliveryInvoice}</p>
+            <p>Receiver: {data.deliveryReceiver}</p>
           </IonLabel>
         </IonItem>
         <IonButton
@@ -39,13 +40,16 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({data, index}) => {
           onClick={() => navigator.clipboard.writeText(data.deliveryClient.clientAddress.address)}
           className="ion-no-padding"
         >
+          <IonIcon
+            icon={navigateOutline}
+            color={AppColor.PRIMARY}
+          />
           {`${data.deliveryClient.clientAddress.suburb}, ${data.deliveryClient.clientAddress.state.toUpperCase()} ${data.deliveryClient.clientAddress.postcode}`}
-          <IonIcon icon={copyOutline} color={AppColor.PRIMARY} />
         </IonButton>
       </IonLabel>
-      <IonReorder slot="start" />
+      <IonReorder slot="end" />
     </IonItem>
   );
 };
 
-export default React.memo(LsCollectionDelivery);
+export default LsCollectionDelivery;

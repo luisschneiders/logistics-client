@@ -114,7 +114,7 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
 
     addCollectionDelivery({
       companyId: companyProfile.companyId,
-      deliveryDate,
+      deliveryDate: dateFormatYYYYMMDD(deliveryDate),
       deliveryClientId,
       deliveryClient: deliveryClientIdOptionsList.find((e:any) => e.clientId === deliveryClientId),
       deliveryInvoice,
@@ -139,7 +139,7 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
             <IonDatetime
               displayFormat="MMM DD, YYYY"
               placeholder="Delivery Date"
-              value={dateFormatYYYYMMDD(deliveryDate)}
+              value={deliveryDate}
               onIonChange={e => setDeliveryDate(e.detail.value!)}
             />
           </IonItem>
