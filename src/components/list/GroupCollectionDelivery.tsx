@@ -67,7 +67,8 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
   }
 
   const handleReport = (index: number) => {
-    const newData: any[] = dataOrder[index];
+    const newData: any[] = [];
+    newData.push(dataOrder[index]);
     setPrintCollectionDelivery(newData);
   }
 
