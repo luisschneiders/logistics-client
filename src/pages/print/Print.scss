@@ -1,0 +1,46 @@
+@page {
+  size: A4;
+  margin: 11mm 17mm 17mm 17mm;
+}
+
+@media print {
+  html, body {
+    background-color: white;
+    width: 210mm;
+    font-size: small;
+  }
+  .noprint {
+    display: none;
+  }
+}
+.print {
+  &__collection-delivery-page-report {
+    padding-top: 1rem;
+  }
+  &__collection-delivery-page-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+  }
+  &__table {
+    width: 100%;
+  }
+  &__thead {
+    text-align: left;
+    tr {
+      background-color: rgb(216, 216, 216);
+      height: 30px;
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+    }
+  }
+
+  &__tbody {
+    tr {
+      border-bottom: 1px solid;
+      height: 30px;
+    }
+  }
+}

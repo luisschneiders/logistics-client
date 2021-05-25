@@ -20,6 +20,8 @@ export const TABS_COLLECTION_CLIENT_VIEW = `${TABS}/collection-client-view`;
 export const TABS_COLLECTION_DELIVERY = `${TABS}/collection-delivery`;
 export const TABS_COLLECTION_USER = `${TABS}/collection-user`;
 
+export const TABS_PRINT_COLLECTION_DELIVERY = `${TABS}/print/collection-delivery`;
+
 export const TABS_SETUP = `${TABS}/setup`;
 
 export const TABS_TIMESHEETS = `${TABS}/timesheets`;

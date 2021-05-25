@@ -5,6 +5,7 @@ import { collectionUserReducer } from '../collectionUser/collectionUser.reducer'
 import { sessionsReducer } from '../sessions/sessions.reducer';
 import { userReducer } from '../user/user.reducer';
 import { modalReducer } from '../modal/modal.reducer';
+import { printReducer } from '../print/print.reducer';
 import { fetchReducer } from '../fetch/fetch.reducer';
 import { APP_STORE_RESET } from '../actionTypes';
 import { PageListItem } from '../../enum/PageListItem';
@@ -42,6 +43,9 @@ export const initialState: AppState = {
     isShowModalCollectionClient: false,
     isShowModalCollectionDelivery: false,
     isShowModalCollectionUser: false,
+  },
+  printReducer: {
+    collectionDelivery: [],
   },
   fetchReducer: {
     isFetchingCollectionClientList: false,
@@ -143,10 +147,11 @@ export const rootReducer = combineReducers({
   collectionClientReducer,
   collectionDeliveryReducer,
   collectionUserReducer,
+  fetchReducer,
+  modalReducer,
+  printReducer,
   sessionsReducer,
   userReducer,
-  modalReducer,
-  fetchReducer,
 });
 
 export const reducers = (state: any, action: any) => {
