@@ -45,6 +45,7 @@ import {
   resetCollectionDeliveryList,
   setCollectionDeliveryList
 } from '../../data/collectionDelivery/collectionDelivery.actions';
+import * as ROUTES from '../../constants/Routes';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -113,7 +114,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                 <IonIcon color={AppColor.SUCCESS} icon={add} />
               </IonFabButton>
               <IonFabButton
-                onClick={() => window.print()}
+                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY}
               >
                 <IonIcon
                   color={AppColor.SECONDARY}
@@ -139,11 +140,11 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     color={AppColor.LIGHT}
                     size="small"
                     title="Print"
+                    routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY}
                   >
                     <IonIcon
                       icon={printOutline}
                       color={AppColor.SECONDARY}
-                      onClick={() => window.print()}
                       size="small"
                     />
                   </IonFabButton>
