@@ -89,7 +89,7 @@ const LsMenu: React.FC<ContainerProps> = ({
   }
 
   return (
-    <IonMenu type="overlay" disabled={!menuEnabled} contentId="main">
+    <IonMenu type="overlay" disabled={!menuEnabled} contentId="main" className="noprint">
       <IonContent forceOverscroll={false}>
         {(!companyProfile || !companyProfile.companyId) &&
           <IonPopover

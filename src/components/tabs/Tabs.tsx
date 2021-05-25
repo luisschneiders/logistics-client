@@ -26,6 +26,8 @@ import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
 import TodoPage from '../../pages/todo/Todo';
 import SetupPage from '../../pages/setup/Setup';
+import PrintCollectionDeliveryPage from '../../pages/print/CollectionDelivery';
+import { AppColor } from '../../enum/AppColor';
 
 interface StateProps {
   isAuthenticated: boolean;
@@ -36,7 +38,7 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
     return tabs
       .filter(route => !!route.url)
       .map((tab, index) => (
-        <IonTabButton tab={`tab${index+1}`} key={index} href={tab.url}>
+        <IonTabButton tab={`tab${index+1}`} key={index} href={tab.url} className="noprint">
           <IonIcon icon={tab.icon} />
           <IonLabel>{tab.label}</IonLabel>
         </IonTabButton>
@@ -56,6 +58,7 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
 
         <Route path={ROUTES.TABS_COLLECTION_DELIVERY} render={() => <CollectionDeliveryListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_DELIVERY}/:id`} component={CollectionDeliveryDetailsPage} exact={true} />
+        <Route path={`${ROUTES.TABS_PRINT_COLLECTION_DELIVERY}`} component={PrintCollectionDeliveryPage} exact={true} />
 
         <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CollectionUserListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CollectionUserDetailsPage} exact={true} />
