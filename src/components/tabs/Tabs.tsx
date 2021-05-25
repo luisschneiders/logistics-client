@@ -27,7 +27,6 @@ import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 import TodoPage from '../../pages/todo/Todo';
 import SetupPage from '../../pages/setup/Setup';
 import PrintCollectionDeliveryPage from '../../pages/print/CollectionDelivery';
-import { AppColor } from '../../enum/AppColor';
 
 interface StateProps {
   isAuthenticated: boolean;
