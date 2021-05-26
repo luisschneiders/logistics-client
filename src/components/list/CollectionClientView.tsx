@@ -31,7 +31,7 @@ import * as ROUTES from '../../constants/Routes';
 
 import LsCard from '../card/Card';
 import {
-  businessOutline
+  businessOutline, personOutline
 } from 'ionicons/icons';
 import { setCollectionClientListLoadMore } from '../../data/collectionClient/collectionClient.actions';
 
@@ -92,8 +92,8 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
                 <IonItem
                   lines="none"
                   className="ion-no-padding"
-                  routerLink={`${ROUTES.TABS_COLLECTION_CLIENT_VIEW}/${item.clientId}`}
-                  detail={true}
+                  // routerLink={`${ROUTES.TABS_COLLECTION_CLIENT_VIEW}/${item.clientId}`}
+                  // detail={true}
                 >
                   <IonAvatar slot="start">
                     <IonIcon size="large" icon={businessOutline} color={AppColor.SECONDARY} />
@@ -108,9 +108,7 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
                         key={employeeIndex}
                         color={AppColor.SECONDARY}
                       >
-                        <IonAvatar>
-                          <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
-                        </IonAvatar>
+                        <IonIcon size="small" icon={personOutline} color={AppColor.PRIMARY} />
                         <IonLabel>{employee.name}</IonLabel>
                       </IonChip>
                       ))}
