@@ -55,7 +55,8 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
   const handlePrint = (e: any) => {
     e.preventDefault();
     window.print();
-  }
+  };
+
   return (
     <IonPage className="print__collection-delivery-page">
       <IonHeader className="noprint">
@@ -97,7 +98,7 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
           <h2 className="ion-text-center">Delivery report</h2>
           <div className="print__collection-delivery-page-header">
             <span>Driver: {driver}</span>
-            <span>Date: {dateFormatDDMMYY(collectionDelivery[0]?.deliveryDate)}</span>
+            <span>Date: {dateFormatDDMMYY(collectionDelivery[0][0].deliveryDate)}</span>
           </div>
           {(collectionDelivery && collectionDelivery.length > 0) &&
             collectionDelivery.map((schedules: any[], indexSchedule: number) => (
