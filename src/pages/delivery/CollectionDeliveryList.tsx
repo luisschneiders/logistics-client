@@ -111,10 +111,13 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                   setCollectionClientListActive(companyProfile.companyId)
                 ]}
               >
-                <IonIcon color={AppColor.SUCCESS} icon={add} />
+                <IonIcon
+                  color={AppColor.SUCCESS}
+                  icon={add}
+                />
               </IonFabButton>
               <IonFabButton
-                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY}
+                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}
               >
                 <IonIcon
                   color={AppColor.SECONDARY}
@@ -140,7 +143,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     color={AppColor.LIGHT}
                     size="small"
                     title="Print"
-                    routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY}
+                    routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_BY_RUN}
                   >
                     <IonIcon
                       icon={printOutline}

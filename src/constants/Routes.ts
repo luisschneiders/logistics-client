@@ -20,7 +20,8 @@ export const TABS_COLLECTION_CLIENT_VIEW = `${TABS}/collection-client-view`;
 export const TABS_COLLECTION_DELIVERY = `${TABS}/collection-delivery`;
 export const TABS_COLLECTION_USER = `${TABS}/collection-user`;
 
-export const TABS_PRINT_COLLECTION_DELIVERY = `${TABS}/print/collection-delivery`;
+export const TABS_PRINT_COLLECTION_DELIVERY_BY_RUN = `${TABS}/print/collection-delivery-by-run`;
+export const TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW = `${TABS}/print/collection-delivery-overview`;
 
 export const TABS_SETUP = `${TABS}/setup`;
 
