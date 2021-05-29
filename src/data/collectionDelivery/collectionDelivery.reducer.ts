@@ -27,7 +27,6 @@ export const collectionDeliveryReducer = (state: CollectionDeliveryState, action
           collectionDeliveries: [...state.collectionDeliveryList.collectionDeliveries, ...action.payload.collectionDeliveries]
         },
       }
-
     case COLLECTION_DELIVERY_BY_ID_SET:
       return {
         ...state,

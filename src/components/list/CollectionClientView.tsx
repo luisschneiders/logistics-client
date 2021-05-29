@@ -27,7 +27,6 @@ import * as selectorsCollectionClient from '../../data/collectionClient/collecti
 import { AppColor } from '../../enum/AppColor';
 import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
-import * as ROUTES from '../../constants/Routes';
 
 import LsCard from '../card/Card';
 import {
