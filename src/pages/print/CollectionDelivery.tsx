@@ -43,6 +43,8 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
   useEffect(() => {
     if (collectionDelivery[0] && collectionDelivery[0].length) {
       setTitle(`${collectionDelivery[0][0].deliveryDate}_DeliveryReport`);
+    } else {
+      setTitle(`DeliveryReport`);
     }
   }, [
     collectionDelivery,
@@ -70,11 +72,11 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
               color={AppColor.LIGHT}
               size="small"
               title="Print"
+              onClick={handlePrint}
             >
               <IonIcon
                 icon={printOutline}
                 color={AppColor.SECONDARY}
-                onClick={handlePrint}
                 size="small"
               />
             </IonFabButton>
@@ -82,24 +84,28 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonItem className="noprint">
-          <IonLabel>Enter driver name:</IonLabel>
-          <IonInput
-            name="driver"
-            type="text"
-            value={driver}
-            spellCheck={false}
-            autocapitalize="off"
-            onIonChange={(e: any) => setDriver(e.detail.value!)}
-            required
-          />
-        </IonItem>
+        {(collectionDelivery[0] && collectionDelivery[0].length) &&
+          <IonItem className="noprint">
+            <IonLabel>Enter driver name:</IonLabel>
+            <IonInput
+              name="driver"
+              type="text"
+              value={driver}
+              spellCheck={false}
+              autocapitalize="off"
+              onIonChange={(e: any) => setDriver(e.detail.value!)}
+              required
+            />
+          </IonItem>
+        }
         <div className="print__collection-delivery-page-report">
           <h2 className="ion-text-center">Delivery report</h2>
+          {(collectionDelivery[0] && collectionDelivery[0].length) &&
           <div className="print__collection-delivery-page-header">
             <span>Driver: {driver}</span>
-            <span>Date: {dateFormatDDMMYY(collectionDelivery[0][0].deliveryDate)}</span>
+            <span>Date: {dateFormatDDMMYY(collectionDelivery[0][0]?.deliveryDate)}</span>
           </div>
+          }
           {(collectionDelivery && collectionDelivery.length > 0) &&
             collectionDelivery.map((schedules: any[], indexSchedule: number) => (
               <div key={indexSchedule} className="ion-padding-vertical">

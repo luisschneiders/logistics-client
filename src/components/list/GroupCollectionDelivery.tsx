@@ -11,7 +11,9 @@ import {
 } from '@ionic/react';
 import LsCollectionDelivery from './CollectionDelivery';
 import { AppColor } from '../../enum/AppColor';
-import { CollectionDelivery } from '../../models/CollectionDelivery';
+import { 
+  CollectionDelivery,
+} from '../../models/CollectionDelivery';
 import { immutableReorder } from '../../util/reorder';
 import { connect } from '../../data/connect';
 import { printOutline } from 'ionicons/icons';
@@ -54,27 +56,36 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
     // by the reorder group
     event.detail.complete();
 
-    // The parseInt(event.target.id) is the ID from <IonReorderGroup>
+    /**
+     * reorder the array and it replace with the new order
+     */
     const newDataOrder: any[] = immutableReorder(dataOrder[parseInt(event.target.id)], event.detail.from, event.detail.to);
-    const newData: any[] = dataOrder;
+    let newData: any[] = dataOrder;
+    newData = [...dataOrder];
+    newData.filter((item, index) => {
+      if (index === parseInt(event.target.id)) {
+        newData[index] = [...newDataOrder];
+        return item;
+      }
+      return item;
+    });
 
-    // Replace with new order
-    newData[parseInt(event.target.id)] = newDataOrder;
-
-    setDataOrder(newData);
     setPrintCollectionDelivery(newData);
+    setDataOrder(newData);
 
   }
 
   const handleReport = (index: number) => {
     const newData: any[] = [];
+
     newData.push(dataOrder[index]);
+
     setPrintCollectionDelivery(newData);
   }
 
   return (
     <IonList lines="full">
-      {dataOrder.map((groups: any, index: number) => (
+      {data.group.map((groups: any, index: number) => (
         <IonItemGroup key={`group-${index}`}>
           <IonItemDivider sticky>
             <IonLabel>
@@ -87,7 +98,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
                 fill="clear"
                 shape="round"
                 onClick={() => handleReport(index)}
-                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY}
+                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_BY_RUN}
                 routerDirection="none"
               >
                 <IonIcon
@@ -98,7 +109,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
               </IonButton>
             </div>
           </IonItemDivider>
-          <IonReorderGroup disabled={false} onIonItemReorder={doReorder} id={index.toString()}>
+          <IonReorderGroup disabled={data.group[0].length <= 1} onIonItemReorder={doReorder} id={index.toString()}>
             {groups.map((data: CollectionDelivery, itemIndex: number) => (
               <LsCollectionDelivery
                 index={index}
