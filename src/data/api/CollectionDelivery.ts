@@ -20,7 +20,7 @@ export const fetchCollectionDeliveryList = async (companyId: string, period: Per
     return deliveryRef.get().then((documentSnapshots: any) => {
       const collectionDeliveries: CollectionDelivery[] = [];
       documentSnapshots.forEach((doc: any) => {
-        const data: any = doc.data();
+        const data: CollectionDelivery = doc.data();
         collectionDeliveries.push(data);
       });
 
