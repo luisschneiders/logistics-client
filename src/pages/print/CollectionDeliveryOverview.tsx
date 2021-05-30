@@ -99,7 +99,7 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
           </IonItem>
         }
         <div className="print__collection-delivery-page-report">
-          <h2 className="ion-text-center">Overview Delivery report</h2>
+          <h2 className="ion-text-center">Overview Delivery Report</h2>
           {(collectionDelivery[0] && collectionDelivery[0].length) &&
           <div className="print__collection-delivery-page-header">
             <span>Driver: {driver}</span>

@@ -106,7 +106,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
                 routerDirection="none"
               >
                 <IonIcon
-                  color={AppColor.SECONDARY}
+                  color={AppColor.TERTIARY}
                   slot="icon-only"
                   icon={printOutline}
                 />
