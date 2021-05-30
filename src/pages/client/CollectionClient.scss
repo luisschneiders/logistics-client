@@ -3,3 +3,9 @@
     height: 44px;
   }
 }
+
+.collection-client-list-page {
+  ion-fab-button {
+    --box-shadow: none;
+  }
+}

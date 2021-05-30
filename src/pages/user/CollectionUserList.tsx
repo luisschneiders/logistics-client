@@ -12,6 +12,7 @@ import {
   IonToolbar
 } from '@ionic/react';
 import React, { useEffect } from 'react';
+import './CollectionUser.scss';
 import { connect } from '../../data/connect';
 import { AppColor } from '../../enum/AppColor';
 import * as selectorsUser from '../../data/user/user.selectors';
@@ -58,7 +59,7 @@ const CollectionUserListPage: React.FC<ContainerProps> = ({
   ]);
 
   return (
-    <IonPage className="collection-user-page">
+    <IonPage className="collection-user-list-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
