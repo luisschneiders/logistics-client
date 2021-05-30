@@ -25,13 +25,9 @@ import {
 } from '../../data/collectionClient/collectionClient.actions';
 
 import { AppColor } from '../../enum/AppColor';
-import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
 import * as ROUTES from '../../constants/Routes';
-
-import LsCard from '../card/Card';
 import { businessOutline } from 'ionicons/icons';
-
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -123,9 +119,6 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
             Load more...
           </IonButton>
         </div>
-      }
-      {(!collectionClient.length) && 
-        <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
   );

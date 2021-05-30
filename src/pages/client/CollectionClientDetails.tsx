@@ -14,7 +14,6 @@ import {
   IonList,
   IonLoading,
   IonIcon,
-  IonAvatar,
   IonChip,
 } from '@ionic/react';
 import {
@@ -22,9 +21,7 @@ import {
   RouteComponentProps,
 } from 'react-router';
 import {
-  businessOutline,
   closeCircle,
-  peopleOutline,
   personOutline,
 } from 'ionicons/icons';
 

@@ -25,15 +25,13 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import { AppColor } from '../../enum/AppColor';
-import { StatusColor } from '../../enum/StatusColor';
 import { PageListItem } from '../../enum/PageListItem';
 
-import LsCard from '../card/Card';
 import {
-  businessOutline, personOutline
+  businessOutline,
+  personOutline
 } from 'ionicons/icons';
 import { setCollectionClientListLoadMore } from '../../data/collectionClient/collectionClient.actions';
-
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -130,9 +128,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
             Load more...
           </IonButton>
         </div>
-      }
-      {(!collectionClient.length) && 
-        <LsCard color={StatusColor.WARNING} message="No records found!"></LsCard>
       }
     </>
   );
