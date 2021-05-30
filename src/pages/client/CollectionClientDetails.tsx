@@ -22,7 +22,10 @@ import {
   RouteComponentProps,
 } from 'react-router';
 import {
+  businessOutline,
   closeCircle,
+  peopleOutline,
+  personOutline,
 } from 'ionicons/icons';
 
 import './CollectionClient.scss';
@@ -279,9 +282,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
                     key={index}
                     color={AppColor.SECONDARY}
                   >
-                    <IonAvatar>
-                      <img src="assets/img/avatar.svg" alt={`employe-${employee}`} />
-                    </IonAvatar>
+                    <IonIcon size="small" icon={personOutline} color={AppColor.PRIMARY} />
                     <IonLabel>{employee.name}</IonLabel>
                     <IonIcon
                       icon={closeCircle}
