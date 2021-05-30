@@ -45,7 +45,8 @@ export const initialState: AppState = {
     isShowModalCollectionUser: false,
   },
   printReducer: {
-    collectionDelivery: [],
+    collectionDeliveryRun: [],
+    collectionDeliveryOverview: [],
   },
   fetchReducer: {
     isFetchingCollectionClientList: false,

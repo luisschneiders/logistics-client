@@ -1,3 +1,4 @@
 export interface PrintState {
-  collectionDelivery: any[];
+  collectionDeliveryRun: any[];
+  collectionDeliveryOverview: any[];
 }

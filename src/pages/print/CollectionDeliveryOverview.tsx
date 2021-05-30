@@ -33,7 +33,7 @@ interface DispatchProps {
 
 interface ContainerProps extends StateProps, DispatchProps {}
 
-const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
+const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
   collectionDelivery,
 }) => {
 
@@ -42,7 +42,7 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
 
   useEffect(() => {
     if (collectionDelivery[0] && collectionDelivery[0].length) {
-      setTitle(`${collectionDelivery[0][0].deliveryDate}_DeliveryReport`);
+      setTitle(`${collectionDelivery[0][0].deliveryDate}_OverviewDeliveryReport`);
     } else {
       setTitle(`DeliveryReport`);
     }
@@ -99,7 +99,7 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
           </IonItem>
         }
         <div className="print__collection-delivery-page-report">
-          <h2 className="ion-text-center">Delivery report</h2>
+          <h2 className="ion-text-center">Overview Delivery report</h2>
           {(collectionDelivery[0] && collectionDelivery[0].length) &&
           <div className="print__collection-delivery-page-header">
             <span>Driver: {driver}</span>
@@ -117,10 +117,9 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
                       </th>
                     </tr>
                     <tr>
-                      <th style={{width: '5%'}} className="ion-text-center">Order</th>
                       <th style={{width: '20%'}}>Invoice</th>
-                      <th style={{width: '35%'}}>Customer</th>
-                      <th style={{width: '10%'}}>Receiver</th>
+                      <th style={{width: '30%'}}>Customer</th>
+                      <th style={{width: '20%'}}>Receiver</th>
                       <th style={{width: '25%'}}>Location</th>
                     </tr>
                   </thead>
@@ -128,10 +127,9 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
                     <tbody className="print__tbody">
                         {schedules.map((item: CollectionDelivery, index: number) => (
                         <tr key={index}>
-                          <td style={{width: '5%'}} className="ion-text-center">{index + 1}</td>
                           <td style={{width: '20%'}}>{item.deliveryInvoice}</td>
-                          <td style={{width: '35%'}}>{item.deliveryClient?.clientName}</td>
-                          <td style={{width: '10%'}}>{item.deliveryReceiver}</td>
+                          <td style={{width: '30%'}}>{item.deliveryClient?.clientName}</td>
+                          <td style={{width: '20%'}}>{item.deliveryReceiver}</td>
                           <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}
                           </td>
                         </tr>
@@ -151,8 +149,8 @@ const PrintCollectionDeliveryPage: React.FC<ContainerProps> = ({
 
 export default connect<{}, StateProps, DispatchProps> ({
   mapStateToProps: (state) => ({
-    collectionDelivery: selectorsPrint.printCollectionDelivery(state),
+    collectionDelivery: selectorsPrint.printCollectionDeliveryOverview(state),
   }),
   mapDispatchToProps: ({}),
-  component: PrintCollectionDeliveryPage
+  component: PrintCollectionDeliveryOverviewPage
 });

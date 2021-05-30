@@ -26,7 +26,8 @@ import CollectionUserDetailsPage from '../../pages/user/CollectionUserDetails';
 
 import TodoPage from '../../pages/todo/Todo';
 import SetupPage from '../../pages/setup/Setup';
-import PrintCollectionDeliveryPage from '../../pages/print/CollectionDelivery';
+import PrintCollectionDeliveryRunPage from '../../pages/print/CollectionDeliveryRun';
+import PrintCollectionDeliveryOverviewPage from '../../pages/print/CollectionDeliveryOverview';
 
 interface StateProps {
   isAuthenticated: boolean;
@@ -57,7 +58,8 @@ const LsTabs: React.FC<StateProps> = ({isAuthenticated}) => {
 
         <Route path={ROUTES.TABS_COLLECTION_DELIVERY} render={() => <CollectionDeliveryListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_DELIVERY}/:id`} component={CollectionDeliveryDetailsPage} exact={true} />
-        <Route path={`${ROUTES.TABS_PRINT_COLLECTION_DELIVERY_BY_RUN}`} component={PrintCollectionDeliveryPage} exact={true} />
+        <Route path={`${ROUTES.TABS_PRINT_COLLECTION_DELIVERY_RUN}`} component={PrintCollectionDeliveryRunPage} exact={true} />
+        <Route path={`${ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}`} component={PrintCollectionDeliveryOverviewPage} exact={true} />
 
         <Route path={ROUTES.TABS_COLLECTION_USER} render={() => <CollectionUserListPage />} exact={true} />
         <Route path={`${ROUTES.TABS_COLLECTION_USER}/:id`} component={CollectionUserDetailsPage} exact={true} />

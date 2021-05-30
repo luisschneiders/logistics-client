@@ -18,13 +18,14 @@ import { immutableReorder } from '../../util/reorder';
 import { connect } from '../../data/connect';
 import { printOutline } from 'ionicons/icons';
 import * as ROUTES from '../../constants/Routes';
-import { setPrintCollectionDelivery } from '../../data/print/print.actions';
+import { setPrintCollectionDeliveryOverview, setPrintCollectionDeliveryRun } from '../../data/print/print.actions';
 
 interface StateProps {
 }
 
 interface DispatchProps {
-  setPrintCollectionDelivery: typeof setPrintCollectionDelivery;
+  setPrintCollectionDeliveryRun: typeof setPrintCollectionDeliveryRun;
+  setPrintCollectionDeliveryOverview: typeof setPrintCollectionDeliveryOverview;
 }
 
 interface ComponentProps {
@@ -37,17 +38,20 @@ interface ContainerProps extends ComponentProps, StateProps, DispatchProps {}
 const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
   data,
   groupBy,
-  setPrintCollectionDelivery
+  setPrintCollectionDeliveryRun,
+  setPrintCollectionDeliveryOverview,
 }) => {
 
   const [dataOrder, setDataOrder] = useState<any[]>([]);
 
   useEffect(() => {
     setDataOrder(data.group);
-    setPrintCollectionDelivery(data.group);
+    setPrintCollectionDeliveryRun(data.group);
+    setPrintCollectionDeliveryOverview(data.group);
   },[
     data,
-    setPrintCollectionDelivery,
+    setPrintCollectionDeliveryRun,
+    setPrintCollectionDeliveryOverview,
   ]);
 
   const doReorder = (event: any) => {
@@ -70,7 +74,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
       return item;
     });
 
-    setPrintCollectionDelivery(newData);
+    setPrintCollectionDeliveryRun(newData);
     setDataOrder(newData);
 
   }
@@ -80,7 +84,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
 
     newData.push(dataOrder[index]);
 
-    setPrintCollectionDelivery(newData);
+    setPrintCollectionDeliveryRun(newData);
   }
 
   return (
@@ -98,7 +102,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
                 fill="clear"
                 shape="round"
                 onClick={() => handleReport(index)}
-                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_BY_RUN}
+                routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_RUN}
                 routerDirection="none"
               >
                 <IonIcon
@@ -126,7 +130,8 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
 export default connect<ComponentProps, StateProps, DispatchProps> ({
   mapStateToProps: () => ({}),
   mapDispatchToProps: ({
-    setPrintCollectionDelivery,
+    setPrintCollectionDeliveryRun,
+    setPrintCollectionDeliveryOverview,
   }),
   component: LsGroupCollectionDelivery
 });
