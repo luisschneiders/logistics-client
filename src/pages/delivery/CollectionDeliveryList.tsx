@@ -143,7 +143,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                     color={AppColor.LIGHT}
                     size="small"
                     title="Print"
-                    routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_RUN}
+                    routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}
                   >
                     <IonIcon
                       icon={printOutline}
