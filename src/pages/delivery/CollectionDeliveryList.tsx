@@ -31,8 +31,8 @@ import { CompanyProfile } from '../../models/CompanyProfile';
 import { AppColor } from '../../enum/AppColor';
 import {
   add,
+  downloadOutline,
   ellipsisVertical,
-  printOutline
 } from 'ionicons/icons';
 import { setModalCollectionDeliveryShow } from '../../data/modal/modal.actions';
 import LsComponentCollectionDelivery from '../../components/delivery/CollectionDelivery';
@@ -120,8 +120,8 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                 routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}
               >
                 <IonIcon
-                  color={AppColor.SECONDARY}
-                  icon={printOutline}
+                  color={AppColor.PRIMARY}
+                  icon={downloadOutline}
                 />
               </IonFabButton>
             </IonFabList>
@@ -140,14 +140,12 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
               <IonCol size="1" push="2" className="ion-no-padding">
                 <IonFab vertical="center" horizontal="end">
                   <IonFabButton
-                    color={AppColor.LIGHT}
                     size="small"
                     title="Print"
                     routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}
                   >
                     <IonIcon
-                      icon={printOutline}
-                      color={AppColor.SECONDARY}
+                      icon={downloadOutline}
                       size="small"
                     />
                   </IonFabButton>

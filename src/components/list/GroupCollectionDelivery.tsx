@@ -7,7 +7,6 @@ import {
   IonText,
   IonReorderGroup,
   IonButton,
-  IonIcon,
 } from '@ionic/react';
 import LsCollectionDelivery from './CollectionDelivery';
 import { AppColor } from '../../enum/AppColor';
@@ -16,7 +15,6 @@ import {
 } from '../../models/CollectionDelivery';
 import { immutableReorder } from '../../util/reorder';
 import { connect } from '../../data/connect';
-import { printOutline } from 'ionicons/icons';
 import * as ROUTES from '../../constants/Routes';
 import { setPrintCollectionDeliveryOverview, setPrintCollectionDeliveryRun } from '../../data/print/print.actions';
 
@@ -99,17 +97,13 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
             </IonLabel>
             <div slot="end">
               <IonButton
-                fill="clear"
+                color={AppColor.SECONDARY}
                 shape="round"
                 onClick={() => handleReport(index)}
                 routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_RUN}
                 routerDirection="none"
               >
-                <IonIcon
-                  color={AppColor.TERTIARY}
-                  slot="icon-only"
-                  icon={printOutline}
-                />
+                Download
               </IonButton>
             </div>
           </IonItemDivider>
