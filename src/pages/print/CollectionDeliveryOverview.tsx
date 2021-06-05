@@ -21,8 +21,7 @@ import { dateFormatDDMMYY } from '../../util/moment';
 import { connect } from '../../data/connect';
 import * as selectorsPrint from '../../data/print/print.selectors';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
-import { AppColor } from '../../enum/AppColor';
-import { printOutline } from 'ionicons/icons';
+import { downloadOutline } from 'ionicons/icons';
 
 interface StateProps {
   collectionDelivery: any[];
@@ -69,14 +68,12 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
           <IonTitle>Delivery report</IonTitle>
           <IonFab vertical="center" horizontal="end">
             <IonFabButton
-              color={AppColor.LIGHT}
               size="small"
-              title="Print"
+              title="Download"
               onClick={handlePrint}
             >
               <IonIcon
-                icon={printOutline}
-                color={AppColor.SECONDARY}
+                icon={downloadOutline}
                 size="small"
               />
             </IonFabButton>

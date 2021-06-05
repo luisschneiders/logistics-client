@@ -7,6 +7,7 @@ import {
   IonText,
   IonReorderGroup,
   IonButton,
+  IonIcon,
 } from '@ionic/react';
 import LsCollectionDelivery from './CollectionDelivery';
 import { AppColor } from '../../enum/AppColor';
@@ -17,6 +18,7 @@ import { immutableReorder } from '../../util/reorder';
 import { connect } from '../../data/connect';
 import * as ROUTES from '../../constants/Routes';
 import { setPrintCollectionDeliveryOverview, setPrintCollectionDeliveryRun } from '../../data/print/print.actions';
+import { eyeOutline } from 'ionicons/icons';
 
 interface StateProps {
 }
@@ -103,7 +105,8 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
                 routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_RUN}
                 routerDirection="none"
               >
-                Download
+                Preview
+                <IonIcon slot="start" icon={eyeOutline} />
               </IonButton>
             </div>
           </IonItemDivider>

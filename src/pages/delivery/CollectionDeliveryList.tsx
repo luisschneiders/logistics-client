@@ -31,7 +31,7 @@ import { CompanyProfile } from '../../models/CompanyProfile';
 import { AppColor } from '../../enum/AppColor';
 import {
   add,
-  downloadOutline,
+  eyeOutline,
   ellipsisVertical,
 } from 'ionicons/icons';
 import { setModalCollectionDeliveryShow } from '../../data/modal/modal.actions';
@@ -69,6 +69,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
     setModalCollectionDeliveryShow,
     setCollectionDeliveryList,
 }) => {
+  /* eslint-disable  @typescript-eslint/no-unused-vars */
   const [height, width] = useWindowSize();
   const [period, setPeriod] = useState<Period>({
     startDate: startPeriod(MOMENT.currentDayDD, 'day'),
@@ -121,7 +122,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
               >
                 <IonIcon
                   color={AppColor.PRIMARY}
-                  icon={downloadOutline}
+                  icon={eyeOutline}
                 />
               </IonFabButton>
             </IonFabList>
@@ -141,11 +142,11 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
                 <IonFab vertical="center" horizontal="end">
                   <IonFabButton
                     size="small"
-                    title="Print"
+                    title="Preview"
                     routerLink={ROUTES.TABS_PRINT_COLLECTION_DELIVERY_OVERVIEW}
                   >
                     <IonIcon
-                      icon={downloadOutline}
+                      icon={eyeOutline}
                       size="small"
                     />
                   </IonFabButton>
