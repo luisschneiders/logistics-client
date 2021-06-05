@@ -24,6 +24,7 @@
     "ionicons": "^5.0.0",
     "moment": "^2.29.1",
     "node-sass": "^4.14.1",
+    "pdfmake": "^0.1.71",
     "react": "^16.12.0",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^16.12.0",
@@ -57,7 +58,8 @@
   "devDependencies": {
     "@capacitor/cli": "^1.5.1",
     "@types/chart.js": "^2.9.29",
-    "@types/firebase": "^3.2.1"
+    "@types/firebase": "^3.2.1",
+    "@types/pdfmake": "^0.1.17"
   },
   "description": "Logistics App"
 }
