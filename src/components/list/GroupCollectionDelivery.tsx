@@ -17,11 +17,13 @@ import {
 import { immutableReorder } from '../../util/reorder';
 import { connect } from '../../data/connect';
 import * as ROUTES from '../../constants/Routes';
-import { setPrintCollectionDeliveryOverview, setPrintCollectionDeliveryRun } from '../../data/print/print.actions';
+import {
+  setPrintCollectionDeliveryOverview,
+  setPrintCollectionDeliveryRun
+} from '../../data/print/print.actions';
 import { eyeOutline } from 'ionicons/icons';
 
-interface StateProps {
-}
+interface StateProps {}
 
 interface DispatchProps {
   setPrintCollectionDeliveryRun: typeof setPrintCollectionDeliveryRun;

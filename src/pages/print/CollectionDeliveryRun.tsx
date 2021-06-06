@@ -14,7 +14,6 @@ import {
   IonToolbar
 } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
-import { useTitle } from '../../hooks/useTitle';
 import './Print.scss';
 import * as ROUTES from '../../constants/Routes';
 import { dateFormatDDMMYY } from '../../util/moment';
@@ -41,31 +40,27 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
   collectionDelivery,
 }) => {
 
-  const headerAlignment: Alignment = 'center';
+  const alignmentCenter: Alignment = 'center';
+  const alignmentLeft: Alignment = 'left';
+  const alignmentRight: Alignment = 'right';
 
   const [driver, setDriver] = useState<string>('');
   const [title, setTitle] = useState<string>('Delivery Report');
   const [fileName, setFileName] = useState<string>('DeliveryReport');
   const [date, setDate] = useState<string>('');
-  const [report, setReport] = useState<any[]>([]);
-  /* eslint-disable  @typescript-eslint/no-unused-vars */
-  const [tableHeader, setTableHeader] = useState<any[]>([
-    [
-      { text: title, bold: true, fillColor: '#eeeeee', colSpan: 5, alignment: 'center' },
-      {},
-      {},
-      {},
-      {},
-    ],
-    [
-      { text: '#', bold: true, fillColor: '#eeeeee', },
-      { text: 'Invoice', fillColor: '#eeeeee', },
-      { text: 'Customer', fillColor: '#eeeeee', },
-      { text: 'Receiver', fillColor: '#eeeeee', },
-      { text: 'Location', fillColor: '#eeeeee', },
-    ],
 
-  ]);
+  const [report, setReport] = useState<any[]>([]);
+
+  /* eslint-disable  @typescript-eslint/no-unused-vars */
+  const [tableHeaderColumns, setTableHeaderColumns] = useState<any[]>(
+    [
+      { text: '#', fillColor: '#eeeeee', bold: true},
+      { text: 'Invoice', fillColor: '#eeeeee', bold: true},
+      { text: 'Customer', fillColor: '#eeeeee', bold: true},
+      { text: 'Receiver', fillColor: '#eeeeee', bold: true},
+      { text: 'Location', fillColor: '#eeeeee', bold: true},
+    ],
+  );
 
   useEffect(() => {
     if (collectionDelivery && collectionDelivery.length) {
@@ -73,22 +68,21 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
       setTitle(`${collectionDelivery[0][0].deliverySchedule} run`);
       setDate(collectionDelivery[0][0].deliveryDate);
 
-      const dataTable: any[] = generateDataTable(collectionDelivery);
-      const tableBody: any[] = generateReport(dataTable, tableHeader[1]);
+      const tableData: any[] = generateDataTable(collectionDelivery);
+      const tableBody: any[] = generateReport(tableData, tableHeaderColumns);
 
       setReport(tableBody);
-
+      
     } else {
-      setReport(tableHeader);
+      
+      setReport(tableHeaderColumns);
     }
   }, [
     collectionDelivery,
     title,
-    tableHeader,
+    tableHeaderColumns,
     setTitle,
   ]);
-  
-  useTitle(title, true);
 
   const generateDataTable = (data: any[]) => {
 
@@ -133,23 +127,47 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
   const docDefinition = {
     content: [
       {text: `Delivery Report`, style: 'header'},
-      {text: `Driver: ${driver}`},
-      {text: `Date: ${dateFormatDDMMYY(date)}`},
+      {
+        columns: [
+          {text: `Driver: ${driver}`, style: 'columnLeft'},
+          {text: `Date: ${dateFormatDDMMYY(date)}`, style: 'columnRight'},
+        ]
+      },
+      {
+        layout: 'lightHorizontalLines',
+        table: {
+          // headers are automatically repeated if the table spans over multiple pages
+          // you can declare how many rows should be treated as headers
+          headerRows: 1,
+          widths: [ '100%' ],
+          body: [
+            [
+              { text: title, fillColor: '#eeeeee', alignment: alignmentCenter, bold: true}
+            ]
+          ]
+        }
+      },
       {
         layout: 'lightHorizontalLines',
         table: {
           // headers are automatically repeated if the table spans over multiple pages
           // you can declare how many rows should be treated as headers
           headerRows: 2,
-          widths: [ '5%', '20%', '30%', '15%', '25%' ],
+          widths: [ '5%', '20%', '25%', '20%', '30%' ],
           body: report
         }
       }
     ],
     styles: {
       header: {
-        alignment: headerAlignment,
+        alignment: alignmentCenter,
         fontSize: 18,
+      },
+      columnLeft: {
+        alignment: alignmentLeft,
+      },
+      columnRight: {
+        alignment: alignmentRight,
       },
     },
     defaultStyle: {
