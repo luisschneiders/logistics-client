@@ -16,7 +16,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import './Print.scss';
 import * as ROUTES from '../../constants/Routes';
-import { dateFormatDDMMYY } from '../../util/moment';
+import { dateFormatDDMMYY, timeFormatHHmm } from '../../util/moment';
 import { connect } from '../../data/connect';
 import * as selectorsPrint from '../../data/print/print.selectors';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
@@ -59,6 +59,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
       { text: 'Customer', fillColor: '#eeeeee', bold: true},
       { text: 'Receiver', fillColor: '#eeeeee', bold: true},
       { text: 'Location', fillColor: '#eeeeee', bold: true},
+      { text: 'Time', fillColor: '#eeeeee', bold: true},
     ],
   );
 
@@ -95,7 +96,8 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
           'Invoice': item.deliveryInvoice,
           'Customer': item.deliveryClient?.clientName,
           'Receiver': item.deliveryReceiver,
-          'Location': `${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`
+          'Location': `${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`,
+          'Time': timeFormatHHmm(item.deliveryTime)
         };
         newCollectionDelivery.push(newDataTableObj);
       })
@@ -153,7 +155,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
           // headers are automatically repeated if the table spans over multiple pages
           // you can declare how many rows should be treated as headers
           headerRows: 2,
-          widths: [ '5%', '20%', '25%', '20%', '30%' ],
+          widths: [ '5%', '20%', '25%', '20%', '25%', '5%' ],
           body: report
         }
       }
@@ -234,16 +236,17 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
                 <table className="print__table">
                   <thead className="print__thead">
                     <tr className="ion-text-center">
-                      <th colSpan={5}>
+                      <th colSpan={6}>
                         {`${schedules[0].deliverySchedule} run`}
                       </th>
                     </tr>
                     <tr>
                       <th style={{width: '5%'}} className="ion-text-center">#</th>
                       <th style={{width: '20%'}}>Invoice</th>
-                      <th style={{width: '30%'}}>Customer</th>
-                      <th style={{width: '15%'}}>Receiver</th>
+                      <th style={{width: '25%'}}>Customer</th>
+                      <th style={{width: '20%'}}>Receiver</th>
                       <th style={{width: '25%'}}>Location</th>
+                      <th style={{width: '5%'}}>Time</th>
                     </tr>
                   </thead>
                   {(collectionDelivery && collectionDelivery.length > 0) &&
@@ -252,10 +255,10 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
                         <tr key={index}>
                           <td style={{width: '5%'}} className="ion-text-center">{index + 1}</td>
                           <td style={{width: '20%'}}>{item.deliveryInvoice}</td>
-                          <td style={{width: '30%'}}>{item.deliveryClient?.clientName}</td>
-                          <td style={{width: '15%'}}>{item.deliveryReceiver}</td>
-                          <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}
-                          </td>
+                          <td style={{width: '25%'}}>{item.deliveryClient?.clientName}</td>
+                          <td style={{width: '20%'}}>{item.deliveryReceiver}</td>
+                          <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}</td>
+                          <td style={{width: '5%'}}>{timeFormatHHmm(item.deliveryTime)}</td>
                         </tr>
                         ))}
                     </tbody>
