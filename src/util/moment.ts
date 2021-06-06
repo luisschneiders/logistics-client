@@ -98,3 +98,7 @@ export const dateFormatM = (date: string) => {
 export const isLeapYear = (year: number) => {
   return moment([year]).isLeapYear();
 }
+
+export const timeFormatHHmm = (time: string) => {
+  return moment(time).format('HH:mm');
+};
