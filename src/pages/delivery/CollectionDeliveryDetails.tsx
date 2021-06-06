@@ -79,6 +79,7 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
     const [deliveryClientIdOptionsList, setDeliveryClientIdOptionsList] = useState<any[]>([]);
     const [deliveryClientId, setDeliveryClientId] = useState<string>('');
     const [deliveryReceiver, setDeliveryReceiver] = useState<string>('');
+    const [deliveryTime, setDeliveryTime] = useState<string>('');
     const [deliveryIsActive, setDeliveryIsActive] = useState<boolean>(false);
 
     const [isById, setIsById] = useState<boolean>(false);
@@ -115,6 +116,7 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
         setDeliverySchedule(collectionDelivery.deliverySchedule);
         setDeliveryClientId(collectionDelivery.deliveryClientId);
         setDeliveryReceiver(collectionDelivery.deliveryReceiver);
+        setDeliveryTime(collectionDelivery.deliveryTime);
         setDeliveryIsActive(collectionDelivery.deliveryIsActive);
       } else if (collectionDeliveryById) {
         setDeliveryDate(collectionDeliveryById.deliveryDate);
@@ -122,6 +124,7 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
         setDeliverySchedule(collectionDeliveryById.deliverySchedule);
         setDeliveryClientId(collectionDeliveryById.deliveryClientId);
         setDeliveryReceiver(collectionDeliveryById.deliveryReceiver);
+        setDeliveryTime(collectionDeliveryById.deliveryTime);
         setDeliveryIsActive(collectionDeliveryById.deliveryIsActive);
       }
 
@@ -163,6 +166,7 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
       newCollectionDelivery.deliveryInvoice = deliveryInvoice;
       newCollectionDelivery.deliverySchedule = deliverySchedule;
       newCollectionDelivery.deliveryReceiver = deliveryReceiver;
+      newCollectionDelivery.deliveryTime = deliveryTime ? deliveryTime : '';
       newCollectionDelivery.deliveryIsActive = deliveryIsActive;
 
       updateCollectionDelivery(newCollectionDelivery);
@@ -248,6 +252,15 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
                 autocapitalize="off"
                 onIonChange={(e: any) => setDeliveryReceiver(e.detail.value!)}
                 required
+              />
+            </IonItem>
+            <IonItem>
+              <IonLabel position="stacked">Arrival time</IonLabel>
+              <IonDatetime
+                displayFormat="HH:mm"
+                placeholder="Arrival time"
+                value={deliveryTime}
+                onIonChange={e => setDeliveryTime(e.detail.value!)}
               />
             </IonItem>
             <IonItem lines="none">

@@ -116,6 +116,7 @@ export const initialState: AppState = {
         updatedAt: '',
       },
       deliveryReceiver: '',
+      deliveryTime: '',
       createdAt: '',
       updatedAt: '',
     },

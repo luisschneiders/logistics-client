@@ -15,6 +15,7 @@ export interface CollectionDelivery {
   deliveryIsActive: boolean;
   deliveryClient: CollectionClient;
   deliveryReceiver: string;
+  deliveryTime: string;
   createdAt: any;
   updatedAt: any;
 }
