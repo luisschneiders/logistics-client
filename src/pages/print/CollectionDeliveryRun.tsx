@@ -97,7 +97,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
           'Customer': item.deliveryClient?.clientName,
           'Receiver': item.deliveryReceiver,
           'Location': `${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`,
-          'Time': timeFormatHHmm(item.deliveryTime)
+          'Time': item.deliveryTime ? timeFormatHHmm(item.deliveryTime) : ''
         };
         newCollectionDelivery.push(newDataTableObj);
       })
@@ -258,7 +258,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
                           <td style={{width: '25%'}}>{item.deliveryClient?.clientName}</td>
                           <td style={{width: '20%'}}>{item.deliveryReceiver}</td>
                           <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}</td>
-                          <td style={{width: '5%'}}>{timeFormatHHmm(item.deliveryTime)}</td>
+                          <td style={{width: '5%'}}>{item.deliveryTime ? timeFormatHHmm(item.deliveryTime) : ''}</td>
                         </tr>
                         ))}
                     </tbody>
