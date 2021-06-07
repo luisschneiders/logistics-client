@@ -77,6 +77,7 @@ const LsGroupCollectionDelivery: React.FC<ContainerProps> = ({
     });
 
     setPrintCollectionDeliveryRun(newData);
+    setPrintCollectionDeliveryOverview(newData);
     setDataOrder(newData);
 
   }
