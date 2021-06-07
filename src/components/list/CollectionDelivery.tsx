@@ -10,6 +10,7 @@ import { CollectionDelivery } from '../../models/CollectionDelivery';
 import { navigateOutline } from 'ionicons/icons';
 import { AppColor } from '../../enum/AppColor';
 import * as ROUTES from '../../constants/Routes';
+import { timeFormatHHmm } from '../../util/moment';
 
 interface ContainerProps {
   data: CollectionDelivery;
@@ -31,7 +32,7 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({data, index}) => {
           <IonLabel>
             <h2>{data.deliveryClient.clientName}</h2>
             <p>Invoice: {data.deliveryInvoice}</p>
-            <p>Receiver: {data.deliveryReceiver}</p>
+            <p>Time: {data.deliveryTime ? timeFormatHHmm(data.deliveryTime): '__:__'} | Receiver: {data.deliveryReceiver}</p>
           </IonLabel>
         </IonItem>
         <IonButton
