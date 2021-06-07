@@ -46,7 +46,6 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
 
   const [driver, setDriver] = useState<string>('');
   const [title, setTitle] = useState<string>('Delivery Report');
-  const [fileName, setFileName] = useState<string>('DeliveryReport');
   const [date, setDate] = useState<string>('');
 
   const [report, setReport] = useState<any[]>([]);
@@ -65,7 +64,6 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
 
   useEffect(() => {
     if (collectionDelivery && collectionDelivery.length) {
-      setFileName(`${collectionDelivery[0][0].deliveryDate}_${collectionDelivery[0][0].deliverySchedule}DeliveryReport`);
       setTitle(`${collectionDelivery[0][0].deliverySchedule} run`);
       setDate(collectionDelivery[0][0].deliveryDate);
 
@@ -179,10 +177,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
 
   const handleDownload = (e: any) => {
     e.preventDefault();
-
-    const defaultFileName: string = fileName;
-
-    pdfMake.createPdf(docDefinition).download(defaultFileName);
+    pdfMake.createPdf(docDefinition).open();
   };
 
   return (
