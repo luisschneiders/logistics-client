@@ -174,7 +174,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
     }
   };
 
-  const handleDownload = (e: any) => {
+  const handlePDF = (e: any) => {
     e.preventDefault();
     pdfMake.createPdf(docDefinition).open();
   };
@@ -191,7 +191,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
             <IonFabButton
               size="small"
               title="Download"
-              onClick={handleDownload}
+              onClick={handlePDF}
             >
               <IonIcon
                 icon={downloadOutline}
