@@ -186,7 +186,7 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_DELIVERY}></IonBackButton>
           </IonButtons>
-          <IonTitle>Delivery report</IonTitle>
+          <IonTitle>Preview report</IonTitle>
           <IonFab vertical="center" horizontal="end">
             <IonFabButton
               size="small"

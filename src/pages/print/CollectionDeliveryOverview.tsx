@@ -39,14 +39,10 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
 }) => {
 
   const [driver, setDriver] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>('Delivery Report Overview');
 
   useEffect(() => {
-    if (collectionDelivery[0] && collectionDelivery[0].length) {
-      setTitle(`${collectionDelivery[0][0].deliveryDate}_OverviewDeliveryReport`);
-    } else {
-      setTitle(`DeliveryReport`);
-    }
+
   }, [
     collectionDelivery,
     title,
@@ -65,7 +61,7 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonBackButton defaultHref={ROUTES.TABS_COLLECTION_DELIVERY}></IonBackButton>
           </IonButtons>
-          <IonTitle>Delivery report</IonTitle>
+          <IonTitle>Preview report</IonTitle>
           <IonFab vertical="center" horizontal="end">
             <IonFabButton
               size="small"
@@ -96,7 +92,7 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
           </IonItem>
         }
         <div className="print__collection-delivery-page-report">
-          <h2 className="ion-text-center">Overview Delivery Report</h2>
+          <h2 className="ion-text-center">Delivery Report Overview</h2>
           {(collectionDelivery[0] && collectionDelivery[0].length) &&
           <div className="print__collection-delivery-page-header">
             <span>Driver: {driver}</span>
