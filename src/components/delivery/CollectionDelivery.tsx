@@ -27,14 +27,12 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
   ])
 
   return (
-    <>
+    <IonContent>
       <IonLoading message="Fetching deliveries..." duration={0} isOpen={isFetching}></IonLoading>
-      <IonContent>
-        {delivery && delivery.group && delivery.group.length > 0 &&
-          <LsGroupCollectionDelivery data={delivery} groupBy="deliverySchedule"></LsGroupCollectionDelivery>
-        }
-      </IonContent>
-    </>
+      {delivery && delivery.group && delivery.group.length > 0 &&
+        <LsGroupCollectionDelivery data={delivery} groupBy="deliverySchedule"></LsGroupCollectionDelivery>
+      }
+    </IonContent>
   );
 };
 
