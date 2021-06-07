@@ -14,7 +14,6 @@ import {
   IonToolbar
 } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
-import { useTitle } from '../../hooks/useTitle';
 import './Print.scss';
 import * as ROUTES from '../../constants/Routes';
 import {
@@ -53,8 +52,6 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
     title,
     setTitle,
   ]);
-  
-  useTitle(title, true);
 
   const handlePrint = (e: any) => {
     e.preventDefault();

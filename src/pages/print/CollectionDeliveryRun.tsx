@@ -71,9 +71,8 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
       const tableBody: any[] = generateReport(tableData, tableHeaderColumns);
 
       setReport(tableBody);
-      
+
     } else {
-      
       setReport(tableHeaderColumns);
     }
   }, [
@@ -266,7 +265,6 @@ const PrintCollectionDeliveryRunPage: React.FC<ContainerProps> = ({
       </IonContent>
     </IonPage>
   );
-
 };
 
 export default connect<{}, StateProps, DispatchProps> ({
