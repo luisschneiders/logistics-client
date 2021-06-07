@@ -17,7 +17,10 @@ import React, { useEffect, useState } from 'react';
 import { useTitle } from '../../hooks/useTitle';
 import './Print.scss';
 import * as ROUTES from '../../constants/Routes';
-import { dateFormatDDMMYY } from '../../util/moment';
+import {
+  dateFormatDDMMYY,
+  timeFormatHHmm
+} from '../../util/moment';
 import { connect } from '../../data/connect';
 import * as selectorsPrint from '../../data/print/print.selectors';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
@@ -118,6 +121,7 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
                       <th style={{width: '30%'}}>Customer</th>
                       <th style={{width: '20%'}}>Receiver</th>
                       <th style={{width: '25%'}}>Location</th>
+                      <th style={{width: '5%'}}>Time</th>
                     </tr>
                   </thead>
                   {(collectionDelivery && collectionDelivery.length > 0) &&
@@ -127,8 +131,8 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
                           <td style={{width: '20%'}}>{item.deliveryInvoice}</td>
                           <td style={{width: '30%'}}>{item.deliveryClient?.clientName}</td>
                           <td style={{width: '20%'}}>{item.deliveryReceiver}</td>
-                          <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}
-                          </td>
+                          <td style={{width: '25%'}}>{`${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`}</td>
+                          <td style={{width: '5%'}}>{item.deliveryTime ? timeFormatHHmm(item.deliveryTime) : ''}</td>
                         </tr>
                         ))}
                     </tbody>
