@@ -24,6 +24,11 @@ import { connect } from '../../data/connect';
 import * as selectorsPrint from '../../data/print/print.selectors';
 import { CollectionDelivery } from '../../models/CollectionDelivery';
 import { downloadOutline } from 'ionicons/icons';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+type Alignment = 'left' | 'right' | 'justify' | 'center';
 
 interface StateProps {
   collectionDelivery: any[];
@@ -38,20 +43,126 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
   collectionDelivery,
 }) => {
 
+  const alignmentCenter: Alignment = 'center';
+  const alignmentLeft: Alignment = 'left';
+  const alignmentRight: Alignment = 'right';
+
   const [driver, setDriver] = useState<string>('');
   const [title, setTitle] = useState<string>('Delivery Report Overview');
+  const [date, setDate] = useState<string>('');
+  const [report, setReport] = useState<any[]>([]);
+
+  /* eslint-disable  @typescript-eslint/no-unused-vars */
+  const [tableHeaderColumns, setTableHeaderColumns] = useState<any[]>(
+    [
+      {text: 'Run', fillColor: '#eeeeee', bold: true},
+      {text: 'Invoice', fillColor: '#eeeeee', bold: true},
+      {text: 'Customer', fillColor: '#eeeeee', bold: true},
+      {text: 'Receiver', fillColor: '#eeeeee', bold: true},
+      {text: 'Location', fillColor: '#eeeeee', bold: true},
+      {text: 'Time', fillColor: '#eeeeee', bold: true},
+    ],
+  );
 
   useEffect(() => {
+    if (collectionDelivery && collectionDelivery.length) {
+      setDate(collectionDelivery[0][0].deliveryDate);
 
+      const tableData: any[] = generateDataTable(collectionDelivery);
+      const tableBody: any[] = generateReport(tableData, tableHeaderColumns);
+
+      setReport(tableBody);
+    } else {
+      setReport(tableHeaderColumns);
+    }
   }, [
     collectionDelivery,
     title,
+    tableHeaderColumns,
     setTitle,
   ]);
 
-  const handlePrint = (e: any) => {
+  const generateDataTable = (data: any[]) => {
+
+    const newCollectionDelivery: any[] = [];
+
+    data.forEach((collectionDelivery: CollectionDelivery[]) => {
+      collectionDelivery.forEach((item: CollectionDelivery, index: number) => {
+        const newDataTableObj: any = {
+          'Run': item.deliverySchedule,
+          'Invoice': item.deliveryInvoice,
+          'Customer': item.deliveryClient?.clientName,
+          'Receiver': item.deliveryReceiver,
+          'Location': `${item.deliveryClient?.clientAddress.suburb}, ${item.deliveryClient?.clientAddress.state.toUpperCase()} ${item.deliveryClient?.clientAddress.postcode}`,
+          'Time': item.deliveryTime ? timeFormatHHmm(item.deliveryTime) : ''
+        };
+        newCollectionDelivery.push(newDataTableObj);
+      })
+    });
+
+    return newCollectionDelivery;
+  }
+
+  const generateReport = (data: any[], columns: any[]) => {
+    const body: any[] = [];
+
+    body.push(columns);
+
+    data.forEach((row: CollectionDelivery[]) => {
+      const dataRow: any[] = [];
+
+      columns.forEach((column: any) => {
+
+        dataRow.push(row[column.text]);
+
+      });
+
+      body.push(dataRow);
+    });
+
+    return body;
+  }
+
+  const docDefinition = {
+    content: [
+      {text: `Delivery Report Overview`, style: 'header'},
+      {
+        columns: [
+          {text: `Driver: ${driver}`, style: 'columnLeft'},
+          {text: `Date: ${dateFormatDDMMYY(date)}`, style: 'columnRight'},
+        ]
+      },
+      {
+        layout: 'lightHorizontalLines',
+        table: {
+          // headers are automatically repeated if the table spans over multiple pages
+          // you can declare how many rows should be treated as headers
+          headerRows: 2,
+          widths: [ '10%', '20%', '25%', '15%', '25%', '5%' ],
+          body: report
+        }
+      }
+    ],
+    styles: {
+      header: {
+        alignment: alignmentCenter,
+        fontSize: 18,
+      },
+      columnLeft: {
+        alignment: alignmentLeft,
+      },
+      columnRight: {
+        alignment: alignmentRight,
+      },
+    },
+    defaultStyle: {
+      fontSize: 8,
+    }
+  };
+
+  const handlePDF = (e: any) => {
     e.preventDefault();
-    window.print();
+    pdfMake.createPdf(docDefinition).open();
   };
 
   return (
@@ -66,7 +177,7 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
             <IonFabButton
               size="small"
               title="Download"
-              onClick={handlePrint}
+              onClick={handlePDF}
             >
               <IonIcon
                 icon={downloadOutline}
