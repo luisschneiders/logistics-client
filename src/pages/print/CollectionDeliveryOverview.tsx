@@ -100,7 +100,9 @@ const PrintCollectionDeliveryOverviewPage: React.FC<ContainerProps> = ({
       })
     });
 
-    return newCollectionDelivery;
+    const sortedCollectionDelivery: any[] = newCollectionDelivery.sort((a:any, b: any) => a.Time > b.Time ? 1 : -1);
+
+    return sortedCollectionDelivery;
   }
 
   const generateReport = (data: any[], columns: any[]) => {
