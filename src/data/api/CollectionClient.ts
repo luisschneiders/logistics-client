@@ -134,6 +134,7 @@ export const addCollectionClient = async (data: Partial<CollectionClient>) => {
       clientId: clientRef.id,
       clientName: data.clientName,
       clientAddress: data.clientAddress,
+      clientEmployee: [],
       clientIsActive: data.clientIsActive,
       createdAt: timestamp,
       updatedAt: timestamp,
