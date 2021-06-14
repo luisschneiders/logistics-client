@@ -7,6 +7,7 @@ import {
   IonIcon,
   IonAvatar,
   IonSearchbar,
+  IonToggle,
 } from '@ionic/react';
 
 import { connect } from '../../data/connect';
@@ -21,13 +22,14 @@ import * as selectorsUser from '../../data/user/user.selectors';
 import * as selectorsSessions from '../../data/sessions/sessions.selectors';
 import * as selectorsCollectionClient from '../../data/collectionClient/collectionClient.selectors';
 import {
-  setCollectionClientListLoadMore,
+  setCollectionClientListLoadMore, updateCollectionClient,
 } from '../../data/collectionClient/collectionClient.actions';
 
 import { AppColor } from '../../enum/AppColor';
 import { PageListItem } from '../../enum/PageListItem';
 import * as ROUTES from '../../constants/Routes';
 import { businessOutline } from 'ionicons/icons';
+import { StatusColor } from '../../enum/StatusColor';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -38,6 +40,7 @@ interface StateProps {
 
 interface DispatchProps {
   setCollectionClientListLoadMore: typeof setCollectionClientListLoadMore;
+  updateCollectionClient: typeof updateCollectionClient;
 }
 
 interface ContainerProps extends StateProps, DispatchProps {}
@@ -48,6 +51,7 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
     // isFetching,
     collectionClientList,
     setCollectionClientListLoadMore,
+    updateCollectionClient,
   }) => {
   const [collectionClient, setCollectionClient] = useState<CollectionClient[]>([]);
   const [searchText, setSearchText] = useState<string>('');
@@ -66,6 +70,15 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
       setCollectionClientListLoadMore(companyProfile.companyId, collectionClientList.pagination.lastVisible, PageListItem.ITEM_100);
     }
   };
+
+  const changeStatus = async (collectionClient: CollectionClient) => {
+    if (collectionClient) {
+      const updatedCollectionClient: CollectionClient = collectionClient;
+      updatedCollectionClient.clientIsActive = !collectionClient.clientIsActive;
+
+      updateCollectionClient(updatedCollectionClient);
+    }
+  }
 
   const handleOnChange = async (e: any) => {
     const clientFiltered: any = collectionClientList.collectionClients.filter(client => client.clientName.toLowerCase().includes(e.detail.value!.toLowerCase()));
@@ -104,6 +117,10 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
                   </IonLabel>
                 </IonItem>
               </IonLabel>
+              <IonToggle
+                color={StatusColor.SUCCESS}
+                checked={item.clientIsActive} onClick={() => changeStatus(item)}
+              />
             </IonItem>
           ))}
         </IonList>
@@ -133,6 +150,7 @@ export default connect<{}, StateProps, DispatchProps>({
   }),
   mapDispatchToProps: ({
     setCollectionClientListLoadMore,
+    updateCollectionClient,
   }),
   component: LsCollectionClientList
 });

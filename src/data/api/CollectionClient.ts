@@ -155,6 +155,7 @@ export const updateCollectionClient = async (data: Partial<CollectionClient>) =>
       clientName: data.clientName,
       clientAddress: data.clientAddress,
       clientEmployee: data.clientEmployee,
+      clientIsActive: data.clientIsActive,
       updatedAt: timestamp,
     }, { merge: true });
 
