@@ -140,7 +140,7 @@ export const addCollectionClient = async (data: Partial<CollectionClient>) => {
     }
     await dbFirestore.collection(Collection.CLIENT).doc(clientRef.id).set(collectionClient);
 
-    toast('Client added successfully!', StatusColor.SUCCESS, 800);
+    toast('Client added successfully!', StatusColor.SUCCESS, 500);
 
     return collectionClient;
   } catch (error) {
@@ -159,7 +159,7 @@ export const updateCollectionClient = async (data: Partial<CollectionClient>) =>
       updatedAt: timestamp,
     }, { merge: true });
 
-    toast('Client updated successfully!', StatusColor.SUCCESS, 800);
+    toast('Client updated successfully!', StatusColor.SUCCESS, 500);
 
     return data;
 
