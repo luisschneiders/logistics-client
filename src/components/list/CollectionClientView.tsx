@@ -137,7 +137,7 @@ export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
-    collectionClientList: selectorsCollectionClient.getCollectionClientList(state),
+    collectionClientList: selectorsCollectionClient.getCollectionClientView(state),
   }),
   mapDispatchToProps: ({
     setCollectionClientListLoadMore

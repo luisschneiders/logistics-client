@@ -50,9 +50,18 @@ export const collectionClientReducer = (state: CollectionClientListState, action
           ...action.payload,
         }
       });
+
+      // return {
+      //   ...state,
+      //   ...newState,
+      // };
+
       return {
         ...state,
-        ...newState,
+        collectionClientList: {
+          collectionClients: [...newState.collectionClientList.collectionClients],
+          pagination: {...state.collectionClientList.pagination},
+        },
       };
     case COLLECTION_CLIENT_LIST_RESET:
       return {

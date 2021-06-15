@@ -19,6 +19,17 @@ export const getCollectionClientList = createSelector(
   }
 );
 
+export const getCollectionClientView = createSelector(
+  getCollectionClientListData,
+  (collectionClientList: CollectionClientList) => {
+    const collectionClientViewFiltered: CollectionClientList = {
+      ...collectionClientList,
+      collectionClients: collectionClientList.collectionClients.filter((e: CollectionClient) => e.clientIsActive === true),
+    }
+    return collectionClientViewFiltered;
+  }
+);
+
 export const getCollectionClientListActive = createSelector(
   getCollectionClientListActiveData,
   (data: CollectionClientListActive) => {
