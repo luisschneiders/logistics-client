@@ -23,6 +23,8 @@ import {
   shareSocialOutline
 } from 'ionicons/icons';
 
+import './Todo.scss';
+
 interface StateProps {
 }
 
@@ -34,7 +36,7 @@ interface ContainerProps extends StateProps, DispatchProps {}
 const TodoPage: React.FC<ContainerProps> = () => {
  
   return (
-    <IonPage>
+    <IonPage className="todo-page">
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -71,7 +73,9 @@ const TodoPage: React.FC<ContainerProps> = () => {
           </IonItem>
           <IonItem>
             <IonIcon slot="start" icon={shareSocialOutline} />
-            <IonLabel>Review Redux strategy</IonLabel>
+            <IonLabel className="todo-page__text-line-through">
+                Review Redux strategy
+            </IonLabel>
           </IonItem>
         </IonList>
       </IonContent>
