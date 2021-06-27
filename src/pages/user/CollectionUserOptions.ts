@@ -8,6 +8,11 @@ export const collectionUserOptions = async () => {
       selected: false
     },
     {
+      value: RoleType.DEVELOPER,
+      description: RoleType.DEVELOPER,
+      selected: false
+    },
+    {
       value: RoleType.USER,
       description: RoleType.USER,
       selected: false

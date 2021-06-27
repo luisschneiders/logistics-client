@@ -28,6 +28,7 @@ import {
   CollectionUserList
 } from '../../models/CollectionUser';
 import { peopleOutline } from 'ionicons/icons';
+import { RoleType } from '../../enum/RoleType';
 
 interface StateProps {
   isLoggedIn: boolean;
@@ -108,13 +109,16 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
                   <IonLabel>
                     <h2>{item.userName}</h2>
                     <p>{item.userEmail}</p>
+                    <p>{item.userRole}</p>
                   </IonLabel>
                 </IonItem>
               </IonLabel>
-              <IonToggle
-                color={StatusColor.SUCCESS}
-                checked={item.userIsActive} onClick={() => changeStatus(item)}
-              />
+              {item.userRole != RoleType.DEVELOPER &&
+                <IonToggle
+                  color={StatusColor.SUCCESS}
+                  checked={item.userIsActive} onClick={() => changeStatus(item)}
+                />
+              }
             </IonItem>
           ))}
         </IonList>
