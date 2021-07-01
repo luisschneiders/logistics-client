@@ -113,7 +113,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
                   </IonLabel>
                 </IonItem>
               </IonLabel>
-              {item.userRole != RoleType.DEVELOPER &&
+              {item.userRole !== RoleType.DEVELOPER &&
                 <IonToggle
                   color={StatusColor.SUCCESS}
                   checked={item.userIsActive} onClick={() => changeStatus(item)}
