@@ -54,6 +54,7 @@ export const fetchCollectionClientList = async (companyId: string, pageSize: num
   try {
     const clientRef = dbFirestore.collection(Collection.CLIENT)
       .where('companyId', '==', companyId)
+      .orderBy('createdAt', 'desc')
       .limit(pageSize);
 
     return clientReference(clientRef, pageSize);
@@ -67,6 +68,7 @@ export const fetchCollectionClientListLoadMore = async (companyId: string, lastV
   try {
     const clientRef = dbFirestore.collection(Collection.CLIENT)
       .where('companyId', '==', companyId)
+      .orderBy('createdAt', 'desc')
       .startAfter(lastVisible)
       .limit(pageSize);
 
