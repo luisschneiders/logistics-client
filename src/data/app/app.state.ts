@@ -56,7 +56,7 @@ export const initialState: AppState = {
   collectionClientReducer: {
     collectionClientList: {
       collectionClients: [],
-      pagination: { page: 1, pageSize: PageListItem.ITEM_100, pageCount: 0, rowCount: 0 },
+      pagination: { page: 1, pageSize: PageListItem.ITEM_30, pageCount: 0, rowCount: 0 },
     },
     collectionClientListActive: {
       collectionClients: [],
