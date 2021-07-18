@@ -99,6 +99,9 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
                     <h2>
                       {item.clientName}
                     </h2>
+                    <p>
+                      {`${item.clientAddress.suburb}, ${item.clientAddress.state.toUpperCase()} ${item.clientAddress.postcode}`}
+                    </p>
                     <div className="list-collection-client-details__item-employee">
                       {item.clientEmployee?.map((employee: ClientEmployee, employeeIndex: number) => (
                       <IonChip
