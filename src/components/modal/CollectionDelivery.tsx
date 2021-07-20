@@ -78,7 +78,7 @@ const LsCollectionDelivery: React.FC<ContainerProps> = ({
       deliveryScheduleOptions();
       setModalCollectionDeliveryShow(false);
     }
-    if (isLoggedIn && companyProfile) {
+    if (isLoggedIn && companyProfile && companyProfile.companyId) {
       setDeliveryClientIdOptionsList(
         collectionClientListActive.collectionClients.sort((a, b) => a.clientName.localeCompare(b.clientName))
       );

@@ -48,7 +48,7 @@ const CollectionUserListPage: React.FC<ContainerProps> = ({
 }) => {
  
   useEffect(() => {
-    if (isLoggedIn && companyProfile) {
+    if (isLoggedIn && companyProfile && companyProfile.companyId) {
       setCollectionUserList(companyProfile.companyId, PageListItem.ITEM_100);
     }
   }, [

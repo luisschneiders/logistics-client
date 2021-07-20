@@ -65,7 +65,7 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
   ]);
 
   const loadMore = () => {
-    if (isLoggedIn && companyProfile) {
+    if (isLoggedIn && companyProfile && companyProfile.companyId) {
       setCollectionUserListLoadMore(companyProfile.companyId, collectionUserList.pagination.lastVisible, PageListItem.ITEM_100);
     }
   };

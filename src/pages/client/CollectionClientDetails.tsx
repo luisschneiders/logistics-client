@@ -87,7 +87,7 @@ const CollectionClientDetailsPage: React.FC<ContainerProps> = ({
     const [isById, setIsById] = useState<boolean>(false);
 
     useEffect(() => {
-      if (isLoggedIn && companyProfile) {
+      if (isLoggedIn && companyProfile && companyProfile.companyId) {
         // If user refresh the page, fetch the Client by id only once
         if (!collectionClient && !isById) {
           setCollectionClientById(match.params.id);

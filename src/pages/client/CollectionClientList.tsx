@@ -54,7 +54,7 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
   resetCollectionClientList();
 
   useEffect(() => {
-    if (isLoggedIn && companyProfile) {
+    if (isLoggedIn && companyProfile && companyProfile.companyId) {
       setCollectionClientList(companyProfile.companyId, PageListItem.ITEM_30);
     }
   }, [

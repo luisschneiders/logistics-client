@@ -84,7 +84,7 @@ const CollectionUserDetailsPage: React.FC<ContainerProps> = ({
     }
 
     useEffect(() => {
-      if (isLoggedIn && companyProfile) {
+      if (isLoggedIn && companyProfile && companyProfile.companyId) {
         collectionUserActionsOptions();
         // If user refresh the page, fetch the User by id only once
         if (!collectionUser && !isById) {

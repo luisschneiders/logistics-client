@@ -94,7 +94,7 @@ const CollectionDeliveryDetailsPage: React.FC<ContainerProps> = ({
     };
  
     useEffect(() => {
-      if (isLoggedIn && companyProfile) {
+      if (isLoggedIn && companyProfile && companyProfile.companyId) {
         fetchCollectionClientListActive(companyProfile.companyId)
           .then((data: any) => {
             if (data && data.collectionClients.length >= 0) {
