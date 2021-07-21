@@ -77,14 +77,15 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
   });
 
   useEffect(() => {
-    if (isLoggedIn && companyProfile) {
+    if (isLoggedIn && companyProfile && companyProfile.companyId) {
+      setCollectionDeliveryList(companyProfile.companyId, period.startDate, period.endDate);
       resetCollectionDeliveryList();
-      setCollectionDeliveryList(companyProfile.companyId, period);
     }
   },[
     isLoggedIn,
     companyProfile,
-    period,
+    period.startDate,
+    period.endDate,
     resetCollectionDeliveryList,
     setModalCollectionDeliveryShow,
     setCollectionDeliveryList,

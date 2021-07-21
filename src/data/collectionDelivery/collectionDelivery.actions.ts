@@ -78,8 +78,11 @@ export const resetCollectionDeliveryList = () => async () => {
   return resetCollectionDeliveryListAction();
 }
 
-export const setCollectionDeliveryList = (companyId: string, period: Period) => async (dispatch: React.Dispatch<any>) => {
+export const setCollectionDeliveryList = (companyId: string, startDate: string, endDate: string) => async (dispatch: React.Dispatch<any>) => {
   dispatch(isFetchingCollectionDeliveryAction(true));
+
+  const period: Period = { startDate, endDate };
+
   const data = await fetchCollectionDeliveryData(companyId, period);
   dispatch(isFetchingCollectionDeliveryAction(false));
   return setCollectionDeliveryListAction(data);
