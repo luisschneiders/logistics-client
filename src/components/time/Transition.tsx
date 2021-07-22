@@ -40,7 +40,7 @@ const LsTransition: React.FC<ContainerProps> = ({ dayOrMonthOrYear, period, setP
     } else if (dayOrMonthOrYear === 'month') {
       setDatetimeDisplayFormat('MMM YYYY');
     } else {
-      setDatetimeDisplayFormat('MMM, DD YYYY');
+      setDatetimeDisplayFormat('DDD. MMM D, YYYY');
     }
 
     setDeliveryDate(period.startDate);
@@ -101,6 +101,7 @@ const LsTransition: React.FC<ContainerProps> = ({ dayOrMonthOrYear, period, setP
           <IonButton
             color={AppColor.LIGHT}
             size="small"
+            className="ion-text-capitalize"
           >
             <IonDatetime
               className="transition__datetime"
