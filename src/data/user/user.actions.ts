@@ -55,7 +55,7 @@ export const getHasSeenWelcome = () => async (dispatch: React.Dispatch<any>) => 
   dispatch(hasSeenWelcomeAction(hasSeenWelcome));
 }
 
-export const setIsLoggedIn = (isLoggedIn: boolean) => async (dispatch: React.Dispatch<any>) => {
+export const setIsLoggedIn = (isLoggedIn: boolean) => async () => {
   return setIsLoggedInAction(isLoggedIn);
 }
 
