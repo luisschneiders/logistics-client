@@ -70,7 +70,6 @@ import { CompanyProfile } from './models/CompanyProfile';
 import { CompanyType } from './enum/CompanyType';
 import { CompanyUser } from './models/CompanyUser';
 import { getSessionStorageUser, setSessionStorageUser } from './data/user/data';
-import { setStorageCompanyProfile, setStorageCompanyUser } from './data/sessions/data';
 
 const App: React.FC = () => {
   return (
@@ -153,8 +152,9 @@ const IonicApp: React.FC<IonicAppProps> = ({
 
     if (sessionStorageUser === 'false') {
       logoutUser().then(() => {
-        setStorageCompanyProfile(companyProfile);
-        setStorageCompanyUser(companyUser);
+        setCompanyProfile(companyProfile);
+        setCompanyUser(companyUser);
+        setIsLoggedIn(false);
       }, (error) => {
         toast(error.message, StatusColor.ERROR, 4000);
       });
