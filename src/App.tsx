@@ -69,6 +69,8 @@ import {
 import { CompanyProfile } from './models/CompanyProfile';
 import { CompanyType } from './enum/CompanyType';
 import { CompanyUser } from './models/CompanyUser';
+import { getSessionStorageUser, setSessionStorageUser } from './data/user/data';
+import { setStorageCompanyProfile, setStorageCompanyUser } from './data/sessions/data';
 
 const App: React.FC = () => {
   return (
@@ -77,6 +79,21 @@ const App: React.FC = () => {
     </AppContextProvider>
   );
 };
+
+const companyProfile: CompanyProfile = {
+  companyId: '',
+  companyName: '',
+  companyAbnAcn: '',
+  companyType: CompanyType.ABN,
+}
+
+const companyUser: CompanyUser = {
+  userId: '',
+  userEmail: '',
+  userName: '',
+  userRole: '',
+  userIsActive: false,
+}
 
 interface StateProps {
   darkMode: boolean;
@@ -116,23 +133,33 @@ const IonicApp: React.FC<IonicAppProps> = ({
   const [busy, setBusy] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  const companyProfile: CompanyProfile = {
-    companyId: '',
-    companyName: '',
-    companyAbnAcn: '',
-    companyType: CompanyType.ABN,
-  }
-
-  const companyUser: CompanyUser = {
-    userId: '',
-    userEmail: '',
-    userName: '',
-    userRole: '',
-    userIsActive: false,
+  const logoutUserFromApp = () => {
+    logoutUser().then(() => {
+      toast('Successfully logged out!', StatusColor.DEFAULT);
+      setIsLoggedIn(false);
+      setResetAppStore(initialState);
+      setCompanyProfile(companyProfile);
+      setCompanyUser(companyUser);
+      setSessionStorageUser(false);
+    }, (error) => {
+      toast(error.message, StatusColor.ERROR, 4000);
+    });
   }
 
   useEffect(() => {
     getDarkMode();
+
+    const sessionStorageUser: any = getSessionStorageUser();
+
+    if (sessionStorageUser === 'false') {
+      logoutUser().then(() => {
+        setStorageCompanyProfile(companyProfile);
+        setStorageCompanyUser(companyUser);
+      }, (error) => {
+        toast(error.message, StatusColor.ERROR, 4000);
+      });
+    }
+
     getCurrentUser().then((user: any) => {
       if (user) {
         getCompanyProfile(user.uid);
@@ -187,15 +214,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                     
                     <Route path={ROUTES.WELCOME} component={WelcomePage} exact={true} />
                     <Route path={ROUTES.LOGOUT} render={() => {
-                      logoutUser().then(() => {
-                        toast('Successfully logged out!', StatusColor.DEFAULT);
-                        setIsLoggedIn(false);
-                        setResetAppStore(initialState);
-                        setCompanyProfile(companyProfile);
-                        setCompanyUser(companyUser);
-                      }, (error) => {
-                        toast(error.message, StatusColor.ERROR, 4000);
-                      });
+                      logoutUserFromApp();
                       return <Redirect to={ROUTES.LOGIN} />
                     }} />
                   </IonRouterOutlet>

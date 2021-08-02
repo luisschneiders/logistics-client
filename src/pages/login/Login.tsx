@@ -34,6 +34,7 @@ import {
   setMenuEnabled,
 } from '../../data/sessions/sessions.actions';
 import { AppColor } from '../../enum/AppColor';
+import { setSessionStorageUser } from '../../data/user/data';
 
 interface OwnProps extends RouteComponentProps {}
 
@@ -79,6 +80,9 @@ const LoginPage: React.FC<ContainerProps> = ({
 
     if (response) {
       // Go to dashboard...
+
+      setSessionStorageUser(true);
+
       await getCompanyProfile(response.user.uid);
       await getCompanyUser(response.user.uid);
       await setIsLoggedIn(true);
