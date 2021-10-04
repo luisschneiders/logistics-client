@@ -79,7 +79,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
       <IonSearchbar
         value={searchText}
         onIonChange={handleOnChange}
-        animated
       ></IonSearchbar>
       {(collectionClient && collectionClient.length > 0) &&
         <IonList lines="full" className="ion-no-padding">
