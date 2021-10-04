@@ -89,7 +89,6 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
           </IonFab>
         </IonToolbar>
       </IonHeader>
-      {/* <IonLoading message="Please wait..." duration={0} isOpen={isFetching}></IonLoading> */}
       <IonContent className="ion-no-padding">
         <LsCollectionClientList />
         <LsModalCollectionClient />
