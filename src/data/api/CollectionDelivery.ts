@@ -52,7 +52,7 @@ export const fetchCollectionDeliveryById = async (deliveryId: string) => {
       return null;
     });
 
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
