@@ -88,8 +88,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
                 <IonItem
                   lines="none"
                   className="ion-no-padding"
-                  // routerLink={`${ROUTES.TABS_COLLECTION_CLIENT_VIEW}/${item.clientId}`}
-                  // detail={true}
                 >
                   <IonAvatar slot="start">
                     <IonIcon size="large" icon={businessOutline} color={AppColor.SECONDARY} />
@@ -124,7 +122,6 @@ const LsCollectionClientView: React.FC<ContainerProps> = ({
           <IonButton
             fill="clear"
             color={AppColor.TERTIARY}
-            // disabled={isFetching}
             onClick={loadMore}
           >
             Load more...
