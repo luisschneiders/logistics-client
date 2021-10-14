@@ -34,7 +34,6 @@ import { StatusColor } from '../../enum/StatusColor';
 interface StateProps {
   isLoggedIn: boolean;
   companyProfile: CompanyProfile;
-  // isFetching: boolean;
   collectionClientList: CollectionClientList;
 }
 
@@ -48,7 +47,6 @@ interface ContainerProps extends StateProps, DispatchProps {}
 const LsCollectionClientList: React.FC<ContainerProps> = ({
     isLoggedIn,
     companyProfile,
-    // isFetching,
     collectionClientList,
     setCollectionClientListLoadMore,
     updateCollectionClient,
@@ -62,7 +60,6 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
     }
   }, [
     collectionClientList,
-    // isFetching,
   ]);
 
   const loadMore = () => {
@@ -129,7 +126,6 @@ const LsCollectionClientList: React.FC<ContainerProps> = ({
           <IonButton
             fill="clear"
             color={AppColor.TERTIARY}
-            // disabled={isFetching}
             onClick={loadMore}
           >
             Load more...
@@ -144,7 +140,6 @@ export default connect<{}, StateProps, DispatchProps>({
   mapStateToProps: (state) => ({
     isLoggedIn: selectorsUser.getIsLoggedIn(state),
     companyProfile: selectorsSessions.getCompanyProfile(state),
-    // isFetching: selectorsCollectionClient.isFetchingCollectionClientList(state),
     collectionClientList: selectorsCollectionClient.getCollectionClientList(state),
   }),
   mapDispatchToProps: ({
