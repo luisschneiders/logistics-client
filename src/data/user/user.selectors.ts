@@ -1,10 +1,6 @@
 import { createSelector } from 'reselect';
 import { AppState } from '../app/app.state';
 
-// const getIdParam = (_state: AppState, props: any) => {
-//   return props.match.params['id'];
-// };
-
 const getIsLoggedInData = (state: AppState) => state.userReducer.isLoggedIn;
 const getHasSeenWelcomeData = (state: AppState) => state.userReducer.hasSeenWelcome;
 

@@ -18,15 +18,6 @@ import { CollectionClientListState } from './collectionClient.state';
 export const collectionClientReducer = (state: CollectionClientListState, action: CollectionClientAction) : CollectionClientListState => {
   switch (action.type) {
     case COLLECTION_CLIENT_ADD:
-      // TODO
-      // Add Client in the list, 
-      // then remove the last item from the array list
-      // and check if page is smaller than pageCount, to prevent the slice
-      // const collectionClients: any[] = (
-      //   state.collectionClientList.pagination.page < state.collectionClientList.pagination.pageCount ?
-      //   state.collectionClientList.collectionClients.slice(0, -1) : state.collectionClientList.collectionClients
-      // );
-
       const collectionClients: any[] = (
         state.collectionClientList.collectionClients
       );
@@ -50,12 +41,6 @@ export const collectionClientReducer = (state: CollectionClientListState, action
           ...action.payload,
         }
       });
-
-      // return {
-      //   ...state,
-      //   ...newState,
-      // };
-
       return {
         ...state,
         collectionClientList: {

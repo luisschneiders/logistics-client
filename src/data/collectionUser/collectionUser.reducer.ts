@@ -14,15 +14,6 @@ import { CollectionUserListState } from './collectionUser.state';
 export const collectionUserReducer = (state: CollectionUserListState, action: CollectionUserAction) : CollectionUserListState => {
   switch (action.type) {
     case COLLECTION_USER_ADD:
-      // TODO
-      // Add User in the list, 
-      // then remove the last item from the array list
-      // and check if page is smaller than pageCount, to prevent the slice
-      // const collectionUsers: any[] = (
-      //   state.collectionUserList.pagination.page < state.collectionUserList.pagination.pageCount ?
-      //   state.collectionUserList.collectionUsers.slice(0, -1) : state.collectionUserList.collectionUsers
-      // );
-
       const collectionUsers: any[] = (
         state.collectionUserList.collectionUsers
       );
