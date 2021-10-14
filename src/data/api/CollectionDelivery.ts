@@ -31,7 +31,7 @@ export const fetchCollectionDeliveryList = async (companyId: string, period: Per
       return collectionDeliveryList;
     })
 
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -80,7 +80,7 @@ export const addCollectionDelivery = async (data: Partial<CollectionDelivery>) =
     toast('Delivery added successfully!', StatusColor.SUCCESS, 500);
 
     return collectionDelivery;
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -104,7 +104,7 @@ export const updateCollectionDelivery = async (data: Partial<CollectionDelivery>
 
     return data;
 
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }

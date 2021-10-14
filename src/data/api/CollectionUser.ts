@@ -57,7 +57,7 @@ export const fetchCollectionUserList = async (id: string, pageSize: number) => {
                 .where('companyId', '==', id)
                 .limit(pageSize);
     return userReference(userRef, pageSize);
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -70,7 +70,7 @@ export const fetchCollectionUserListLoadMore = async (id: string, lastVisible: a
                 .startAfter(lastVisible)
                 .limit(pageSize);
     return userReference(userRef, pageSize);
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -91,7 +91,7 @@ export const fetchCollectionUserById = async (collectionUserId: string) => {
       return null;
     });
 
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -115,7 +115,7 @@ export const addCollectionUser = async (data: RegisterUserForm) => {
     toast('User added successfully!', StatusColor.SUCCESS, 500);
 
     return addCollectionUser;
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
@@ -134,7 +134,7 @@ export const updateCollectionUser = async (data: Partial<CollectionUser>) => {
 
     return data;
 
-  } catch (error) {
+  } catch (error: any) {
     toast(error.message, StatusColor.ERROR, 4000);
     return false;
   }
