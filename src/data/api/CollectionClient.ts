@@ -58,8 +58,10 @@ export const fetchCollectionClientList = async (companyId: string, pageSize: num
       .limit(pageSize);
 
     return clientReference(clientRef, pageSize);
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -73,8 +75,10 @@ export const fetchCollectionClientListLoadMore = async (companyId: string, lastV
       .limit(pageSize);
 
     return clientReference(clientRef, pageSize);
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -100,8 +104,10 @@ export const fetchCollectionClientListActive = async (companyId: string) => {
       return collectionClientListActive;
 
     });
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -121,8 +127,10 @@ export const fetchCollectionClientById = async (collectionClientId: string) => {
       return null;
     });
 
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -146,8 +154,10 @@ export const addCollectionClient = async (data: Partial<CollectionClient>) => {
     toast('Client added successfully!', StatusColor.SUCCESS, 500);
 
     return collectionClient;
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -166,8 +176,10 @@ export const updateCollectionClient = async (data: Partial<CollectionClient>) =>
 
     return data;
 
-  } catch (error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch (error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }

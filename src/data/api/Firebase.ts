@@ -20,8 +20,10 @@ export async function loginUser(email: string, password: string) {
     const response: any = await fb.auth().signInWithEmailAndPassword(email, password);
     toast('Welcome back!', StatusColor.DEFAULT);
     return response;
-  } catch(error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch(error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -59,8 +61,10 @@ export async function registerUser(form: RegisterCompanyForm) {
 
     return resultRegisterUser;
 
-  } catch(error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch(error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
@@ -88,8 +92,10 @@ export async function updateProfile(profile: UserProfileFirebase) {
     fb.auth().currentUser?.updateProfile(profile);
     return true;
 
-  } catch(error: any) {
-    toast(error.message, StatusColor.ERROR, 4000);
+  } catch(error) {
+    if (error instanceof Error) {
+      toast(error.message, StatusColor.ERROR, 4000);
+    }
     return false;
   }
 }
