@@ -64,7 +64,7 @@ const CollectionClientViewPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>Client</IonTitle>
+          <IonTitle>Clients</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonLoading message="Fetching clients..." duration={0} isOpen={isFetching}></IonLoading>

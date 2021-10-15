@@ -71,7 +71,7 @@ const CollectionClientListPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>Client</IonTitle>
+          <IonTitle>Setup {'>'} Client</IonTitle>
           <IonFab vertical="center" horizontal="end">
             {(companyProfile?.companyId.length !== 0) && 
               <IonFabButton

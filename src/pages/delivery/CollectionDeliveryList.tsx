@@ -98,7 +98,7 @@ const CollectionDeliveryListPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonMenuButton auto-hide="true"></IonMenuButton>
           </IonButtons>
-          {width <= MOBILE_VIEW &&  <IonTitle>Delivery</IonTitle>}
+          {width <= MOBILE_VIEW &&  <IonTitle>Deliveries</IonTitle>}
           {width <= MOBILE_VIEW &&
           (isLoggedIn && companyProfile) &&
           <IonFab vertical="center" horizontal="end">

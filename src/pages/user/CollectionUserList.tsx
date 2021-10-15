@@ -65,7 +65,7 @@ const CollectionUserListPage: React.FC<ContainerProps> = ({
           <IonButtons slot="start">
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>User</IonTitle>
+          <IonTitle>Setup {'>'} User</IonTitle>
           <IonFab vertical="center" horizontal="end">
             {(companyProfile?.companyId.length !== 0) && 
               <IonFabButton
