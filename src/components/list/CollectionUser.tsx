@@ -90,7 +90,6 @@ const LsCollectionUser: React.FC<ContainerProps> = ({
       <IonSearchbar
         value={searchText}
         onIonChange={handleOnChange}
-        animated
       ></IonSearchbar>
       {collectionUser && collectionUser.length > 0 &&
         <IonList lines="full" className="ion-no-padding">
